@@ -41,3 +41,21 @@ export interface DirectoryMetrics {
   barrelFileCount: number;
   totalLineCount: number;
 }
+
+export interface TestMockSetupSummary {
+  line: number;
+  label: string;
+  fingerprint: string;
+}
+
+export interface DuplicateTestSetupCluster {
+  fingerprint: string;
+  label: string;
+  fileCount: number;
+  occurrences: Array<{ path: string; line: number }>;
+}
+
+export interface DuplicateTestSetupIndex {
+  byFile: Record<string, DuplicateTestSetupCluster[]>;
+  clusters: DuplicateTestSetupCluster[];
+}

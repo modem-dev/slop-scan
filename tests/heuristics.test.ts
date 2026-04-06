@@ -160,6 +160,82 @@ describe("heuristic rule pack", () => {
     expect(result.findings).toHaveLength(0);
   });
 
+  test("flags duplicated mock setup across test files", async () => {
+    const rootDir = await createTempRepo({
+      "src/api.ts": [
+        "export async function fetchUser() {",
+        "  return { id: 1 };",
+        "}",
+        "",
+      ].join("\n"),
+      "tests/user-a.test.ts": [
+        "import { describe, expect, it, vi } from 'vitest';",
+        "import * as api from '../src/api';",
+        "",
+        "vi.mock('../src/api', () => ({",
+        "  fetchUser: vi.fn(),",
+        "}));",
+        "",
+        "describe('user a', () => {",
+        "  it('loads user', () => {",
+        "    vi.mocked(api.fetchUser).mockResolvedValue({ id: 1 });",
+        "    expect(true).toBe(true);",
+        "  });",
+        "});",
+        "",
+      ].join("\n"),
+      "tests/user-b.test.ts": [
+        "import { describe, expect, it, vi } from 'vitest';",
+        "import * as api from '../src/api';",
+        "",
+        "vi.mock('../src/api', () => ({",
+        "  fetchUser: vi.fn(),",
+        "}));",
+        "",
+        "describe('user b', () => {",
+        "  it('loads user again', () => {",
+        "    vi.mocked(api.fetchUser).mockResolvedValue({ id: 2 });",
+        "    expect(true).toBe(true);",
+        "  });",
+        "});",
+        "",
+      ].join("\n"),
+      "tests/user-c.test.ts": [
+        "import { describe, expect, it, vi } from 'vitest';",
+        "import * as api from '../src/api';",
+        "",
+        "vi.mock('../src/api', () => ({",
+        "  fetchUser: vi.fn(),",
+        "}));",
+        "",
+        "describe('user c', () => {",
+        "  it('loads user one more time', () => {",
+        "    vi.mocked(api.fetchUser).mockResolvedValue({ id: 3 });",
+        "    expect(true).toBe(true);",
+        "  });",
+        "});",
+        "",
+      ].join("\n"),
+      "tests/cli.spec.ts": [
+        "import { expect, it } from 'vitest';",
+        "",
+        "const run = (value: string) => value.toUpperCase();",
+        "",
+        "it('uppercases strings', () => {",
+        "  expect(run('ok')).toBe('OK');",
+        "});",
+        "",
+      ].join("\n"),
+    });
+
+    const result = await analyzeRepository(rootDir, DEFAULT_CONFIG, createDefaultRegistry());
+    const duplicateFindings = result.findings.filter((finding) => finding.ruleId === "tests.duplicate-mock-setup");
+
+    expect(duplicateFindings).toHaveLength(3);
+    expect(duplicateFindings.every((finding) => finding.path?.startsWith("tests/user-"))).toBe(true);
+    expect(duplicateFindings[0]?.evidence.some((entry) => entry.includes("mockResolvedValue"))).toBe(true);
+  });
+
   test("stays quiet on a small clean repo", async () => {
     const rootDir = await createTempRepo({
       "src/index.ts": [

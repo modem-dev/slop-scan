@@ -4,6 +4,8 @@ import { commentsFactProvider } from "./facts/comments";
 import { directoryMetricsFactProvider } from "./facts/directory-metrics";
 import { exportsFactProvider } from "./facts/exports";
 import { functionsFactProvider } from "./facts/functions";
+import { testDuplicationFactProvider } from "./facts/test-duplication";
+import { testMockSetupsFactProvider } from "./facts/test-mock-setups";
 import { tryCatchFactProvider } from "./facts/try-catch";
 import { javascriptLikeLanguage } from "./languages/javascript-like";
 import { jsonReporter } from "./reporters/json";
@@ -15,6 +17,7 @@ import { barrelDensityRule } from "./rules/structure/barrel-density";
 import { directoryFanoutHotspotRule } from "./rules/structure/directory-fanout-hotspot";
 import { overFragmentationRule } from "./rules/structure/over-fragmentation";
 import { passThroughWrappersRule } from "./rules/structure/pass-through-wrappers";
+import { duplicateMockSetupRule } from "./rules/tests/duplicate-mock-setup";
 
 export function createDefaultRegistry(): Registry {
   const registry = new Registry();
@@ -25,7 +28,9 @@ export function createDefaultRegistry(): Registry {
   registry.registerFactProvider(functionsFactProvider);
   registry.registerFactProvider(exportsFactProvider);
   registry.registerFactProvider(tryCatchFactProvider);
+  registry.registerFactProvider(testMockSetupsFactProvider);
   registry.registerFactProvider(directoryMetricsFactProvider);
+  registry.registerFactProvider(testDuplicationFactProvider);
 
   registry.registerRule(placeholderCommentsRule);
   registry.registerRule(asyncNoiseRule);
@@ -34,6 +39,7 @@ export function createDefaultRegistry(): Registry {
   registry.registerRule(passThroughWrappersRule);
   registry.registerRule(overFragmentationRule);
   registry.registerRule(directoryFanoutHotspotRule);
+  registry.registerRule(duplicateMockSetupRule);
 
   registry.registerReporter(textReporter);
   registry.registerReporter(jsonReporter);

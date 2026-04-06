@@ -28,6 +28,37 @@ export function walk(node: ts.Node, visit: (node: ts.Node) => void): void {
   node.forEachChild((child) => walk(child, visit));
 }
 
+export function isTestFile(filePath: string): boolean {
+  return (
+    filePath.includes("/__tests__/")
+    || filePath.includes("/tests/")
+    || filePath.includes("/test/")
+    || /(?:\.|-|_)test\.[cm]?[jt]sx?$/.test(filePath)
+    || /(?:\.|-|_)spec\.[cm]?[jt]sx?$/.test(filePath)
+  );
+}
+
+export function fingerprintNodeShape(node: ts.Node, maxDepth = 4): string {
+  function visit(current: ts.Node, depth: number): string {
+    const label = ts.SyntaxKind[current.kind];
+    if (depth >= maxDepth) {
+      return label;
+    }
+
+    const children = current.getChildren().filter(
+      (child) => child.kind !== ts.SyntaxKind.SyntaxList && child.kind !== ts.SyntaxKind.EndOfFileToken,
+    );
+
+    if (children.length === 0) {
+      return label;
+    }
+
+    return `${label}(${children.map((child) => visit(child, depth + 1)).join(",")})`;
+  }
+
+  return visit(node, 0);
+}
+
 export function getNodeStatementCount(node: ts.Block | undefined): number {
   return node?.statements.length ?? 0;
 }

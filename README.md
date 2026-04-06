@@ -114,6 +114,10 @@ This keeps the codebase extensible without turning the scanner into one giant li
 - `structure.over-fragmentation`
 - `structure.directory-fanout-hotspot`
 
+### Tests
+
+- `tests.duplicate-mock-setup`
+
 ## Output shape
 
 The CLI currently reports:
