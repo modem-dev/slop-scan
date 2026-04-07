@@ -1,26 +1,24 @@
 # repo-slop-analyzer
 
-Deterministic Bun + TypeScript tooling for finding **AI-associated slop patterns** in a codebase.
+Deterministic CLI for finding **AI-associated slop patterns** in JavaScript and TypeScript repositories.
 
-This project is intentionally framed as a **slop analyzer**, not an authorship detector.
-It looks for explainable patterns commonly found in low-judgment, unreviewed AI output and reports where the hotspots are.
+Scan a repo, surface the hotspots, and compare codebases using normalized slop metrics.
 
-## Current status
+> `repo-slop-analyzer` is a **slop analyzer**, not an authorship detector. It reports explainable patterns and suspicious density. It does **not** claim who wrote the code.
 
-The repo currently ships a working CLI, a pluggable analysis engine, an initial TypeScript/JavaScript rule pack, and a regression suite with fixture repos.
+## Why use it
 
-## Why this exists
+- **Find the hotspots fast** — see which files and directories concentrate the most suspicious patterns
+- **Understand why something was flagged** — every finding includes a rule ID and evidence
+- **Compare repos fairly** — normalize by file count, logical KLOC, and function count
+- **Benchmark heuristics over time** — rerun the pinned benchmark set and watch movement
 
-AI-generated code often leaves recognizable structural and stylistic residue:
+## Good fit for
 
-- defensive `try/catch` blocks that mostly log and return defaults
-- async wrappers and `return await` noise
-- pass-through wrappers and shallow indirection
-- barrel-heavy module organization
-- over-fragmented directories with many tiny files
-- placeholder comments like “add more validation if needed”
-
-The goal is to detect those patterns **deterministically** and **explainably**.
+- checking third-party repos that feel vibe-coded
+- comparing explicit-AI repos to mature OSS baselines
+- finding low-judgment boilerplate in your own codebase
+- iterating on deterministic slop heuristics
 
 ## Install
 
@@ -28,136 +26,102 @@ The goal is to detect those patterns **deterministically** and **explainably**.
 bun install
 ```
 
-## Usage
+## Quick start
 
-### Scan the current repo
+Scan the current repo:
 
 ```bash
 bun run src/cli.ts scan .
 ```
 
-### Get machine-readable JSON
+Scan another repo and get JSON:
 
 ```bash
-bun run src/cli.ts scan . --json
+bun run src/cli.ts scan /path/to/repo --json
 ```
 
-### Scan a fixture repo
-
-```bash
-bun run src/cli.ts scan tests/fixtures/repos/slop-heavy
-```
-
-### Recreate the pinned benchmark set
+Recreate the pinned benchmark set:
 
 ```bash
 bun run benchmark:update
 ```
 
-Benchmark assets live in:
-- `benchmarks/sets/known-ai-vs-solid-oss.json`
-- `benchmarks/results/known-ai-vs-solid-oss.json`
-- `reports/known-ai-vs-solid-oss-benchmark.md`
+## What it catches
 
-## Testing
+Current checks focus on patterns that often show up in unreviewed generated code:
 
-Run the full regression suite:
+- needless `try/catch`
+- async wrapper / `return await` noise
+- pass-through wrappers
+- barrel density
+- over-fragmentation
+- directory fan-out hotspots
+- placeholder comments
+- duplicated test mock/setup patterns
 
-```bash
-bun test
-```
+## What you get back
 
-The tests include:
-
-- scheduler and engine unit tests
-- heuristic rule tests against temporary repos
-- fixture regression tests against persistent example repos
-- CLI end-to-end JSON regression coverage
-
-Fixture repos live in:
-
-- `tests/fixtures/repos/clean`
-- `tests/fixtures/repos/slop-heavy`
-- `tests/fixtures/repos/mixed`
-
-## Architecture
-
-The architecture is intentionally **pluggable**.
-
-It is built around four concepts:
-
-1. **language plugins**
-   - decide which files are analyzable
-2. **fact providers**
-   - produce reusable facts like ASTs, comments, function summaries, try/catch summaries, and directory metrics
-3. **rule plugins**
-   - consume facts and emit findings
-4. **reporters**
-   - render text or JSON output
-
-### Execution flow
-
-1. discover files
-2. classify supported languages
-3. run file-scoped fact providers
-4. run directory-scoped fact providers
-5. run rule plugins
-6. aggregate scores
-7. render reports
-
-This keeps the codebase extensible without turning the scanner into one giant linear loop of checks.
-
-## Current rules
-
-### Comments
-
-- `comments.placeholder-comments`
-
-### Defensive noise
-
-- `defensive.async-noise`
-- `defensive.needless-try-catch`
-
-### Structure
-
-- `structure.pass-through-wrappers`
-- `structure.barrel-density`
-- `structure.over-fragmentation`
-- `structure.directory-fanout-hotspot`
-
-### Tests
-
-- `tests.duplicate-mock-setup`
-
-## Output shape
-
-The CLI currently reports:
-
-- raw counts
-- physical LOC, logical LOC, and function counts
+- raw repo score
 - normalized metrics:
   - score / file
-  - score / KLOC (logical)
+  - score / KLOC
   - score / function
   - findings / file
-  - findings / KLOC (logical)
+  - findings / KLOC
   - findings / function
-- file hotspots
-- directory hotspots
-- detailed findings in JSON mode
+- top file hotspots
+- top directory hotspots
+- detailed findings with evidence in JSON mode
 
-## Config
+## Supported files
+
+Current language support:
+- `.ts`
+- `.tsx`
+- `.js`
+- `.jsx`
+- `.mjs`
+- `.cjs`
+
+## Benchmarks
+
+The repo ships with a **pinned, recreatable benchmark set** comparing explicit-AI repos against older solid OSS repos.
+
+### Cohort medians
+
+| Metric | Explicit-AI median | Mature OSS median | Ratio |
+|---|---:|---:|---:|
+| Score / file | **1.39** | **0.45** | **3.10x** |
+| Score / KLOC | **13.79** | **5.27** | **2.62x** |
+| Score / function | **0.39** | **0.13** | **3.09x** |
+| Findings / file | **0.44** | **0.12** | **3.58x** |
+| Findings / KLOC | **4.69** | **1.86** | **2.52x** |
+| Findings / function | **0.10** | **0.05** | **2.03x** |
+
+### Pinned benchmark snapshot
+
+| Repo | Cohort | Ref | Score/file | Score/KLOC | Findings/file | Findings/KLOC |
+|---|---|---|---:|---:|---:|---:|
+| `universal-pm` | explicit-ai | `2d90bde` | 4.93 | 68.49 | 1.28 | 17.76 |
+| `voice-notifications` | explicit-ai | `8a984b8` | 1.50 | 48.08 | 0.60 | 19.23 |
+| `openusage` | explicit-ai | `857f537` | 1.39 | 8.67 | 0.33 | 2.07 |
+| `devworkbench` | explicit-ai | `ea50862` | 0.98 | 10.52 | 0.44 | 4.69 |
+| `fulling` | explicit-ai | `d95060f` | 0.77 | 13.79 | 0.25 | 4.53 |
+| `ni` | mature-oss | `6d96905` | 0.72 | 29.41 | 0.16 | 6.55 |
+| `node-notifier` | mature-oss | `b36c237` | 0.20 | 2.32 | 0.08 | 0.95 |
+| `tsup` | mature-oss | `b906f86` | 0.22 | 3.72 | 0.08 | 1.42 |
+| `execa` | mature-oss | `f3a2e84` | 0.24 | 6.82 | 0.08 | 2.30 |
+| `hyper` | mature-oss | `2a7bb18` | 0.74 | 1.30 | 0.18 | 0.32 |
+| `umami` | mature-oss | `0a83864` | 0.66 | 17.81 | 0.20 | 5.47 |
+
+Full benchmark assets:
+- manifest: [`benchmarks/sets/known-ai-vs-solid-oss.json`](benchmarks/sets/known-ai-vs-solid-oss.json)
+- snapshot: [`benchmarks/results/known-ai-vs-solid-oss.json`](benchmarks/results/known-ai-vs-solid-oss.json)
+- report: [`reports/known-ai-vs-solid-oss-benchmark.md`](reports/known-ai-vs-solid-oss-benchmark.md)
+
+## Configuration
 
 The analyzer reads `repo-slop.config.json` from the scan root.
-
-Current config support:
-
-- `ignores` — active
-- `rules.<id>.enabled` — active
-- `rules.<id>.weight` — active
-- `thresholds` — reserved for upcoming rules
-
-Example:
 
 ```json
 {
@@ -165,32 +129,42 @@ Example:
   "rules": {
     "structure.over-fragmentation": { "enabled": true, "weight": 1.2 },
     "comments.placeholder-comments": { "enabled": false }
-  },
-  "thresholds": {
-    "tinyFileLoc": 20
   }
 }
 ```
 
-## Repository layout
+Supported today:
+- `ignores`
+- `rules.<id>.enabled`
+- `rules.<id>.weight`
 
-```txt
-src/
-  core/
-  discovery/
-  facts/
-  languages/
-  reporters/
-  rules/
-tests/
-  fixtures/
+## How it works
+
+`repo-slop-analyzer` is built as a pluggable engine:
+- language plugins
+- fact providers
+- rule plugins
+- reporters
+
+That keeps the analyzer deterministic and extensible without turning it into one giant loop of ad hoc checks.
+
+## Docs
+
+- benchmark guide: [`benchmarks/README.md`](benchmarks/README.md)
+- benchmark report: [`reports/known-ai-vs-solid-oss-benchmark.md`](reports/known-ai-vs-solid-oss-benchmark.md)
+- project spec: [`PROJECT_SPEC.md`](PROJECT_SPEC.md)
+
+## Contributing
+
+Issues and pull requests are welcome.
+
+If you change rule behavior, rerun:
+
+```bash
+bun test
+bun run benchmark:update
 ```
 
-## Next likely steps
+## License
 
-- richer TypeScript-aware rules
-- repo-relative style outliers
-- duplicate function/branch detection
-- config-driven thresholds and rule weighting
-- better JSON schema versioning
-- PR / changed-files mode
+A `LICENSE` file has not been added yet.
