@@ -42,6 +42,7 @@ export interface BenchmarkRepoSnapshot {
   cohort: BenchmarkCohort;
   ref: string;
   summary: AnalysisSummary;
+  blendedScore: number | null;
   ruleCounts: Record<string, number>;
   topFiles: FileScore[];
   topDirectories: DirectoryScore[];
@@ -50,6 +51,7 @@ export interface BenchmarkRepoSnapshot {
 export interface BenchmarkCohortSnapshot {
   repoCount: number;
   medians: NormalizedMetrics;
+  blendedScoreMedian: number | null;
 }
 
 export interface BenchmarkPairSnapshot {

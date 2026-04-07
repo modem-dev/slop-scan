@@ -11,6 +11,7 @@ A pinned benchmark set gives us:
 - exact commit SHAs
 - saved snapshot results
 - a generated markdown report
+- a reproducible blended score that summarizes the six normalized metrics
 
 ## Included set
 
@@ -21,6 +22,8 @@ This set compares:
 - against older, well-regarded JS/TS OSS repos
 
 AI provenance may come from public README disclosures or user-provided provenance used during benchmark calibration.
+
+The generated report also includes a **blended score**: the geometric mean of each repo's six normalized-metric ratios versus the mature OSS medians, rescaled so the mature OSS median is 1.00.
 
 ## Reproduce the saved snapshot
 

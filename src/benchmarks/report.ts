@@ -34,12 +34,24 @@ function aggregateRuleCounts(repos: BenchmarkRepoSnapshot[]): Array<[string, num
     .map(([ruleId, count]) => [ruleId, count, total === 0 ? 0 : count / total]);
 }
 
+function renderRepoLink(repo: BenchmarkRepoSnapshot): string {
+  return `[${repo.repo}](https://github.com/${repo.repo})`;
+}
+
+function sortByBlendedScore(repos: BenchmarkRepoSnapshot[]): BenchmarkRepoSnapshot[] {
+  return [...repos].sort((left, right) => {
+    const leftScore = left.blendedScore ?? Number.NEGATIVE_INFINITY;
+    const rightScore = right.blendedScore ?? Number.NEGATIVE_INFINITY;
+    return rightScore - leftScore || left.repo.localeCompare(right.repo);
+  });
+}
+
 function renderRepoTable(set: BenchmarkSet, snapshot: BenchmarkSnapshot, cohort: BenchmarkCohort): string[] {
-  const repos = snapshot.repos.filter((repo) => repo.cohort === cohort);
+  const repos = sortByBlendedScore(snapshot.repos.filter((repo) => repo.cohort === cohort));
 
   const lines = [
-    "| Repo | Ref | Age | Stars | Files | Logical LOC | Functions | Score/file | Score/KLOC | Score/function | Findings/file | Findings/KLOC | Findings/function |",
-    "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+    "| Repo | Ref | Age | Stars | Blended | Files | Logical LOC | Functions | Score/file | Score/KLOC | Score/function | Findings/file | Findings/KLOC | Findings/function |",
+    "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
   ];
 
   for (const repo of repos) {
@@ -50,7 +62,7 @@ function renderRepoTable(set: BenchmarkSet, snapshot: BenchmarkSnapshot, cohort:
 
     const ageYears = yearsBetween(spec.createdAt, snapshot.generatedAt);
     lines.push(
-      `| \`${repo.id}\` | \`${shortRef(repo.ref)}\` | ${ageYears.toFixed(1)}y | ${spec.stars} | ${repo.summary.fileCount} | ${repo.summary.logicalLineCount} | ${repo.summary.functionCount} | ${formatMetric(repo.summary.normalized.scorePerFile)} | ${formatMetric(repo.summary.normalized.scorePerKloc)} | ${formatMetric(repo.summary.normalized.scorePerFunction)} | ${formatMetric(repo.summary.normalized.findingsPerFile)} | ${formatMetric(repo.summary.normalized.findingsPerKloc)} | ${formatMetric(repo.summary.normalized.findingsPerFunction)} |`,
+      `| ${renderRepoLink(repo)} | \`${shortRef(repo.ref)}\` | ${ageYears.toFixed(1)}y | ${spec.stars} | **${formatMetric(repo.blendedScore)}** | ${repo.summary.fileCount} | ${repo.summary.logicalLineCount} | ${repo.summary.functionCount} | ${formatMetric(repo.summary.normalized.scorePerFile)} | ${formatMetric(repo.summary.normalized.scorePerKloc)} | ${formatMetric(repo.summary.normalized.scorePerFunction)} | ${formatMetric(repo.summary.normalized.findingsPerFile)} | ${formatMetric(repo.summary.normalized.findingsPerKloc)} | ${formatMetric(repo.summary.normalized.findingsPerFunction)} |`,
     );
   }
 
@@ -66,8 +78,14 @@ function renderCohortRuleSummary(repos: BenchmarkRepoSnapshot[]): string[] {
 export function renderBenchmarkReport(set: BenchmarkSet, snapshot: BenchmarkSnapshot): string {
   const aiRepos = snapshot.repos.filter((repo) => repo.cohort === "explicit-ai");
   const solidRepos = snapshot.repos.filter((repo) => repo.cohort === "mature-oss");
-  const aiMedian = snapshot.cohorts["explicit-ai"].medians;
-  const solidMedian = snapshot.cohorts["mature-oss"].medians;
+  const aiCohort = snapshot.cohorts["explicit-ai"];
+  const solidCohort = snapshot.cohorts["mature-oss"];
+  const aiMedian = aiCohort.medians;
+  const solidMedian = solidCohort.medians;
+  const blendedMedianRatio =
+    aiCohort.blendedScoreMedian !== null && solidCohort.blendedScoreMedian !== null && solidCohort.blendedScoreMedian !== 0
+      ? aiCohort.blendedScoreMedian / solidCohort.blendedScoreMedian
+      : null;
   const medianRatios = Object.fromEntries(
     NORMALIZED_METRIC_KEYS.map((metricKey) => [
       metricKey,
@@ -102,6 +120,8 @@ export function renderBenchmarkReport(set: BenchmarkSet, snapshot: BenchmarkSnap
     "",
     "The pinned refs below are the exact commits used for the saved snapshot.",
     "",
+    "Blended score = geometric mean of the six normalized-metric ratios versus the mature OSS cohort medians, then rescaled so the mature OSS cohort median is 1.00. Higher means a repo is consistently noisier across the benchmark dimensions.",
+    "",
     "## AI cohort",
     "",
     ...renderRepoTable(set, snapshot, "explicit-ai"),
@@ -114,6 +134,7 @@ export function renderBenchmarkReport(set: BenchmarkSet, snapshot: BenchmarkSnap
     "",
     "| Metric | AI median | Solid median | Ratio |",
     "|---|---:|---:|---:|",
+    `| Blended score | **${formatMetric(aiCohort.blendedScoreMedian)}** | **${formatMetric(solidCohort.blendedScoreMedian)}** | **${formatRatio(blendedMedianRatio)}** |`,
     `| Score / file | **${formatMetric(aiMedian.scorePerFile)}** | **${formatMetric(solidMedian.scorePerFile)}** | **${formatRatio(medianRatios.scorePerFile)}** |`,
     `| Score / KLOC | **${formatMetric(aiMedian.scorePerKloc)}** | **${formatMetric(solidMedian.scorePerKloc)}** | **${formatRatio(medianRatios.scorePerKloc)}** |`,
     `| Score / function | **${formatMetric(aiMedian.scorePerFunction)}** | **${formatMetric(solidMedian.scorePerFunction)}** | **${formatRatio(medianRatios.scorePerFunction)}** |`,

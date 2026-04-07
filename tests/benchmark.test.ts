@@ -83,10 +83,12 @@ describe("benchmark support", () => {
     expect(snapshot.cohorts["explicit-ai"].repoCount).toBe(1);
     expect(snapshot.cohorts["mature-oss"].repoCount).toBe(1);
     expect(snapshot.cohorts["explicit-ai"].medians.scorePerFile).not.toBeNull();
+    expect(snapshot.cohorts["mature-oss"].blendedScoreMedian).not.toBeNull();
+    expect(snapshot.repos.every((repo) => repo.blendedScore !== null)).toBe(true);
     expect(snapshot.pairings[0]?.ratios.scorePerFile).not.toBeNull();
     expect(report).toContain("Pinned benchmark: Fixture benchmark");
-    expect(report).toContain("Cohort medians");
-    expect(report).toContain("`slop-heavy`");
-    expect(report).toContain("`mixed`");
+    expect(report).toContain("Blended score");
+    expect(report).toContain("fixtures/slop-heavy");
+    expect(report).toContain("fixtures/mixed");
   });
 });

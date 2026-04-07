@@ -1,6 +1,7 @@
 import type { Finding, NormalizedMetrics } from "../core/types";
 import type {
   BenchmarkCohort,
+  BenchmarkCohortSnapshot,
   BenchmarkPairSnapshot,
   BenchmarkRepoSnapshot,
   BenchmarkSnapshot,
@@ -47,6 +48,7 @@ function buildRepoSnapshot({ spec, result }: BenchmarkedAnalysis): BenchmarkRepo
     cohort: spec.cohort,
     ref: spec.ref,
     summary: result.summary,
+    blendedScore: null,
     ruleCounts: summarizeRuleCounts(result.findings),
     topFiles: result.fileScores.slice(0, 5),
     topDirectories: result.directoryScores.slice(0, 5),
@@ -64,7 +66,34 @@ function buildMedianMetrics(repos: BenchmarkRepoSnapshot[]): NormalizedMetrics {
   return Object.fromEntries(entries) as NormalizedMetrics;
 }
 
-function buildCohortSnapshots(repos: BenchmarkRepoSnapshot[]) {
+function geometricMean(values: number[]): number | null {
+  if (values.length === 0) {
+    return null;
+  }
+
+  if (values.some((value) => value === 0)) {
+    return 0;
+  }
+
+  return Math.exp(values.reduce((sum, value) => sum + Math.log(value), 0) / values.length);
+}
+
+function computeRawBlendedScore(metrics: NormalizedMetrics, matureMedian: NormalizedMetrics): number | null {
+  const ratios = NORMALIZED_METRIC_KEYS.flatMap((metricKey) => {
+    const value = metrics[metricKey];
+    const baseline = matureMedian[metricKey];
+
+    if (value === null || baseline === null || baseline <= 0) {
+      return [];
+    }
+
+    return [value / baseline];
+  });
+
+  return geometricMean(ratios);
+}
+
+function buildCohortSnapshots(repos: BenchmarkRepoSnapshot[]): Record<BenchmarkCohort, BenchmarkCohortSnapshot> {
   const cohorts: Record<BenchmarkCohort, BenchmarkRepoSnapshot[]> = {
     "explicit-ai": [],
     "mature-oss": [],
@@ -74,16 +103,42 @@ function buildCohortSnapshots(repos: BenchmarkRepoSnapshot[]) {
     cohorts[repo.cohort].push(repo);
   }
 
+  const buildSnapshot = (cohortRepos: BenchmarkRepoSnapshot[]): BenchmarkCohortSnapshot => ({
+    repoCount: cohortRepos.length,
+    medians: buildMedianMetrics(cohortRepos),
+    blendedScoreMedian: median(
+      cohortRepos
+        .map((repo) => repo.blendedScore)
+        .filter((value): value is number => value !== null),
+    ),
+  });
+
   return {
-    "explicit-ai": {
-      repoCount: cohorts["explicit-ai"].length,
-      medians: buildMedianMetrics(cohorts["explicit-ai"]),
-    },
-    "mature-oss": {
-      repoCount: cohorts["mature-oss"].length,
-      medians: buildMedianMetrics(cohorts["mature-oss"]),
-    },
+    "explicit-ai": buildSnapshot(cohorts["explicit-ai"]),
+    "mature-oss": buildSnapshot(cohorts["mature-oss"]),
   };
+}
+
+function applyBlendedScores(repos: BenchmarkRepoSnapshot[], matureMedian: NormalizedMetrics): BenchmarkRepoSnapshot[] {
+  const rawScores = repos.map((repo) => ({
+    repo,
+    rawBlendedScore: computeRawBlendedScore(repo.summary.normalized, matureMedian),
+  }));
+
+  const matureBaseline = median(
+    rawScores
+      .filter(({ repo }) => repo.cohort === "mature-oss")
+      .map(({ rawBlendedScore }) => rawBlendedScore)
+      .filter((value): value is number => value !== null),
+  );
+
+  return rawScores.map(({ repo, rawBlendedScore }) => ({
+    ...repo,
+    blendedScore:
+      rawBlendedScore !== null && matureBaseline !== null && matureBaseline > 0
+        ? rawBlendedScore / matureBaseline
+        : rawBlendedScore,
+  }));
 }
 
 function buildPairings(set: BenchmarkSet, repos: BenchmarkRepoSnapshot[]): BenchmarkPairSnapshot[] {
@@ -117,7 +172,9 @@ export function createBenchmarkSnapshot(
   analyzerVersion: string,
   generatedAt = new Date().toISOString(),
 ): BenchmarkSnapshot {
-  const repos = analyses.map(buildRepoSnapshot);
+  const baseRepos = analyses.map(buildRepoSnapshot);
+  const initialCohorts = buildCohortSnapshots(baseRepos);
+  const repos = applyBlendedScores(baseRepos, initialCohorts["mature-oss"].medians);
 
   return {
     schemaVersion: 1,

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "benchmarkSetId": "known-ai-vs-solid-oss",
   "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-  "generatedAt": "2026-04-07T03:32:14.477Z",
+  "generatedAt": "2026-04-07T03:48:12.851Z",
   "analyzerVersion": "0.1.0",
   "configMode": "default",
   "repos": [
@@ -28,6 +28,7 @@
           "findingsPerFunction": 0.10067114093959731
         }
       },
+      "blendedScore": 10.991458647574063,
       "ruleCounts": {
         "defensive.needless-try-catch": 11,
         "structure.pass-through-wrappers": 3,
@@ -90,6 +91,7 @@
           "findingsPerFunction": 0.2857142857142857
         }
       },
+      "blendedScore": 10.763901334330917,
       "ruleCounts": {
         "defensive.needless-try-catch": 2
       },
@@ -129,6 +131,7 @@
           "findingsPerFunction": 0.0855397148676171
         }
       },
+      "blendedScore": 4.1038426510392165,
       "ruleCounts": {
         "tests.duplicate-mock-setup": 26,
         "defensive.needless-try-catch": 9,
@@ -197,6 +200,7 @@
           "findingsPerFunction": 0.09523809523809523
         }
       },
+      "blendedScore": 4.809864420110902,
       "ruleCounts": {
         "defensive.needless-try-catch": 11,
         "structure.barrel-density": 1,
@@ -260,6 +264,7 @@
           "findingsPerFunction": 0.059233449477351915
         }
       },
+      "blendedScore": 2.962703601002208,
       "ruleCounts": {
         "defensive.needless-try-catch": 17,
         "structure.barrel-density": 4,
@@ -335,6 +340,7 @@
           "findingsPerFunction": 0.07702510193053987
         }
       },
+      "blendedScore": 4.145376297529845,
       "ruleCounts": {
         "tests.duplicate-mock-setup": 1003,
         "defensive.needless-try-catch": 683,
@@ -421,6 +427,7 @@
           "findingsPerFunction": 0.05351551380586393
         }
       },
+      "blendedScore": 2.4487378871859575,
       "ruleCounts": {
         "defensive.needless-try-catch": 80,
         "structure.barrel-density": 34,
@@ -506,6 +513,7 @@
           "findingsPerFunction": 0.09495192307692307
         }
       },
+      "blendedScore": 6.682057355268006,
       "ruleCounts": {
         "defensive.needless-try-catch": 69,
         "structure.pass-through-wrappers": 7,
@@ -569,6 +577,7 @@
           "findingsPerFunction": 0.02526595744680851
         }
       },
+      "blendedScore": 1.5992236125011856,
       "ruleCounts": {
         "defensive.needless-try-catch": 9,
         "structure.pass-through-wrappers": 6,
@@ -642,6 +651,7 @@
           "findingsPerFunction": 0.020202020202020204
         }
       },
+      "blendedScore": 0.9266255009041235,
       "ruleCounts": {
         "structure.barrel-density": 1,
         "structure.over-fragmentation": 1
@@ -683,6 +693,7 @@
           "findingsPerFunction": 0.023809523809523808
         }
       },
+      "blendedScore": 0.5860908323791766,
       "ruleCounts": {
         "defensive.needless-try-catch": 1
       },
@@ -717,6 +728,7 @@
           "findingsPerFunction": 0.02857142857142857
         }
       },
+      "blendedScore": 1.3082993160992882,
       "ruleCounts": {
         "structure.pass-through-wrappers": 2,
         "defensive.needless-try-catch": 1,
@@ -764,6 +776,7 @@
           "findingsPerFunction": 0.021825396825396824
         }
       },
+      "blendedScore": 1.0733744990958765,
       "ruleCounts": {
         "defensive.needless-try-catch": 12,
         "structure.directory-fanout-hotspot": 7,
@@ -847,6 +860,7 @@
           "findingsPerFunction": 0.0031740104555638537
         }
       },
+      "blendedScore": 0.5450819229116693,
       "ruleCounts": {
         "defensive.needless-try-catch": 9,
         "structure.pass-through-wrappers": 5,
@@ -915,6 +929,7 @@
           "findingsPerFunction": 0.021505376344086023
         }
       },
+      "blendedScore": 0.9216188015008189,
       "ruleCounts": {
         "defensive.needless-try-catch": 10,
         "structure.directory-fanout-hotspot": 6,
@@ -999,6 +1014,7 @@
           "findingsPerFunction": 0.04782608695652174
         }
       },
+      "blendedScore": 2.0662877828554427,
       "ruleCounts": {
         "defensive.needless-try-catch": 29,
         "structure.pass-through-wrappers": 27,
@@ -1085,6 +1101,7 @@
           "findingsPerFunction": 0.05138793301215875
         }
       },
+      "blendedScore": 1.7981648005965822,
       "ruleCounts": {
         "defensive.needless-try-catch": 86,
         "structure.pass-through-wrappers": 55,
@@ -1159,7 +1176,8 @@
         "findingsPerFile": 0.302158273381295,
         "findingsPerKloc": 3.021296479168373,
         "findingsPerFunction": 0.0855397148676171
-      }
+      },
+      "blendedScoreMedian": 4.145376297529845
     },
     "mature-oss": {
       "repoCount": 8,
@@ -1170,7 +1188,8 @@
         "findingsPerFile": 0.059214352174924406,
         "findingsPerKloc": 1.0613206172712295,
         "findingsPerFunction": 0.022817460317460316
-      }
+      },
+      "blendedScoreMedian": 1
     }
   },
   "pairings": [
