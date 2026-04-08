@@ -34,6 +34,8 @@ export interface TryCatchSummary {
   catchIsEmpty: boolean;
   catchThrowsGeneric: boolean;
   boundaryCategories: string[];
+  boundaryOperationPaths: string[];
+  isFilesystemExistenceProbe: boolean;
 }
 
 export interface DirectoryMetrics {

@@ -14,7 +14,9 @@ import { lintReporter } from "./reporters/lint";
 import { textReporter } from "./reporters/text";
 import { placeholderCommentsRule } from "./rules/comments/placeholder-comments";
 import { asyncNoiseRule } from "./rules/defensive/async-noise";
-import { needlessTryCatchRule } from "./rules/defensive/needless-try-catch";
+import { emptyCatchRule } from "./rules/defensive/empty-catch";
+import { errorObscuringRule } from "./rules/defensive/error-obscuring";
+import { errorSwallowingRule } from "./rules/defensive/error-swallowing";
 import { barrelDensityRule } from "./rules/structure/barrel-density";
 import { directoryFanoutHotspotRule } from "./rules/structure/directory-fanout-hotspot";
 import { duplicateFunctionSignaturesRule } from "./rules/structure/duplicate-function-signatures";
@@ -38,7 +40,9 @@ export function createDefaultRegistry(): Registry {
 
   registry.registerRule(placeholderCommentsRule);
   registry.registerRule(asyncNoiseRule);
-  registry.registerRule(needlessTryCatchRule);
+  registry.registerRule(errorSwallowingRule);
+  registry.registerRule(errorObscuringRule);
+  registry.registerRule(emptyCatchRule);
   registry.registerRule(barrelDensityRule);
   registry.registerRule(passThroughWrappersRule);
   registry.registerRule(duplicateFunctionSignaturesRule);

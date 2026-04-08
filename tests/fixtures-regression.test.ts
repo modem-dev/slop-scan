@@ -33,7 +33,7 @@ describe("fixture regression suite", () => {
     expect([...new Set(result.findings.map((finding) => finding.ruleId))].sort()).toEqual([
       "comments.placeholder-comments",
       "defensive.async-noise",
-      "defensive.needless-try-catch",
+      "defensive.error-obscuring",
       "structure.barrel-density",
       "structure.directory-fanout-hotspot",
       "structure.over-fragmentation",
@@ -94,7 +94,7 @@ describe("fixture regression suite", () => {
     );
     expect(output.stdout).toContain("  at src/comments.ts:1:1");
     expect(output.stdout).toContain(
-      "strong  Found 1 defensive try/catch block  defensive.needless-try-catch",
+      "strong  Found 1 error-obscuring catch block  defensive.error-obscuring",
     );
     expect(output.stdout).toContain("  at src/error.ts:2:1");
     expect(output.stdout).toContain(

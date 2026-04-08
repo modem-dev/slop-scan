@@ -53,6 +53,17 @@ const FILE_SYSTEM_METHODS = new Set([
   "writeFile",
   "writeFileSync",
 ]);
+const FILE_SYSTEM_EXISTENCE_METHODS = new Set([
+  "access",
+  "accessSync",
+  "existsSync",
+  "lstat",
+  "lstatSync",
+  "realpath",
+  "realpathSync",
+  "stat",
+  "statSync",
+]);
 const PROCESS_METHODS = new Set([
   "exec",
   "execFile",
@@ -86,8 +97,12 @@ const BROWSER_METHODS = new Set([
   "type",
 ]);
 
-function collectBoundaryCategories(node: ts.TryStatement): string[] {
+function collectBoundarySignals(node: ts.TryStatement): {
+  categories: string[];
+  operationPaths: string[];
+} {
   const categories = new Set<string>();
+  const operationPaths = new Set<string>();
 
   walk(node.tryBlock, (child) => {
     if (ts.isCallExpression(child) || ts.isNewExpression(child)) {
@@ -97,6 +112,8 @@ function collectBoundaryCategories(node: ts.TryStatement): string[] {
       if (path.length === 0) {
         return;
       }
+
+      operationPaths.add(path.join("."));
 
       const [root] = path;
       const last = path.at(-1) ?? "";
@@ -133,7 +150,26 @@ function collectBoundaryCategories(node: ts.TryStatement): string[] {
     }
   });
 
-  return [...categories].sort();
+  return {
+    categories: [...categories].sort(),
+    operationPaths: [...operationPaths].sort(),
+  };
+}
+
+function isFilesystemExistenceProbe(
+  tryStatementCount: number,
+  catchReturnsDefault: boolean,
+  catchThrowsGeneric: boolean,
+  operationPaths: string[],
+): boolean {
+  return (
+    tryStatementCount <= 2 &&
+    (catchReturnsDefault || catchThrowsGeneric) &&
+    operationPaths.length > 0 &&
+    operationPaths.every((operationPath) =>
+      FILE_SYSTEM_EXISTENCE_METHODS.has(operationPath.split(".").at(-1) ?? ""),
+    )
+  );
 }
 
 function summarizeTryStatement(node: ts.TryStatement, sourceFile: ts.SourceFile): TryCatchSummary {
@@ -165,11 +201,13 @@ function summarizeTryStatement(node: ts.TryStatement, sourceFile: ts.SourceFile)
     Boolean(catchStatements[0].expression) &&
     (ts.isNewExpression(catchStatements[0].expression!) ||
       ts.isStringLiteral(catchStatements[0].expression!));
+  const boundary = collectBoundarySignals(node);
+  const tryStatementCount = node.tryBlock.statements.length;
 
   return {
     line: getLineNumber(sourceFile, node.getStart(sourceFile)),
     hasCatchClause: Boolean(node.catchClause),
-    tryStatementCount: node.tryBlock.statements.length,
+    tryStatementCount,
     catchStatementCount: catchStatements.length,
     catchLogsOnly,
     catchReturnsDefault,
@@ -177,7 +215,14 @@ function summarizeTryStatement(node: ts.TryStatement, sourceFile: ts.SourceFile)
     catchHasDefaultReturn,
     catchIsEmpty: catchStatements.length === 0,
     catchThrowsGeneric,
-    boundaryCategories: collectBoundaryCategories(node),
+    boundaryCategories: boundary.categories,
+    boundaryOperationPaths: boundary.operationPaths,
+    isFilesystemExistenceProbe: isFilesystemExistenceProbe(
+      tryStatementCount,
+      catchReturnsDefault,
+      catchThrowsGeneric,
+      boundary.operationPaths,
+    ),
   };
 }
 

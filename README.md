@@ -104,7 +104,9 @@ The CLI currently exits non-zero for CLI/runtime errors, not for findings.
 
 Current checks focus on patterns that often show up in unreviewed generated code:
 
-- needless `try/catch`
+- log-and-continue catch blocks
+- error-obscuring catch blocks (default-return or generic replacement error)
+- empty catch blocks
 - async wrapper / `return await` noise
 - pass-through wrappers
 - barrel density

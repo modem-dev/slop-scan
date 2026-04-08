@@ -74,7 +74,7 @@ describe("heuristic rule pack", () => {
     const ruleIds = new Set(result.findings.map((finding) => finding.ruleId));
 
     expect(ruleIds.has("comments.placeholder-comments")).toBe(true);
-    expect(ruleIds.has("defensive.needless-try-catch")).toBe(true);
+    expect(ruleIds.has("defensive.error-obscuring")).toBe(true);
     expect(ruleIds.has("defensive.async-noise")).toBe(true);
     expect(ruleIds.has("structure.pass-through-wrappers")).toBe(true);
     expect(ruleIds.has("structure.barrel-density")).toBe(true);
@@ -126,12 +126,10 @@ describe("heuristic rule pack", () => {
 
     const result = await analyzeRepository(rootDir, DEFAULT_CONFIG, createDefaultRegistry());
     const ioFinding = result.findings.find(
-      (finding) =>
-        finding.path === "src/io.ts" && finding.ruleId === "defensive.needless-try-catch",
+      (finding) => finding.path === "src/io.ts" && finding.ruleId === "defensive.error-obscuring",
     );
     const leafFinding = result.findings.find(
-      (finding) =>
-        finding.path === "src/leaf.ts" && finding.ruleId === "defensive.needless-try-catch",
+      (finding) => finding.path === "src/leaf.ts" && finding.ruleId === "defensive.error-obscuring",
     );
 
     expect(ioFinding).toBeDefined();
@@ -141,6 +139,74 @@ describe("heuristic rule pack", () => {
       true,
     );
     expect(ioFinding?.locations).toHaveLength(1);
+  });
+
+  test("does not flag filesystem existence probe wrappers", async () => {
+    const rootDir = await createTempRepo({
+      "src/fs-check.ts": [
+        'import { access } from "node:fs/promises";',
+        "",
+        "export async function pathExists(targetPath: string) {",
+        "  try {",
+        "    await access(targetPath);",
+        "    return true;",
+        "  } catch {",
+        "    return false;",
+        "  }",
+        "}",
+        "",
+        "export async function assertExists(targetPath: string, message: string) {",
+        "  try {",
+        "    await access(targetPath);",
+        "  } catch {",
+        "    throw new Error(message);",
+        "  }",
+        "}",
+        "",
+      ].join("\n"),
+    });
+
+    const result = await analyzeRepository(rootDir, DEFAULT_CONFIG, createDefaultRegistry());
+
+    expect(
+      result.findings.filter((finding) =>
+        [
+          "defensive.error-swallowing",
+          "defensive.error-obscuring",
+          "defensive.empty-catch",
+        ].includes(finding.ruleId),
+      ),
+    ).toHaveLength(0);
+  });
+
+  test("separates log-only and empty catch patterns", async () => {
+    const rootDir = await createTempRepo({
+      "src/catches.ts": [
+        "export function logOnly(logger: { error: (message: string) => void }) {",
+        "  try {",
+        '    JSON.parse("broken");',
+        "  } catch {",
+        '    logger.error("parse failed");',
+        "  }",
+        "}",
+        "",
+        "export function swallowSilently() {",
+        "  try {",
+        '    JSON.parse("broken");',
+        "  } catch {}",
+        "}",
+        "",
+      ].join("\n"),
+    });
+
+    const result = await analyzeRepository(rootDir, DEFAULT_CONFIG, createDefaultRegistry());
+
+    expect(result.findings.some((finding) => finding.ruleId === "defensive.error-swallowing")).toBe(
+      true,
+    );
+    expect(result.findings.some((finding) => finding.ruleId === "defensive.empty-catch")).toBe(
+      true,
+    );
   });
 
   test("does not flag routine phrasing or alias compatibility wrappers", async () => {

@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "benchmarkSetId": "known-ai-vs-solid-oss",
   "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-  "generatedAt": "2026-04-08T01:47:08.639Z",
-  "analyzerVersion": "0.1.2",
+  "generatedAt": "2026-04-08T21:02:39.680Z",
+  "analyzerVersion": "0.1.3",
   "configMode": "default",
   "repos": [
     {
@@ -14,7 +14,7 @@
       "summary": {
         "fileCount": 139,
         "directoryCount": 29,
-        "findingCount": 47,
+        "findingCount": 48,
         "repoScore": 188.3111111111111,
         "physicalLineCount": 33794,
         "logicalLineCount": 22270,
@@ -23,17 +23,19 @@
           "scorePerFile": 1.3547561950439648,
           "scorePerKloc": 8.45581998702789,
           "scorePerFunction": 0.3835256845440145,
-          "findingsPerFile": 0.3381294964028777,
-          "findingsPerKloc": 2.110462505612932,
-          "findingsPerFunction": 0.09572301425661914
+          "findingsPerFile": 0.34532374100719426,
+          "findingsPerKloc": 2.1553659631791646,
+          "findingsPerFunction": 0.09775967413441955
         }
       },
-      "blendedScore": 3.5092070910796167,
+      "blendedScore": 3.546342591807541,
       "ruleCounts": {
         "tests.duplicate-mock-setup": 26,
-        "defensive.needless-try-catch": 9,
+        "defensive.empty-catch": 5,
         "structure.duplicate-function-signatures": 5,
         "structure.pass-through-wrappers": 5,
+        "defensive.error-swallowing": 3,
+        "defensive.error-obscuring": 2,
         "structure.directory-fanout-hotspot": 2
       },
       "topFiles": [
@@ -50,7 +52,7 @@
         {
           "path": "src/hooks/app/use-panel.ts",
           "score": 6.5,
-          "findingCount": 1
+          "findingCount": 2
         },
         {
           "path": "plugins/codex/plugin.js",
@@ -98,9 +100,10 @@
           "findingsPerFunction": 0.09523809523809523
         }
       },
-      "blendedScore": 3.770079150999443,
+      "blendedScore": 3.7700791509994422,
       "ruleCounts": {
-        "defensive.needless-try-catch": 11,
+        "defensive.error-swallowing": 10,
+        "defensive.empty-catch": 1,
         "structure.barrel-density": 1,
         "structure.directory-fanout-hotspot": 1,
         "structure.pass-through-wrappers": 1
@@ -148,34 +151,36 @@
       "summary": {
         "fileCount": 219,
         "directoryCount": 78,
-        "findingCount": 34,
-        "repoScore": 114.39166666666668,
+        "findingCount": 36,
+        "repoScore": 115.59166666666668,
         "physicalLineCount": 26787,
         "logicalLineCount": 12154,
         "functionCount": 574,
         "normalized": {
-          "scorePerFile": 0.5223363774733638,
-          "scorePerKloc": 9.411853436454392,
-          "scorePerFunction": 0.19928861788617888,
-          "findingsPerFile": 0.1552511415525114,
-          "findingsPerKloc": 2.797432943886786,
-          "findingsPerFunction": 0.059233449477351915
+          "scorePerFile": 0.5278158295281584,
+          "scorePerKloc": 9.510586363885691,
+          "scorePerFunction": 0.20137921022067368,
+          "findingsPerFile": 0.1643835616438356,
+          "findingsPerKloc": 2.96198782293895,
+          "findingsPerFunction": 0.0627177700348432
         }
       },
-      "blendedScore": 2.3222332484107437,
+      "blendedScore": 2.402059161413838,
       "ruleCounts": {
-        "defensive.needless-try-catch": 17,
+        "defensive.error-swallowing": 11,
+        "defensive.error-obscuring": 5,
         "structure.barrel-density": 4,
         "structure.pass-through-wrappers": 4,
         "defensive.async-noise": 3,
+        "defensive.empty-catch": 3,
         "structure.directory-fanout-hotspot": 3,
         "tests.duplicate-mock-setup": 3
       },
       "topFiles": [
         {
           "path": "components/terminal/xterm-terminal.tsx",
-          "score": 8,
-          "findingCount": 1
+          "score": 9.2,
+          "findingCount": 2
         },
         {
           "path": "lib/jobs/project-task/projectTaskReconcile.ts",
@@ -190,7 +195,7 @@
         {
           "path": "lib/util/ttyd-exec.ts",
           "score": 6.5,
-          "findingCount": 1
+          "findingCount": 2
         },
         {
           "path": "components/terminal/hooks/use-file-drop.ts",
@@ -222,58 +227,60 @@
       "cohort": "explicit-ai",
       "ref": "44cf74717b4507245648a0263f3b0df85aa2a813",
       "summary": {
-        "fileCount": 10580,
-        "directoryCount": 444,
-        "findingCount": 3388,
-        "repoScore": 11456.957485884475,
-        "physicalLineCount": 1955399,
-        "logicalLineCount": 1037965,
-        "functionCount": 40714,
+        "fileCount": 10465,
+        "directoryCount": 423,
+        "findingCount": 3417,
+        "repoScore": 11394.13866868018,
+        "physicalLineCount": 1939647,
+        "logicalLineCount": 1031409,
+        "functionCount": 40348,
         "normalized": {
-          "scorePerFile": 1.0828882311800072,
-          "scorePerKloc": 11.037903480256537,
-          "scorePerFunction": 0.281400930537026,
-          "findingsPerFile": 0.32022684310018906,
-          "findingsPerKloc": 3.2640792319586884,
-          "findingsPerFunction": 0.08321461904995825
+          "scorePerFile": 1.0887853481777525,
+          "scorePerKloc": 11.047158468347842,
+          "scorePerFunction": 0.28239661615644346,
+          "findingsPerFile": 0.32651696129957,
+          "findingsPerKloc": 3.3129437497636727,
+          "findingsPerFunction": 0.08468821255080797
         }
       },
-      "blendedScore": 3.4943245111907,
+      "blendedScore": 3.530423337788157,
       "ruleCounts": {
         "tests.duplicate-mock-setup": 1003,
-        "defensive.needless-try-catch": 683,
-        "structure.pass-through-wrappers": 624,
-        "structure.barrel-density": 415,
+        "structure.pass-through-wrappers": 618,
+        "structure.barrel-density": 412,
+        "defensive.error-obscuring": 370,
+        "defensive.empty-catch": 341,
         "defensive.async-noise": 315,
-        "structure.duplicate-function-signatures": 252,
-        "structure.directory-fanout-hotspot": 70,
-        "structure.over-fragmentation": 26
+        "structure.duplicate-function-signatures": 249,
+        "structure.directory-fanout-hotspot": 68,
+        "structure.over-fragmentation": 26,
+        "defensive.error-swallowing": 15
       },
       "topFiles": [
+        {
+          "path": "src/config/io.ts",
+          "score": 19.4,
+          "findingCount": 4
+        },
         {
           "path": "extensions/msteams/src/attachments/shared.ts",
           "score": 18.25,
           "findingCount": 4
         },
         {
-          "path": "src/agents/subagent-spawn.ts",
-          "score": 17,
+          "path": "extensions/diffs/assets/viewer-runtime.js",
+          "score": 18,
           "findingCount": 4
         },
         {
-          "path": "src/config/io.ts",
-          "score": 17,
-          "findingCount": 3
-        },
-        {
           "path": "extensions/matrix/src/matrix/sdk.ts",
-          "score": 16,
-          "findingCount": 3
+          "score": 17.5,
+          "findingCount": 4
         },
         {
-          "path": "src/agents/tools/sessions-resolution.ts",
-          "score": 14.5,
-          "findingCount": 3
+          "path": "src/agents/subagent-spawn.ts",
+          "score": 17,
+          "findingCount": 4
         }
       ],
       "topDirectories": [
@@ -312,40 +319,42 @@
       "summary": {
         "fileCount": 1072,
         "directoryCount": 306,
-        "findingCount": 243,
-        "repoScore": 814.652579365079,
+        "findingCount": 249,
+        "repoScore": 831.3525793650789,
         "physicalLineCount": 257938,
         "logicalLineCount": 120432,
         "functionCount": 3513,
         "normalized": {
-          "scorePerFile": 0.7599371076166781,
-          "scorePerKloc": 6.76441958420585,
-          "scorePerFunction": 0.23189654977656673,
-          "findingsPerFile": 0.22667910447761194,
-          "findingsPerKloc": 2.017736149860502,
-          "findingsPerFunction": 0.06917164816396243
+          "scorePerFile": 0.7755154658256332,
+          "scorePerKloc": 6.903087048002847,
+          "scorePerFunction": 0.2366503214816621,
+          "findingsPerFile": 0.23227611940298507,
+          "findingsPerKloc": 2.06755679553607,
+          "findingsPerFunction": 0.07087959009393681
         }
       },
-      "blendedScore": 2.48358299054269,
+      "blendedScore": 2.539695324126198,
       "ruleCounts": {
-        "defensive.needless-try-catch": 80,
         "structure.duplicate-function-signatures": 55,
+        "defensive.empty-catch": 46,
         "structure.barrel-density": 34,
+        "defensive.error-obscuring": 27,
         "structure.pass-through-wrappers": 27,
         "tests.duplicate-mock-setup": 25,
         "structure.directory-fanout-hotspot": 17,
+        "defensive.error-swallowing": 13,
         "defensive.async-noise": 5
       },
       "topFiles": [
         {
-          "path": "packages/core/src/plugins/hooks.ts",
-          "score": 12,
-          "findingCount": 2
+          "path": "packages/core/src/emdash-runtime.ts",
+          "score": 24.7,
+          "findingCount": 4
         },
         {
-          "path": "packages/core/src/emdash-runtime.ts",
-          "score": 10,
-          "findingCount": 2
+          "path": "packages/core/src/plugins/hooks.ts",
+          "score": 20,
+          "findingCount": 3
         },
         {
           "path": "packages/core/src/plugins/context.ts",
@@ -399,52 +408,54 @@
       "summary": {
         "fileCount": 176,
         "directoryCount": 19,
-        "findingCount": 79,
-        "repoScore": 372.8999999999999,
+        "findingCount": 93,
+        "repoScore": 413.49999999999983,
         "physicalLineCount": 62616,
         "logicalLineCount": 18958,
         "functionCount": 832,
         "normalized": {
-          "scorePerFile": 2.1187499999999995,
-          "scorePerKloc": 19.669796392024473,
-          "scorePerFunction": 0.44819711538461526,
-          "findingsPerFile": 0.44886363636363635,
-          "findingsPerKloc": 4.167106234834899,
-          "findingsPerFunction": 0.09495192307692307
+          "scorePerFile": 2.349431818181817,
+          "scorePerKloc": 21.81137250764848,
+          "scorePerFunction": 0.4969951923076921,
+          "findingsPerFile": 0.5284090909090909,
+          "findingsPerKloc": 4.905580757463868,
+          "findingsPerFunction": 0.11177884615384616
         }
       },
-      "blendedScore": 5.237545785188169,
+      "blendedScore": 5.984079110932836,
       "ruleCounts": {
-        "defensive.needless-try-catch": 69,
+        "defensive.empty-catch": 56,
+        "defensive.error-obscuring": 19,
+        "defensive.error-swallowing": 8,
         "structure.pass-through-wrappers": 7,
         "defensive.async-noise": 2,
         "structure.directory-fanout-hotspot": 1
       },
       "topFiles": [
         {
+          "path": "browse/src/server.ts",
+          "score": 21.4,
+          "findingCount": 3
+        },
+        {
+          "path": "browse/src/sidebar-agent.ts",
+          "score": 19.400000000000002,
+          "findingCount": 3
+        },
+        {
           "path": "browse/src/cli.ts",
-          "score": 10,
-          "findingCount": 2
+          "score": 14.8,
+          "findingCount": 3
         },
         {
           "path": "bin/gstack-global-discover.ts",
-          "score": 8,
-          "findingCount": 1
+          "score": 11.000000000000002,
+          "findingCount": 2
         },
         {
-          "path": "browse/src/browser-manager.ts",
-          "score": 8,
-          "findingCount": 1
-        },
-        {
-          "path": "browse/src/cdp-inspector.ts",
-          "score": 8,
-          "findingCount": 1
-        },
-        {
-          "path": "browse/src/cookie-import-browser.ts",
-          "score": 8,
-          "findingCount": 1
+          "path": "test/skill-e2e.test.ts",
+          "score": 11,
+          "findingCount": 2
         }
       ],
       "topDirectories": [
@@ -463,7 +474,7 @@
       "summary": {
         "fileCount": 166,
         "directoryCount": 36,
-        "findingCount": 19,
+        "findingCount": 21,
         "repoScore": 63.87349206349206,
         "physicalLineCount": 32498,
         "logicalLineCount": 13564,
@@ -472,17 +483,19 @@
           "scorePerFile": 0.3847800726716389,
           "scorePerKloc": 4.70904541901298,
           "scorePerFunction": 0.08493815433975008,
-          "findingsPerFile": 0.1144578313253012,
-          "findingsPerKloc": 1.4007667354762607,
-          "findingsPerFunction": 0.02526595744680851
+          "findingsPerFile": 0.12650602409638553,
+          "findingsPerKloc": 1.5482158655263933,
+          "findingsPerFunction": 0.027925531914893616
         }
       },
-      "blendedScore": 1.2535071828776654,
+      "blendedScore": 1.3178308614426713,
       "ruleCounts": {
-        "defensive.needless-try-catch": 9,
+        "defensive.error-obscuring": 6,
         "structure.pass-through-wrappers": 6,
+        "defensive.empty-catch": 4,
         "structure.directory-fanout-hotspot": 3,
-        "defensive.async-noise": 1
+        "defensive.async-noise": 1,
+        "defensive.error-swallowing": 1
       },
       "topFiles": [
         {
@@ -493,12 +506,12 @@
         {
           "path": "src/mcp/daemonLauncher.ts",
           "score": 6.200000000000001,
-          "findingCount": 1
+          "findingCount": 2
         },
         {
           "path": "src/ui/App.tsx",
           "score": 6,
-          "findingCount": 1
+          "findingCount": 2
         },
         {
           "path": "test/session/broker-e2e.test.ts",
@@ -537,40 +550,47 @@
       "summary": {
         "fileCount": 1129,
         "directoryCount": 486,
-        "findingCount": 162,
-        "repoScore": 561.5527247262539,
+        "findingCount": 169,
+        "repoScore": 570.352724726254,
         "physicalLineCount": 150365,
         "logicalLineCount": 59523,
         "functionCount": 2917,
         "normalized": {
-          "scorePerFile": 0.4973894815998706,
-          "scorePerKloc": 9.434214080712563,
-          "scorePerFunction": 0.1925103615791066,
-          "findingsPerFile": 0.14348981399468555,
-          "findingsPerKloc": 2.721637014263394,
-          "findingsPerFunction": 0.055536510113129926
+          "scorePerFile": 0.5051839900143968,
+          "scorePerKloc": 9.58205609136391,
+          "scorePerFunction": 0.19552715965932602,
+          "findingsPerFile": 0.14968999114260406,
+          "findingsPerKloc": 2.8392386136451453,
+          "findingsPerFunction": 0.057936235858759
         }
       },
-      "blendedScore": 2.2267697618516693,
+      "blendedScore": 2.2921215861114397,
       "ruleCounts": {
         "structure.duplicate-function-signatures": 50,
-        "defensive.needless-try-catch": 40,
         "structure.pass-through-wrappers": 29,
+        "defensive.error-obscuring": 24,
+        "defensive.empty-catch": 21,
         "tests.duplicate-mock-setup": 18,
         "structure.directory-fanout-hotspot": 15,
         "defensive.async-noise": 4,
         "structure.barrel-density": 3,
-        "structure.over-fragmentation": 3
+        "structure.over-fragmentation": 3,
+        "defensive.error-swallowing": 2
       },
       "topFiles": [
         {
-          "path": "tests/features.test.ts",
-          "score": 13,
-          "findingCount": 2
+          "path": "packages/vinext/src/index.ts",
+          "score": 14.65,
+          "findingCount": 3
         },
         {
           "path": "packages/vinext/src/shims/navigation.ts",
-          "score": 12,
+          "score": 13.5,
+          "findingCount": 3
+        },
+        {
+          "path": "tests/features.test.ts",
+          "score": 13,
           "findingCount": 2
         },
         {
@@ -579,14 +599,9 @@
           "findingCount": 3
         },
         {
-          "path": "tests/pages-page-data.test.ts",
-          "score": 10.75,
-          "findingCount": 3
-        },
-        {
           "path": "packages/vinext/src/server/prod-server.ts",
-          "score": 10,
-          "findingCount": 2
+          "score": 11.1,
+          "findingCount": 3
         }
       ],
       "topDirectories": [
@@ -625,7 +640,7 @@
       "summary": {
         "fileCount": 94,
         "directoryCount": 24,
-        "findingCount": 26,
+        "findingCount": 29,
         "repoScore": 98.62500000000001,
         "physicalLineCount": 17222,
         "logicalLineCount": 8474,
@@ -634,14 +649,16 @@
           "scorePerFile": 1.0492021276595747,
           "scorePerKloc": 11.638541420816617,
           "scorePerFunction": 0.4482954545454546,
-          "findingsPerFile": 0.2765957446808511,
-          "findingsPerKloc": 3.0682086381873965,
-          "findingsPerFunction": 0.11818181818181818
+          "findingsPerFile": 0.30851063829787234,
+          "findingsPerKloc": 3.422232711824404,
+          "findingsPerFunction": 0.1318181818181818
         }
       },
-      "blendedScore": 3.88086125833803,
+      "blendedScore": 4.098646301325513,
       "ruleCounts": {
-        "defensive.needless-try-catch": 21,
+        "defensive.empty-catch": 18,
+        "defensive.error-obscuring": 3,
+        "defensive.error-swallowing": 3,
         "tests.duplicate-mock-setup": 3,
         "structure.barrel-density": 1,
         "structure.directory-fanout-hotspot": 1
@@ -650,7 +667,7 @@
         {
           "path": "packages/cli/src/cli.ts",
           "score": 8,
-          "findingCount": 1
+          "findingCount": 2
         },
         {
           "path": "packages/cli/src/docker/shutdown.ts",
@@ -703,7 +720,7 @@
           "findingsPerFunction": 0.020202020202020204
         }
       },
-      "blendedScore": 0.7263097619002123,
+      "blendedScore": 0.7263097619002122,
       "ruleCounts": {
         "structure.barrel-density": 1,
         "structure.over-fragmentation": 1
@@ -745,9 +762,9 @@
           "findingsPerFunction": 0.023809523809523808
         }
       },
-      "blendedScore": 0.4593910835627455,
+      "blendedScore": 0.45939108356274544,
       "ruleCounts": {
-        "defensive.needless-try-catch": 1
+        "defensive.empty-catch": 1
       },
       "topFiles": [
         {
@@ -783,7 +800,7 @@
       "blendedScore": 1.0254742221567712,
       "ruleCounts": {
         "structure.pass-through-wrappers": 2,
-        "defensive.needless-try-catch": 1,
+        "defensive.error-obscuring": 1,
         "structure.directory-fanout-hotspot": 1
       },
       "topFiles": [
@@ -830,10 +847,11 @@
       },
       "blendedScore": 0.987281412292342,
       "ruleCounts": {
-        "defensive.needless-try-catch": 12,
+        "defensive.empty-catch": 11,
         "structure.directory-fanout-hotspot": 7,
         "structure.duplicate-function-signatures": 6,
         "structure.over-fragmentation": 2,
+        "defensive.error-obscuring": 1,
         "structure.barrel-density": 1
       },
       "topFiles": [
@@ -897,39 +915,40 @@
       "cohort": "mature-oss",
       "ref": "2a7bb18259d975f27b30b502af1be7576f6f5656",
       "summary": {
-        "fileCount": 115,
-        "directoryCount": 22,
-        "findingCount": 17,
-        "repoScore": 68.43333333333332,
-        "physicalLineCount": 162828,
-        "logicalLineCount": 65160,
-        "functionCount": 5356,
+        "fileCount": 113,
+        "directoryCount": 21,
+        "findingCount": 18,
+        "repoScore": 73.10000000000001,
+        "physicalLineCount": 162735,
+        "logicalLineCount": 65075,
+        "functionCount": 5354,
         "normalized": {
-          "scorePerFile": 0.5950724637681158,
-          "scorePerKloc": 1.0502353181911193,
-          "scorePerFunction": 0.012776947971122726,
-          "findingsPerFile": 0.14782608695652175,
-          "findingsPerKloc": 0.2608962553713935,
-          "findingsPerFunction": 0.0031740104555638537
+          "scorePerFile": 0.6469026548672567,
+          "scorePerKloc": 1.1233192470226663,
+          "scorePerFunction": 0.013653343294732912,
+          "findingsPerFile": 0.1592920353982301,
+          "findingsPerKloc": 0.27660391855551286,
+          "findingsPerFunction": 0.0033619723571161747
         }
       },
-      "blendedScore": 0.4272473844717202,
+      "blendedScore": 0.4572975537118579,
       "ruleCounts": {
-        "defensive.needless-try-catch": 9,
+        "defensive.error-swallowing": 8,
         "structure.pass-through-wrappers": 5,
-        "structure.directory-fanout-hotspot": 2,
-        "defensive.async-noise": 1
+        "defensive.empty-catch": 3,
+        "defensive.async-noise": 1,
+        "defensive.error-obscuring": 1
       },
       "topFiles": [
         {
           "path": "bin/yarn-standalone.js",
-          "score": 13,
-          "findingCount": 2
+          "score": 24,
+          "findingCount": 4
         },
         {
           "path": "app/plugins.ts",
           "score": 8.5,
-          "findingCount": 2
+          "findingCount": 3
         },
         {
           "path": "bin/rimraf-standalone.js",
@@ -947,18 +966,7 @@
           "findingCount": 1
         }
       ],
-      "topDirectories": [
-        {
-          "path": "app/utils",
-          "score": 3.333333333333333,
-          "findingCount": 1
-        },
-        {
-          "path": "app/config",
-          "score": 3,
-          "findingCount": 1
-        }
-      ]
+      "topDirectories": []
     },
     {
       "id": "umami",
@@ -985,11 +993,13 @@
       "blendedScore": 1.012718587707658,
       "ruleCounts": {
         "structure.duplicate-function-signatures": 14,
-        "defensive.needless-try-catch": 10,
+        "defensive.error-obscuring": 7,
         "structure.directory-fanout-hotspot": 6,
         "structure.barrel-density": 5,
         "structure.pass-through-wrappers": 4,
-        "defensive.async-noise": 1
+        "defensive.empty-catch": 2,
+        "defensive.async-noise": 1,
+        "defensive.error-swallowing": 1
       },
       "topFiles": [
         {
@@ -1052,30 +1062,32 @@
       "cohort": "mature-oss",
       "ref": "bdc53ab1e67f7e2e000112eeed9c85413ddb0e9e",
       "summary": {
-        "fileCount": 1433,
-        "directoryCount": 619,
-        "findingCount": 113,
-        "repoScore": 375.5409370467554,
-        "physicalLineCount": 95801,
-        "logicalLineCount": 46593,
-        "functionCount": 2300,
+        "fileCount": 1432,
+        "directoryCount": 618,
+        "findingCount": 116,
+        "repoScore": 377.4409370467554,
+        "physicalLineCount": 95795,
+        "logicalLineCount": 46589,
+        "functionCount": 2299,
         "normalized": {
-          "scorePerFile": 0.2620662505560052,
-          "scorePerKloc": 8.060029125550091,
-          "scorePerFunction": 0.163278668281198,
-          "findingsPerFile": 0.07885554780181438,
-          "findingsPerKloc": 2.425257012856008,
-          "findingsPerFunction": 0.049130434782608694
+          "scorePerFile": 0.26357607335667277,
+          "scorePerKloc": 8.101503295772723,
+          "scorePerFunction": 0.16417613616648777,
+          "findingsPerFile": 0.08100558659217877,
+          "findingsPerKloc": 2.4898581210156903,
+          "findingsPerFunction": 0.050456720313179645
         }
       },
-      "blendedScore": 1.6497972059132502,
+      "blendedScore": 1.6764578380797177,
       "ruleCounts": {
-        "defensive.needless-try-catch": 29,
         "structure.pass-through-wrappers": 27,
         "structure.directory-fanout-hotspot": 20,
+        "defensive.empty-catch": 16,
         "structure.barrel-density": 11,
+        "defensive.error-obscuring": 10,
         "defensive.async-noise": 9,
         "structure.over-fragmentation": 8,
+        "defensive.error-swallowing": 6,
         "tests.duplicate-mock-setup": 6,
         "structure.duplicate-function-signatures": 3
       },
@@ -1086,9 +1098,14 @@
           "findingCount": 3
         },
         {
+          "path": "packages/vite/src/node/utils.ts",
+          "score": 9.9,
+          "findingCount": 2
+        },
+        {
           "path": "packages/vite/src/node/config.ts",
           "score": 8,
-          "findingCount": 2
+          "findingCount": 3
         },
         {
           "path": "packages/vite/src/node/plugins/worker.ts",
@@ -1099,11 +1116,6 @@
           "path": "packages/vite/src/node/ssr/__tests__/ssrLoadModule.spec.ts",
           "score": 8,
           "findingCount": 2
-        },
-        {
-          "path": "packages/vite/src/node/utils.ts",
-          "score": 8,
-          "findingCount": 1
         }
       ],
       "topDirectories": [
@@ -1140,33 +1152,40 @@
       "cohort": "mature-oss",
       "ref": "2c9bf5e278792615dfd48de42f459cc4ad8e0b29",
       "summary": {
-        "fileCount": 2812,
-        "directoryCount": 1155,
-        "findingCount": 261,
-        "repoScore": 752.9540043290039,
-        "physicalLineCount": 226574,
-        "logicalLineCount": 131236,
+        "fileCount": 2798,
+        "directoryCount": 1144,
+        "findingCount": 269,
+        "repoScore": 756.6540043290039,
+        "physicalLineCount": 226544,
+        "logicalLineCount": 131228,
         "functionCount": 4359,
         "normalized": {
-          "scorePerFile": 0.26776458190931857,
-          "scorePerKloc": 5.737404403738333,
-          "scorePerFunction": 0.1727354907843551,
-          "findingsPerFile": 0.09281650071123755,
-          "findingsPerKloc": 1.9887835654850805,
-          "findingsPerFunction": 0.05987611837577426
+          "scorePerFile": 0.2704267349281644,
+          "scorePerKloc": 5.765949373068277,
+          "scorePerFunction": 0.17358430932071667,
+          "findingsPerFile": 0.09614010007147963,
+          "findingsPerKloc": 2.0498674063462063,
+          "findingsPerFunction": 0.06171140169763707
         }
       },
-      "blendedScore": 1.6226082759681881,
+      "blendedScore": 1.654113770531161,
       "ruleCounts": {
-        "defensive.needless-try-catch": 86,
         "structure.pass-through-wrappers": 55,
+        "defensive.empty-catch": 50,
         "structure.duplicate-function-signatures": 37,
+        "defensive.error-obscuring": 34,
         "structure.directory-fanout-hotspot": 32,
         "structure.barrel-density": 29,
         "defensive.async-noise": 21,
+        "defensive.error-swallowing": 10,
         "structure.over-fragmentation": 1
       },
       "topFiles": [
+        {
+          "path": "packages/astro/src/core/errors/dev/utils.ts",
+          "score": 11,
+          "findingCount": 2
+        },
         {
           "path": "packages/astro/src/core/render-context.ts",
           "score": 10.5,
@@ -1175,21 +1194,16 @@
         {
           "path": "packages/astro/src/core/session/runtime.ts",
           "score": 10.5,
+          "findingCount": 3
+        },
+        {
+          "path": "packages/astro/src/content/mutable-data-store.ts",
+          "score": 9.9,
           "findingCount": 2
         },
         {
           "path": "packages/astro/src/assets/fonts/infra/unstorage-fs-storage.ts",
           "score": 9,
-          "findingCount": 2
-        },
-        {
-          "path": "packages/astro/src/assets/fonts/providers/index.ts",
-          "score": 9,
-          "findingCount": 2
-        },
-        {
-          "path": "packages/astro/src/core/dev/dev.ts",
-          "score": 8.5,
           "findingCount": 2
         }
       ],
@@ -1227,13 +1241,13 @@
       "repoCount": 9,
       "medians": {
         "scorePerFile": 1.0041666666666667,
-        "scorePerKloc": 9.434214080712563,
-        "scorePerFunction": 0.23189654977656673,
-        "findingsPerFile": 0.2765957446808511,
-        "findingsPerKloc": 2.797432943886786,
-        "findingsPerFunction": 0.08321461904995825
+        "scorePerKloc": 9.58205609136391,
+        "scorePerFunction": 0.2366503214816621,
+        "findingsPerFile": 0.30851063829787234,
+        "findingsPerKloc": 2.96198782293895,
+        "findingsPerFunction": 0.08468821255080797
       },
-      "blendedScoreMedian": 3.4943245111907
+      "blendedScoreMedian": 3.530423337788157
     },
     "mature-oss": {
       "repoCount": 8,
@@ -1241,7 +1255,7 @@
         "scorePerFile": 0.19086548662498448,
         "scorePerKloc": 4.422142801664107,
         "scorePerFunction": 0.09195482875096181,
-        "findingsPerFile": 0.06910136440535823,
+        "findingsPerFile": 0.07017638380054042,
         "findingsPerKloc": 1.3961844005945103,
         "findingsPerFunction": 0.02817460317460317
       },
@@ -1254,12 +1268,12 @@
       "solidRepoId": "hyper",
       "notes": "GUI-oriented TypeScript app vs older terminal/desktop-style TS app.",
       "ratios": {
-        "scorePerFile": 1.6874695567462252,
-        "scorePerKloc": 10.246589947764024,
-        "scorePerFunction": 17.108475733206095,
-        "findingsPerFile": 2.9595588235294117,
-        "findingsPerKloc": 17.9709231314763,
-        "findingsPerFunction": 30.005602240896355
+        "scorePerFile": 1.5522685818513449,
+        "scorePerKloc": 9.579939703416061,
+        "scorePerFunction": 16.010298693120657,
+        "findingsPerFile": 2.7465277777777777,
+        "findingsPerKloc": 16.95039815434993,
+        "findingsPerFunction": 28.32804232804233
       }
     },
     {
@@ -1270,9 +1284,9 @@
         "scorePerFile": 8.814792677910093,
         "scorePerKloc": 2.0292261171595976,
         "scorePerFunction": 4.476224033539827,
-        "findingsPerFile": 5.6974820143884894,
-        "findingsPerKloc": 1.311599685675797,
-        "findingsPerFunction": 2.8932281059063136
+        "findingsPerFile": 5.818705035971223,
+        "findingsPerKloc": 1.3395060619667716,
+        "findingsPerFunction": 2.954786150712831
       }
     },
     {
@@ -1280,12 +1294,12 @@
       "solidRepoId": "vite",
       "notes": "AI-built Vite-based framework layer vs the mature Vite baseline.",
       "ratios": {
-        "scorePerFile": 1.8979532104748276,
-        "scorePerKloc": 1.1704937952154961,
-        "scorePerFunction": 1.1790294691010454,
-        "findingsPerFile": 1.8196540128706584,
-        "findingsPerKloc": 1.1222056053590648,
-        "findingsPerFunction": 1.1303891438955649
+        "scorePerFile": 1.9166534487778744,
+        "scorePerKloc": 1.1827503787307874,
+        "scorePerFunction": 1.1909596864981997,
+        "findingsPerFile": 1.8478971320362847,
+        "findingsPerKloc": 1.140321446302704,
+        "findingsPerFunction": 1.148236260683508
       }
     }
   ]
