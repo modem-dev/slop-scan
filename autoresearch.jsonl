@@ -1,0 +1,1 @@
+{"type":"config","name":"Optimize scanner throughput across representative repos","metricName":"total_ms","metricUnit":"ms","bestDirection":"lower"}
