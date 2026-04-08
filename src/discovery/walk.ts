@@ -1,4 +1,5 @@
-import { readdir } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
+import ignore from "ignore";
 import path from "node:path";
 import type { AnalyzerConfig } from "../config";
 import type { DirectoryRecord, FileRecord, LanguagePlugin } from "../core/types";
@@ -52,12 +53,28 @@ function shouldIgnore(relativePath: string, patterns: string[]): boolean {
   });
 }
 
+type GitIgnoreMatcher = ReturnType<typeof ignore>;
+
+async function loadGitIgnoreMatcher(rootDir: string): Promise<GitIgnoreMatcher | null> {
+  try {
+    const raw = await readFile(path.join(rootDir, ".gitignore"), "utf8");
+    return ignore().add(raw);
+  } catch {
+    return null;
+  }
+}
+
+function shouldIgnoreGitPath(relativePath: string, gitIgnore: GitIgnoreMatcher | null): boolean {
+  return gitIgnore?.ignores(normalizePath(relativePath)) ?? false;
+}
+
 export async function discoverSourceFiles(
   rootDir: string,
   config: AnalyzerConfig,
   languages: LanguagePlugin[],
 ): Promise<{ files: FileRecord[]; directories: DirectoryRecord[] }> {
   const files: FileRecord[] = [];
+  const gitIgnore = await loadGitIgnoreMatcher(rootDir);
 
   async function walkDirectory(relativeDir: string): Promise<void> {
     const absoluteDir = path.join(rootDir, relativeDir);
@@ -66,12 +83,19 @@ export async function discoverSourceFiles(
     for (const entry of entries) {
       const relativePath = normalizePath(path.join(relativeDir, entry.name));
 
-      if (relativePath !== "." && shouldIgnore(relativePath, config.ignores)) {
+      if (entry.isDirectory()) {
+        if (relativePath !== "." && shouldIgnore(relativePath, config.ignores)) {
+          continue;
+        }
+
+        await walkDirectory(relativePath);
         continue;
       }
 
-      if (entry.isDirectory()) {
-        await walkDirectory(relativePath);
+      if (
+        relativePath !== "."
+        && (shouldIgnore(relativePath, config.ignores) || shouldIgnoreGitPath(relativePath, gitIgnore))
+      ) {
         continue;
       }
 

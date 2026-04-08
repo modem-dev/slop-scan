@@ -188,7 +188,7 @@ Full benchmark assets:
 
 ## Configuration
 
-The analyzer reads `slop-scan.config.json` from the scan root.
+The analyzer reads `slop-scan.config.json` from the scan root and also respects root `.gitignore` entries.
 
 ```json
 {

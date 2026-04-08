@@ -46,6 +46,19 @@ describe("analysis engine", () => {
     expect(result.repoScore).toBe(0);
   });
 
+  test("respects root .gitignore entries", async () => {
+    const rootDir = await createTempRepo({
+      ".gitignore": ["ignored/*", "!ignored/keep.ts"].join("\n"),
+      "src/index.ts": "export const value = 1;\n",
+      "ignored/drop.ts": "export const ignored = true;\n",
+      "ignored/keep.ts": "export const kept = true;\n",
+    });
+
+    const result = await analyzeRepository(rootDir, DEFAULT_CONFIG, createDefaultRegistry());
+
+    expect(result.files.map((file) => file.path)).toEqual(["ignored/keep.ts", "src/index.ts"]);
+  });
+
   test("renders text and json reports via the registry", async () => {
     const rootDir = await createTempRepo();
     const registry = createDefaultRegistry();
