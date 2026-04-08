@@ -29,19 +29,54 @@ export function getLineNumber(sourceFile: ts.SourceFile, position: number): numb
   return sourceFile.getLineAndCharacterOfPosition(position).line + 1;
 }
 
+export function countPhysicalLines(text: string): number {
+  if (text.length === 0) {
+    return 0;
+  }
+
+  let lines = 1;
+  for (let index = 0; index < text.length; index += 1) {
+    if (text.charCodeAt(index) === 10) {
+      lines += 1;
+    }
+  }
+
+  return lines;
+}
+
 export function countLogicalLines(text: string, filePath: string): number {
-  const sourceFile = ts.createSourceFile(filePath, text, ts.ScriptTarget.Latest, true, getScriptKind(filePath));
   const scanner = ts.createScanner(ts.ScriptTarget.Latest, true, getLanguageVariant(filePath), text);
-  const logicalLines = new Set<number>();
+  let cursor = 0;
+  let currentLine = 1;
+  let lastLogicalLine = 0;
+  let logicalLineCount = 0;
 
   let token = scanner.scan();
   while (token !== ts.SyntaxKind.EndOfFileToken) {
-    const tokenLine = sourceFile.getLineAndCharacterOfPosition(scanner.getTokenPos()).line + 1;
-    logicalLines.add(tokenLine);
+    const tokenPos = scanner.getTokenPos();
+
+    while (cursor < tokenPos) {
+      const char = text.charCodeAt(cursor);
+      if (char === 13) {
+        currentLine += 1;
+        if (text.charCodeAt(cursor + 1) === 10) {
+          cursor += 1;
+        }
+      } else if (char === 10) {
+        currentLine += 1;
+      }
+      cursor += 1;
+    }
+
+    if (currentLine !== lastLogicalLine) {
+      logicalLineCount += 1;
+      lastLogicalLine = currentLine;
+    }
+
     token = scanner.scan();
   }
 
-  return logicalLines.size;
+  return logicalLineCount;
 }
 
 export function walk(node: ts.Node, visit: (node: ts.Node) => void): void {
@@ -68,10 +103,13 @@ export function isTestFile(filePath: string): boolean {
 }
 
 export function fingerprintNodeShape(node: ts.Node, maxDepth = 4): string {
-  function visit(current: ts.Node, depth: number): string {
+  const parts: string[] = [];
+
+  function visit(current: ts.Node, depth: number): void {
     const label = ts.SyntaxKind[current.kind];
     if (depth >= maxDepth) {
-      return label;
+      parts.push(label);
+      return;
     }
 
     const children = current.getChildren().filter(
@@ -79,13 +117,22 @@ export function fingerprintNodeShape(node: ts.Node, maxDepth = 4): string {
     );
 
     if (children.length === 0) {
-      return label;
+      parts.push(label);
+      return;
     }
 
-    return `${label}(${children.map((child) => visit(child, depth + 1)).join(",")})`;
+    parts.push(label, "(");
+    for (let index = 0; index < children.length; index += 1) {
+      if (index > 0) {
+        parts.push(",");
+      }
+      visit(children[index]!, depth + 1);
+    }
+    parts.push(")");
   }
 
-  return visit(node, 0);
+  visit(node, 0);
+  return parts.join("");
 }
 
 export function getNodeStatementCount(node: ts.Block | undefined): number {

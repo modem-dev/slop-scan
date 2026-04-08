@@ -1,7 +1,7 @@
-import { readFile } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import type { AnalyzerConfig } from "../config";
 import { discoverSourceFiles } from "../discovery/walk";
-import { countLogicalLines } from "../facts/ts-helpers";
+import { countLogicalLines, countPhysicalLines } from "../facts/ts-helpers";
 import type { FunctionSummary } from "../facts/types";
 import { FactStore } from "./fact-store";
 import { Registry } from "./registry";
@@ -37,6 +37,10 @@ function createRuntime(
   return { rootDir, config, files, directories, store };
 }
 
+function isPromiseLike<T>(value: T | Promise<T>): value is Promise<T> {
+  return typeof value === "object" && value !== null && "then" in value;
+}
+
 async function runProviders(
   providers: FactProvider[],
   contexts: ProviderContext[],
@@ -48,8 +52,12 @@ async function runProviders(
         continue;
       }
 
-      const producedFacts = await provider.run(context);
-      for (const [factId, value] of Object.entries(producedFacts)) {
+      const producedFactsResult = provider.run(context);
+      const producedFacts = isPromiseLike(producedFactsResult)
+        ? await producedFactsResult
+        : producedFactsResult;
+      for (const factId in producedFacts) {
+        const value = producedFacts[factId];
         if (context.scope === "file" && context.file) {
           store.setFileFact(context.file.path, factId, value);
         } else if (context.scope === "directory" && context.directory) {
@@ -73,13 +81,16 @@ async function runRules(rules: RulePlugin[], contexts: ProviderContext[]): Promi
       }
 
       const weight = ruleConfig?.weight ?? 1;
-      const nextFindings = await rule.evaluate(context);
-      findings.push(
-        ...nextFindings.map((finding) => ({
+      const nextFindingsResult = rule.evaluate(context);
+      const nextFindings = isPromiseLike(nextFindingsResult)
+        ? await nextFindingsResult
+        : nextFindingsResult;
+      for (const finding of nextFindings) {
+        findings.push({
           ...finding,
           score: finding.score * weight,
-        })),
-      );
+        });
+      }
     }
   }
 
@@ -263,14 +274,16 @@ export async function analyzeRepository(
   const findings: Finding[] = [];
 
   for (const file of discovery.files) {
-    const text = await readFile(file.absolutePath, "utf8");
-    file.lineCount = text.length === 0 ? 0 : text.split(/\r?\n/).length;
+    const text = readFileSync(file.absolutePath, "utf8");
+    file.lineCount = countPhysicalLines(text);
     file.logicalLineCount = countLogicalLines(text, file.path);
 
-    store.setFileFact(file.path, "file.record", file);
-    store.setFileFact(file.path, "file.text", text);
-    store.setFileFact(file.path, "file.lineCount", file.lineCount);
-    store.setFileFact(file.path, "file.logicalLineCount", file.logicalLineCount);
+    store.setFileFacts(file.path, {
+      "file.record": file,
+      "file.text": text,
+      "file.lineCount": file.lineCount,
+      "file.logicalLineCount": file.logicalLineCount,
+    });
 
     const context = { scope: "file", file, runtime } satisfies ProviderContext;
     await runProviders(orderedFileProviders, [context], store);
