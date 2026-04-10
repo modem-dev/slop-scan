@@ -2,6 +2,7 @@ import { PLUGIN_API_VERSION } from "../plugin";
 import type { SlopScanPlugin } from "../plugin";
 import type { FactProvider, LanguagePlugin, ReporterPlugin, RulePlugin } from "./types";
 
+/** Preserves the ordered set of languages, providers, rules, and reporters assembled into a scan. */
 export class Registry {
   private readonly languages: LanguagePlugin[] = [];
   private readonly factProviders: FactProvider[] = [];
@@ -40,7 +41,7 @@ export class Registry {
     this.reporters.set(plugin.id, plugin);
   }
 
-  /** Validates and registers rules from an external plugin. */
+  /** External plugins currently contribute rules only, so their metadata is checked here before those rules join the normal registry. */
   registerPlugin(namespace: string, plugin: SlopScanPlugin): void {
     if (!plugin.meta || typeof plugin.meta.name !== "string" || plugin.meta.name.length === 0) {
       throw new Error(`Plugin "${namespace}" must define meta.name.`);

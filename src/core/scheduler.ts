@@ -1,5 +1,6 @@
 import type { FactProvider } from "./types";
 
+/** Simple dependency ordering that preserves registration order among providers that are ready at the same time. */
 export function orderFactProviders(
   providers: FactProvider[],
   initialFacts: string[] = [],
@@ -30,6 +31,7 @@ export function orderFactProviders(
   return ordered;
 }
 
+/** Fails fast when a rule depends on facts that the planned analysis will never produce. */
 export function validateRuleRequirements(
   ruleRequirements: Array<{ id: string; requires: string[] }>,
   availableFacts: string[],

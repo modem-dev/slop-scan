@@ -21,6 +21,7 @@ import type {
   RulePlugin,
 } from "./types";
 
+/** Test hooks that bracket the point where transient file facts are released. */
 export interface AnalyzeRepositoryHooks {
   onFileAnalyzed?(file: FileRecord, store: FactStore): void;
   onFileReleased?(file: FileRecord, store: FactStore): void;
@@ -30,6 +31,7 @@ export interface AnalyzeRepositoryOptions {
   hooks?: AnalyzeRepositoryHooks;
 }
 
+/** Pre-expanded override matches, including static-prefix directory hits for patterns like `src/rules/**`. */
 interface ResolvedRuleOverride {
   rules: Record<string, RuleConfig>;
   filePaths: Set<string>;
@@ -51,6 +53,7 @@ function normalizePath(value: string): string {
   return value.split(path.sep).join("/").replace(/^\.\//, "");
 }
 
+/** Pulls out the literal prefix so `src/rules/**` can also match the `src/rules` directory itself. */
 function staticGlobPrefix(pattern: string): string {
   const normalized = normalizePath(pattern).replace(/\/+$/, "");
   if (normalized.length === 0) {
@@ -70,6 +73,7 @@ function staticGlobPrefix(pattern: string): string {
   return staticSegments.length > 0 ? staticSegments.join("/") : ".";
 }
 
+/** Expands override globs once so rule evaluation can use cheap set lookups. */
 async function resolveRuleOverrides(
   rootDir: string,
   config: AnalyzerConfig,
@@ -131,6 +135,7 @@ async function resolveRuleOverrides(
   );
 }
 
+/** Applies matching path overrides in declaration order; later overrides win. */
 function resolveRuleConfig(
   context: ProviderContext,
   ruleId: string,
@@ -186,7 +191,6 @@ function isPromiseLike<T>(value: T | Promise<T>): value is Promise<T> {
   return typeof value === "object" && value !== null && "then" in value;
 }
 
-/** Stores reusable file text and line counts. */
 function cacheFilePayload(absolutePath: string, payload: CachedFilePayload): void {
   if (
     !filePayloadCache.has(absolutePath) &&
@@ -201,7 +205,7 @@ function cacheFilePayload(absolutePath: string, payload: CachedFilePayload): voi
   filePayloadCache.set(absolutePath, payload);
 }
 
-/** Loads cached file text and line counts when possible. */
+/** Reuses file text and line counts when size and mtime still match. */
 function loadFilePayload(file: FileRecord): CachedFilePayload {
   const stats = statSync(file.absolutePath, { bigint: true });
   const cached = filePayloadCache.get(file.absolutePath);
@@ -383,6 +387,7 @@ function buildSummary(
   };
 }
 
+/** Keeps only file facts that later providers or delayed rules still need. */
 function requiredFileFacts(items: Array<{ requires: string[] }>): Set<string> {
   const facts = new Set<string>();
 
@@ -397,6 +402,7 @@ function requiredFileFacts(items: Array<{ requires: string[] }>): Set<string> {
   return facts;
 }
 
+/** Runs file rules in an immediate pass and a delayed pass so transient file facts can be dropped before broader-scope work. */
 export async function analyzeRepository(
   rootDir: string,
   config: AnalyzerConfig,

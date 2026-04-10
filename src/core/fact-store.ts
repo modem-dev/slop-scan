@@ -2,10 +2,12 @@ import type { FactStoreReader } from "./types";
 
 type FactsRecord = Record<string, unknown>;
 
+/** Uses a prototype-less record so arbitrary fact ids cannot collide with object built-ins. */
 function createFactsRecord(): FactsRecord {
   return Object.create(null) as FactsRecord;
 }
 
+/** Keeps repo, directory, and file facts separate so transient file facts can be released without touching longer-lived scopes. */
 export class FactStore implements FactStoreReader {
   private readonly repoFacts = createFactsRecord();
   private readonly directoryFacts = new Map<string, FactsRecord>();
@@ -73,6 +75,7 @@ export class FactStore implements FactStoreReader {
     return facts ? Object.hasOwn(facts, factId) : false;
   }
 
+  /** Used after immediate file analysis to drop file facts that later phases do not need. */
   retainFileFacts(filePath: string, factIds: Iterable<string>): void {
     const facts = this.fileFacts.get(filePath);
     if (!facts) {

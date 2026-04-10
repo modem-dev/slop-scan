@@ -75,6 +75,7 @@ export interface AnalysisResult {
   findings: Finding[];
   fileScores: FileScore[];
   directoryScores: DirectoryScore[];
+  /** Kept alongside summary for reporters that read it directly. */
   repoScore: number;
 }
 
@@ -86,7 +87,9 @@ export interface LanguagePlugin {
 export interface ProviderBase {
   id: string;
   scope: Scope;
+  /** Fact ids that must already exist before this item can run. */
   requires: string[];
+  /** Allows a provider or rule to decline particular contexts within its scope. */
   supports(context: ProviderContext): boolean;
 }
 
@@ -119,6 +122,7 @@ export interface ProviderContext {
   runtime: AnalyzerRuntime;
   file?: FileRecord;
   directory?: DirectoryRecord;
+  /** Present only during rule execution, after defaults and path overrides are applied. */
   ruleConfig?: ResolvedRuleConfig;
 }
 
