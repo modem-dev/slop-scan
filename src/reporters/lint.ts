@@ -107,7 +107,7 @@ function renderFinding(finding: Finding): string {
 
 export const lintReporter: ReporterPlugin = {
   id: "lint",
-  render(result: AnalysisResult): string {
+  render(result: AnalysisResult, _options): string {
     const renderedFindings = [...result.findings]
       .sort(compareFindings)
       .map(renderFinding)

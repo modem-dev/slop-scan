@@ -55,6 +55,12 @@ Scan the current repo in lint mode:
 slop-scan scan . --lint
 ```
 
+Scan the current repo with pinned benchmark reference context:
+
+```bash
+slop-scan scan . --ref
+```
+
 Scan another repo and get JSON:
 
 ```bash
@@ -128,6 +134,7 @@ Current checks focus on patterns that often show up in unreviewed generated code
   - findings / function
 - top file hotspots
 - top directory hotspots
+- side-by-side pinned benchmark reference context with `--ref`
 - grouped lint-style findings with `--lint`
 - full-fidelity findings with evidence in `--json`
 
@@ -147,6 +154,10 @@ Current language support:
 The repo ships with a **pinned, recreatable benchmark set** comparing known AI-generated repos against older solid OSS repos.
 
 **Blended score** = geometric mean of the six normalized-metric ratios versus the mature OSS cohort medians, then rescaled so the mature OSS cohort median is **1.00**. Higher means a repo is consistently noisier across the benchmark dimensions.
+
+Use `--ref` with the default text output to compare a scanned repo's normalized metrics side by side with the pinned cohort medians.
+
+The CLI reference context is packaged as `src/reference-baseline.ts`, generated from the pinned benchmark snapshot with `bun run reference:update`.
 
 ### Cohort medians
 

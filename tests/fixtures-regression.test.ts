@@ -1,12 +1,23 @@
 import { describe, expect, test } from "bun:test";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import fs from "node:fs";
 import { analyzeRepository } from "../src/core/engine";
 import { DEFAULT_CONFIG } from "../src/config";
 import { createDefaultRegistry } from "../src/default-registry";
 
 function fixturePath(name: string): string {
   return path.join(process.cwd(), "tests", "fixtures", "repos", name);
+}
+
+function getBunExe(): string {
+  // Try common Windows Bun installation path first
+  const windowsBunPath = path.join(process.env.USERPROFILE ?? "", ".bun", "bin", "bun.exe");
+  if (fs.existsSync(windowsBunPath)) {
+    return windowsBunPath;
+  }
+  // Fallback to just "bun" (will work if it's in PATH)
+  return "bun";
 }
 
 describe("fixture regression suite", () => {
@@ -63,7 +74,7 @@ describe("fixture regression suite", () => {
 
   test("CLI JSON output matches the slop-heavy fixture summary", () => {
     const output = spawnSync(
-      "bun",
+      getBunExe(),
       ["run", "src/cli.ts", "scan", fixturePath("slop-heavy"), "--json"],
       {
         encoding: "utf8",
@@ -81,7 +92,7 @@ describe("fixture regression suite", () => {
 
   test("CLI lint output lists grouped rule hits with locations", () => {
     const output = spawnSync(
-      "bun",
+      getBunExe(),
       ["run", "src/cli.ts", "scan", fixturePath("slop-heavy"), "--lint"],
       {
         encoding: "utf8",
@@ -107,7 +118,7 @@ describe("fixture regression suite", () => {
 
   test("CLI rejects --json and --lint together", () => {
     const output = spawnSync(
-      "bun",
+      getBunExe(),
       ["run", "src/cli.ts", "scan", fixturePath("slop-heavy"), "--json", "--lint"],
       {
         encoding: "utf8",

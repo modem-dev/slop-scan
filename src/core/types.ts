@@ -106,7 +106,11 @@ export interface RulePlugin extends ProviderBase {
 
 export interface ReporterPlugin {
   id: string;
-  render(result: AnalysisResult): Promise<string> | string;
+  render(result: AnalysisResult, options?: ReporterOptions): Promise<string> | string;
+}
+
+export interface ReporterOptions {
+  reference?: boolean;
 }
 
 export interface AnalyzerRuntime {

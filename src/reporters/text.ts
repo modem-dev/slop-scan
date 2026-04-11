@@ -1,4 +1,5 @@
 import type { AnalysisResult, ReporterPlugin } from "../core/types";
+import { renderReferenceContext } from "../reference-context";
 
 function formatMetric(value: number | null): string {
   return value === null ? "n/a" : value.toFixed(2);
@@ -6,7 +7,7 @@ function formatMetric(value: number | null): string {
 
 export const textReporter: ReporterPlugin = {
   id: "text",
-  render(result: AnalysisResult): string {
+  render(result: AnalysisResult, options): string {
     const { summary } = result;
     const lines = [
       "slop-scan report",
@@ -24,11 +25,18 @@ export const textReporter: ReporterPlugin = {
       `- findings / file: ${formatMetric(summary.normalized.findingsPerFile)}`,
       `- findings / KLOC (logical): ${formatMetric(summary.normalized.findingsPerKloc)}`,
       `- findings / function: ${formatMetric(summary.normalized.findingsPerFunction)}`,
+    ];
+
+    if (options?.reference) {
+      lines.push(...renderReferenceContext(result));
+    }
+
+    lines.push(
       "",
       "Raw totals:",
       `- findings: ${summary.findingCount}`,
       `- repo score: ${summary.repoScore.toFixed(2)}`,
-    ];
+    );
 
     if (result.fileScores.length > 0) {
       lines.push("", "File hotspots:");
