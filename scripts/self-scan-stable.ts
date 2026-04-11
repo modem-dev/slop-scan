@@ -36,6 +36,7 @@ const STABLE_PACKAGE_PATH = path.resolve("node_modules/slop-scan-stable/package.
 const STABLE_BIN_PATH = path.resolve("node_modules/slop-scan-stable/bin/slop-scan.js");
 const UPDATE_FLAG = "--update";
 const SCORE_EPSILON = 1e-9;
+const STABLE_SCAN_MAX_BUFFER = 10 * 1024 * 1024;
 
 function countRuleHits(report: ScanReport): Record<string, number> {
   const counts = new Map<string, number>();
@@ -61,13 +62,14 @@ function runStableScan(): ScanReport {
   const result = spawnSync("node", [STABLE_BIN_PATH, "scan", ".", "--json"], {
     cwd: process.cwd(),
     encoding: "utf8",
+    maxBuffer: STABLE_SCAN_MAX_BUFFER,
   });
 
   if (result.status !== 0) {
-    if (result.stdout.length > 0) {
+    if (result.stdout?.length > 0) {
       console.log(result.stdout.trimEnd());
     }
-    if (result.stderr.length > 0) {
+    if (result.stderr?.length > 0) {
       console.error(result.stderr.trimEnd());
     }
 

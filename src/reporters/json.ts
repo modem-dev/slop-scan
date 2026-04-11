@@ -2,7 +2,7 @@ import type { AnalysisResult, ReporterPlugin } from "../core/types";
 
 export const jsonReporter: ReporterPlugin = {
   id: "json",
-  render(result: AnalysisResult): string {
+  render(result: AnalysisResult, _options): string {
     return JSON.stringify(
       {
         rootDir: result.rootDir,

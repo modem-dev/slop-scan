@@ -28,6 +28,7 @@ export type {
   LanguagePlugin,
   ProviderContext,
   ReporterPlugin,
+  ReporterOptions,
   RulePlugin,
   Scope,
 } from "./core/types";

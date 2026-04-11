@@ -48,10 +48,11 @@
     "test": "bun test",
     "prepare": "husky",
     "prepack": "bun run build",
+    "reference:update": "bun run scripts/update-reference-baseline.ts",
     "benchmark:fetch": "bun run scripts/benchmark-fetch.ts",
     "benchmark:scan": "bun run scripts/benchmark-scan.ts",
     "benchmark:report": "bun run scripts/benchmark-report.ts",
-    "benchmark:update": "bun run benchmark:fetch && bun run benchmark:scan && bun run benchmark:report"
+    "benchmark:update": "bun run benchmark:fetch && bun run benchmark:scan && bun run benchmark:report && bun run reference:update"
   },
   "dependencies": {
     "globby": "^16.2.0",

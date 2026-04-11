@@ -16,6 +16,7 @@ export function formatHelp(): string {
     "  -h, --help          Show help",
     "  --json              Output results as JSON",
     "  --lint              Output results in lint format",
+    "  --ref               Include pinned benchmark reference context in text output",
     "  --ignore <pattern>  Glob pattern to ignore (repeatable)",
     "",
     "Examples:",
@@ -29,6 +30,7 @@ export interface CliArgs {
   help: boolean;
   json: boolean;
   lint: boolean;
+  ref: boolean;
   ignore: string[];
   command: string | undefined;
   target: string;
@@ -41,6 +43,7 @@ export function parseCliArgs(argv: string[]): CliArgs {
       help: { type: "boolean", short: "h", default: false },
       json: { type: "boolean", default: false },
       lint: { type: "boolean", default: false },
+      ref: { type: "boolean", default: false },
       ignore: { type: "string", multiple: true, default: [] },
     },
     allowPositionals: true,
@@ -53,6 +56,7 @@ export function parseCliArgs(argv: string[]): CliArgs {
     help: values.help,
     json: values.json,
     lint: values.lint,
+    ref: values.ref,
     ignore: values.ignore,
     command: command,
     target: target,
@@ -78,6 +82,11 @@ export async function run(argv: string[]): Promise<number> {
     return 1;
   }
 
+  if (args.ref && (args.json || args.lint)) {
+    console.error("--ref can only be used with default text output.");
+    return 1;
+  }
+
   const rootDir = path.resolve(args.target);
   const loadedConfig = await loadConfigFile(rootDir);
   const config = loadedConfig.config;
@@ -93,7 +102,7 @@ export async function run(argv: string[]): Promise<number> {
 
   const result = await analyzeRepository(rootDir, config, registry);
   const reporter = registry.getReporter(args.json ? "json" : args.lint ? "lint" : "text");
-  const output = await reporter.render(result);
+  const output = await reporter.render(result, { reference: args.ref });
 
   if (output.length > 0) {
     console.log(output);
