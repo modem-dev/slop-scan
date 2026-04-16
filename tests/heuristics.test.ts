@@ -379,6 +379,68 @@ describe("heuristic rule pack", () => {
     ).toBe(true);
   });
 
+  test("ignores duplicated cleanup-only mock statements across test files", async () => {
+    const rootDir = await createTempRepo({
+      "tests/cleanup-a.test.ts": [
+        "import { beforeEach, describe, expect, it, vi } from 'vitest';",
+        "",
+        "const fetchUser = vi.fn();",
+        "",
+        "describe('cleanup a', () => {",
+        "  beforeEach(() => {",
+        "    fetchUser.mockReset();",
+        "    fetchUser.mockClear();",
+        "  });",
+        "",
+        "  it('works', () => {",
+        "    expect(true).toBe(true);",
+        "  });",
+        "});",
+        "",
+      ].join("\n"),
+      "tests/cleanup-b.test.ts": [
+        "import { beforeEach, describe, expect, it, vi } from 'vitest';",
+        "",
+        "const fetchUser = vi.fn();",
+        "",
+        "describe('cleanup b', () => {",
+        "  beforeEach(() => {",
+        "    fetchUser.mockReset();",
+        "    fetchUser.mockClear();",
+        "  });",
+        "",
+        "  it('works again', () => {",
+        "    expect(true).toBe(true);",
+        "  });",
+        "});",
+        "",
+      ].join("\n"),
+      "tests/cleanup-c.test.ts": [
+        "import { beforeEach, describe, expect, it, vi } from 'vitest';",
+        "",
+        "const fetchUser = vi.fn();",
+        "",
+        "describe('cleanup c', () => {",
+        "  beforeEach(() => {",
+        "    fetchUser.mockReset();",
+        "    fetchUser.mockClear();",
+        "  });",
+        "",
+        "  it('works one more time', () => {",
+        "    expect(true).toBe(true);",
+        "  });",
+        "});",
+        "",
+      ].join("\n"),
+    });
+
+    const result = await analyzeRepository(rootDir, DEFAULT_CONFIG, createDefaultRegistry());
+
+    expect(
+      result.findings.filter((finding) => finding.ruleId === "tests.duplicate-mock-setup"),
+    ).toHaveLength(0);
+  });
+
   test("does not treat test matrices or svg/icon packs as structural slop", async () => {
     const rootDir = await createTempRepo({
       "test/na/npm.test.ts": "export const value = 1;\n",

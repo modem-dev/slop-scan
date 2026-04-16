@@ -23,8 +23,14 @@ const MOCK_PATH_PATTERNS = [
   "mockRestore",
 ];
 
+const CLEANUP_PATH_PATTERNS = ["mockReset", "mockClear", "mockRestore"];
+
 function matchesMockPath(path: string): boolean {
   return MOCK_PATH_PATTERNS.some((pattern) => path === pattern || path.endsWith(`.${pattern}`));
+}
+
+function matchesCleanupPath(path: string): boolean {
+  return CLEANUP_PATH_PATTERNS.some((pattern) => path === pattern || path.endsWith(`.${pattern}`));
 }
 
 interface PendingStatementSummary {
@@ -92,14 +98,15 @@ export const testMockSetupsFactProvider: FactProvider = {
     const setups: TestMockSetupSummary[] = [];
     for (const statement of pendingStatements) {
       const labels = [...statement.labels].sort();
-      if (labels.length === 0) {
+      const significantLabels = labels.filter((label) => !matchesCleanupPath(label));
+      if (significantLabels.length === 0) {
         continue;
       }
 
       setups.push({
         line: statement.line,
-        label: labels.join(" | "),
-        fingerprint: `${labels.join("|")}::${fingerprintNodeShape(statement.node, 5)}`,
+        label: significantLabels.join(" | "),
+        fingerprint: `${significantLabels.join("|")}::${fingerprintNodeShape(statement.node, 5)}`,
       });
     }
 
