@@ -1,7 +1,52 @@
-import { createFindingDeltaIdentity } from "../delta-identity";
-import type { RulePlugin } from "../core/types";
+import type { Finding, ProviderContext, RulePlugin } from "../core/types";
 import type { DuplicateTestSetupIndex } from "../facts/types";
 import { isTestFile } from "../facts/ts-helpers";
+import { delta } from "../rule-delta";
+
+function findUniqueDuplicateMockSetupClusters(
+  duplication: DuplicateTestSetupIndex | undefined,
+  filePath: string,
+) {
+  const clusters = duplication?.byFile[filePath] ?? [];
+
+  return clusters.filter(
+    (cluster, index) =>
+      clusters.findIndex((candidate) => candidate.fingerprint === cluster.fingerprint) === index,
+  );
+}
+
+function buildDuplicateMockSetupDeltaDescriptors(finding: Finding, context: ProviderContext) {
+  const filePath = context.file?.path ?? finding.path;
+  if (!filePath) {
+    return [];
+  }
+
+  const duplication = context.runtime.store.getRepoFact<DuplicateTestSetupIndex>(
+    "repo.testMockDuplication",
+  );
+  const uniqueClusters = findUniqueDuplicateMockSetupClusters(duplication, filePath);
+
+  return uniqueClusters.flatMap((cluster) => {
+    const localOccurrences = cluster.occurrences
+      .filter((occurrence) => occurrence.path === filePath)
+      .sort((left, right) => left.line - right.line);
+    const primaryOccurrence = localOccurrences[0];
+
+    if (!primaryOccurrence) {
+      return [];
+    }
+
+    return {
+      groupKey: { clusterFingerprint: cluster.fingerprint },
+      occurrenceKey: {
+        clusterFingerprint: cluster.fingerprint,
+        path: filePath,
+      },
+      path: filePath,
+      line: primaryOccurrence.line,
+    };
+  });
+}
 
 /**
  * Flags repeated test setup/mock shapes that appear across multiple test files.
@@ -16,6 +61,7 @@ export const duplicateMockSetupRule: RulePlugin = {
   severity: "medium",
   scope: "file",
   requires: ["repo.testMockDuplication"],
+  delta: delta.bySemantic(buildDuplicateMockSetupDeltaDescriptors),
   supports(context) {
     return context.scope === "file" && Boolean(context.file) && isTestFile(context.file!.path);
   },
@@ -23,39 +69,11 @@ export const duplicateMockSetupRule: RulePlugin = {
     const duplication = context.runtime.store.getRepoFact<DuplicateTestSetupIndex>(
       "repo.testMockDuplication",
     );
-    const clusters = duplication?.byFile[context.file!.path] ?? [];
+    const uniqueClusters = findUniqueDuplicateMockSetupClusters(duplication, context.file!.path);
 
-    if (clusters.length === 0) {
+    if (uniqueClusters.length === 0) {
       return [];
     }
-
-    // A file can reference the same duplication cluster multiple times via
-    // multiple occurrences. Deduplicate by fingerprint so the rule message talks
-    // about distinct repeated patterns, not raw occurrence count.
-    const uniqueClusters = clusters.filter(
-      (cluster, index) =>
-        clusters.findIndex((candidate) => candidate.fingerprint === cluster.fingerprint) === index,
-    );
-    const deltaOccurrences = uniqueClusters.flatMap((cluster) => {
-      const localOccurrences = cluster.occurrences
-        .filter((occurrence) => occurrence.path === context.file!.path)
-        .sort((left, right) => left.line - right.line);
-      const primaryOccurrence = localOccurrences[0];
-
-      if (!primaryOccurrence) {
-        return [];
-      }
-
-      return {
-        groupKey: { clusterFingerprint: cluster.fingerprint },
-        occurrenceKey: {
-          clusterFingerprint: cluster.fingerprint,
-          path: context.file!.path,
-        },
-        path: context.file!.path,
-        line: primaryOccurrence.line,
-      };
-    });
 
     return [
       {
@@ -84,7 +102,6 @@ export const duplicateMockSetupRule: RulePlugin = {
             line: occurrence.line,
           })),
         ),
-        deltaIdentity: createFindingDeltaIdentity("tests.duplicate-mock-setup", deltaOccurrences),
       },
     ];
   },

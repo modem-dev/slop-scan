@@ -1,13 +1,53 @@
-import { createFindingDeltaIdentity } from "../delta-identity";
-import type { RulePlugin } from "../core/types";
+import type { Finding, ProviderContext, RulePlugin } from "../core/types";
 import type { TryCatchSummary } from "../facts/types";
-import { buildFileOrdinalDeltaDescriptors } from "./helpers";
+import { delta } from "../rule-delta";
+import { buildFileOrdinalDeltaDescriptors, filterValuesByFindingLines } from "./helpers";
 import {
   buildTryCatchIdentityBase,
   formatTryCatchBoundary,
   isValidTryCatchTarget,
   scoreTryCatch,
 } from "./try-catch-rule-helpers";
+
+function findErrorSwallowingSummaries(summaries: TryCatchSummary[]): TryCatchSummary[] {
+  return summaries.filter(
+    (summary) =>
+      isValidTryCatchTarget(summary) && summary.tryStatementCount <= 2 && summary.catchLogsOnly,
+  );
+}
+
+function buildErrorSwallowingDeltaDescriptors(finding: Finding, context: ProviderContext) {
+  const filePath = context.file?.path ?? finding.path;
+  if (!filePath) {
+    return [];
+  }
+
+  const summaries =
+    context.runtime.store.getFileFact<TryCatchSummary[]>(filePath, "file.tryCatchSummaries") ?? [];
+  const flagged = filterValuesByFindingLines(
+    finding,
+    filePath,
+    findErrorSwallowingSummaries(summaries),
+    (summary) => summary.line,
+  );
+
+  return buildFileOrdinalDeltaDescriptors(
+    filePath,
+    flagged,
+    (summary) =>
+      JSON.stringify({
+        ...buildTryCatchIdentityBase(summary),
+        kind: "log-only",
+      }),
+    (summary) => summary.line,
+    (summary, ordinal) => ({
+      path: filePath,
+      kind: "log-only",
+      ...buildTryCatchIdentityBase(summary),
+      ordinal,
+    }),
+  );
+}
 
 /**
  * Flags catch blocks that only log and then continue without changing control
@@ -20,6 +60,7 @@ export const errorSwallowingRule: RulePlugin = {
   severity: "strong",
   scope: "file",
   requires: ["file.tryCatchSummaries"],
+  delta: delta.bySemantic(buildErrorSwallowingDeltaDescriptors),
   supports(context) {
     return context.scope === "file" && Boolean(context.file);
   },
@@ -30,31 +71,11 @@ export const errorSwallowingRule: RulePlugin = {
         "file.tryCatchSummaries",
       ) ?? [];
 
-    const flagged = summaries.filter(
-      (summary) =>
-        isValidTryCatchTarget(summary) && summary.tryStatementCount <= 2 && summary.catchLogsOnly,
-    );
+    const flagged = findErrorSwallowingSummaries(summaries);
 
     if (flagged.length === 0) {
       return [];
     }
-
-    const deltaOccurrences = buildFileOrdinalDeltaDescriptors(
-      context.file!.path,
-      flagged,
-      (summary) =>
-        JSON.stringify({
-          ...buildTryCatchIdentityBase(summary),
-          kind: "log-only",
-        }),
-      (summary) => summary.line,
-      (summary, ordinal) => ({
-        path: context.file!.path,
-        kind: "log-only",
-        ...buildTryCatchIdentityBase(summary),
-        ordinal,
-      }),
-    );
 
     return [
       {
@@ -73,7 +94,6 @@ export const errorSwallowingRule: RulePlugin = {
           flagged.reduce((total, summary) => total + scoreTryCatch(summary), 0),
         ),
         locations: flagged.map((summary) => ({ path: context.file!.path, line: summary.line })),
-        deltaIdentity: createFindingDeltaIdentity("defensive.error-swallowing", deltaOccurrences),
       },
     ];
   },

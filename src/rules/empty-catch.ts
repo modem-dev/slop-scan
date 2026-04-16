@@ -1,13 +1,56 @@
-import { createFindingDeltaIdentity } from "../delta-identity";
-import type { RulePlugin } from "../core/types";
+import type { Finding, ProviderContext, RulePlugin } from "../core/types";
 import type { TryCatchSummary } from "../facts/types";
-import { buildFileOrdinalDeltaDescriptors } from "./helpers";
+import { delta } from "../rule-delta";
+import { buildFileOrdinalDeltaDescriptors, filterValuesByFindingLines } from "./helpers";
 import {
   buildTryCatchIdentityBase,
   formatTryCatchBoundary,
   isValidTryCatchTarget,
   scoreTryCatch,
 } from "./try-catch-rule-helpers";
+
+function findEmptyCatchSummaries(summaries: TryCatchSummary[]): TryCatchSummary[] {
+  return summaries.filter(
+    (summary) =>
+      isValidTryCatchTarget(summary) &&
+      summary.tryStatementCount <= 2 &&
+      summary.catchIsEmpty &&
+      !summary.isDocumentedLocalFallback,
+  );
+}
+
+function buildEmptyCatchDeltaDescriptors(finding: Finding, context: ProviderContext) {
+  const filePath = context.file?.path ?? finding.path;
+  if (!filePath) {
+    return [];
+  }
+
+  const summaries =
+    context.runtime.store.getFileFact<TryCatchSummary[]>(filePath, "file.tryCatchSummaries") ?? [];
+  const flagged = filterValuesByFindingLines(
+    finding,
+    filePath,
+    findEmptyCatchSummaries(summaries),
+    (summary) => summary.line,
+  );
+
+  return buildFileOrdinalDeltaDescriptors(
+    filePath,
+    flagged,
+    (summary) =>
+      JSON.stringify({
+        ...buildTryCatchIdentityBase(summary),
+        kind: "empty-catch",
+      }),
+    (summary) => summary.line,
+    (summary, ordinal) => ({
+      path: filePath,
+      kind: "empty-catch",
+      ...buildTryCatchIdentityBase(summary),
+      ordinal,
+    }),
+  );
+}
 
 /**
  * Flags empty catch clauses, which suppress failures without even leaving a log
@@ -21,6 +64,7 @@ export const emptyCatchRule: RulePlugin = {
   severity: "strong",
   scope: "file",
   requires: ["file.tryCatchSummaries"],
+  delta: delta.bySemantic(buildEmptyCatchDeltaDescriptors),
   supports(context) {
     return context.scope === "file" && Boolean(context.file);
   },
@@ -31,34 +75,11 @@ export const emptyCatchRule: RulePlugin = {
         "file.tryCatchSummaries",
       ) ?? [];
 
-    const flagged = summaries.filter(
-      (summary) =>
-        isValidTryCatchTarget(summary) &&
-        summary.tryStatementCount <= 2 &&
-        summary.catchIsEmpty &&
-        !summary.isDocumentedLocalFallback,
-    );
+    const flagged = findEmptyCatchSummaries(summaries);
 
     if (flagged.length === 0) {
       return [];
     }
-
-    const deltaOccurrences = buildFileOrdinalDeltaDescriptors(
-      context.file!.path,
-      flagged,
-      (summary) =>
-        JSON.stringify({
-          ...buildTryCatchIdentityBase(summary),
-          kind: "empty-catch",
-        }),
-      (summary) => summary.line,
-      (summary, ordinal) => ({
-        path: context.file!.path,
-        kind: "empty-catch",
-        ...buildTryCatchIdentityBase(summary),
-        ordinal,
-      }),
-    );
 
     return [
       {
@@ -77,7 +98,6 @@ export const emptyCatchRule: RulePlugin = {
           flagged.reduce((total, summary) => total + scoreTryCatch(summary), 0),
         ),
         locations: flagged.map((summary) => ({ path: context.file!.path, line: summary.line })),
-        deltaIdentity: createFindingDeltaIdentity("defensive.empty-catch", deltaOccurrences),
       },
     ];
   },

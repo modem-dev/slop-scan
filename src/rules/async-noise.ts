@@ -1,7 +1,78 @@
-import { createFindingDeltaIdentity } from "../delta-identity";
-import type { RulePlugin } from "../core/types";
+import type { Finding, ProviderContext, RulePlugin } from "../core/types";
 import type { FunctionSummary } from "../facts/types";
-import { BOUNDARY_WRAPPER_TARGET_PREFIXES, buildFileOrdinalDeltaDescriptors } from "./helpers";
+import { delta } from "../rule-delta";
+import {
+  BOUNDARY_WRAPPER_TARGET_PREFIXES,
+  buildFileOrdinalDeltaDescriptors,
+  filterValuesByFindingLines,
+} from "./helpers";
+
+type AsyncNoiseMatch = {
+  summary: FunctionSummary;
+  kind: "return-await" | "async-pass-through";
+};
+
+function findAsyncNoiseMatches(functions: FunctionSummary[]): AsyncNoiseMatch[] {
+  const redundantReturnAwait = functions.filter((summary) => summary.hasReturnAwaitCall);
+  const asyncPassThroughWrappers = functions.filter(
+    (summary) =>
+      summary.isAsync &&
+      !summary.hasAwait &&
+      summary.isPassThroughWrapper &&
+      !summary.hasReturnAwaitCall &&
+      // Edge-facing wrappers often keep async signatures for API consistency.
+      !BOUNDARY_WRAPPER_TARGET_PREFIXES.some((prefix) =>
+        summary.passThroughTarget?.startsWith(prefix),
+      ),
+  );
+
+  return [
+    ...redundantReturnAwait.map((summary) => ({ summary, kind: "return-await" as const })),
+    ...asyncPassThroughWrappers.map((summary) => ({
+      summary,
+      kind: "async-pass-through" as const,
+    })),
+  ];
+}
+
+function buildAsyncNoiseDeltaDescriptors(finding: Finding, context: ProviderContext) {
+  const filePath = context.file?.path ?? finding.path;
+  if (!filePath) {
+    return [];
+  }
+
+  const functions =
+    context.runtime.store.getFileFact<FunctionSummary[]>(filePath, "file.functionSummaries") ?? [];
+  const noisy = filterValuesByFindingLines(
+    finding,
+    filePath,
+    findAsyncNoiseMatches(functions),
+    ({ summary }) => summary.line,
+  );
+
+  return buildFileOrdinalDeltaDescriptors(
+    filePath,
+    noisy,
+    ({ summary, kind }) =>
+      JSON.stringify({
+        kind,
+        name: summary.name,
+        parameterCount: summary.parameterCount,
+        passThroughTarget: summary.passThroughTarget,
+        statementCount: summary.statementCount,
+      }),
+    ({ summary }) => summary.line,
+    ({ summary, kind }, ordinal) => ({
+      path: filePath,
+      kind,
+      name: summary.name,
+      parameterCount: summary.parameterCount,
+      passThroughTarget: summary.passThroughTarget,
+      statementCount: summary.statementCount,
+      ordinal,
+    }),
+  );
+}
 
 /**
  * Flags async-related ceremony that adds little value:
@@ -17,6 +88,7 @@ export const asyncNoiseRule: RulePlugin = {
   severity: "medium",
   scope: "file",
   requires: ["file.functionSummaries"],
+  delta: delta.bySemantic(buildAsyncNoiseDeltaDescriptors),
   supports(context) {
     return context.scope === "file" && Boolean(context.file);
   },
@@ -29,57 +101,20 @@ export const asyncNoiseRule: RulePlugin = {
 
     // Keep the two sub-signals separate so we can weight redundant `return await`
     // more heavily than a plain pass-through async wrapper.
-    const redundantReturnAwait = functions.filter((summary) => summary.hasReturnAwaitCall);
-    const asyncPassThroughWrappers = functions.filter(
-      (summary) =>
-        summary.isAsync &&
-        !summary.hasAwait &&
-        summary.isPassThroughWrapper &&
-        !summary.hasReturnAwaitCall &&
-        // Edge-facing wrappers often keep async signatures for API consistency.
-        !BOUNDARY_WRAPPER_TARGET_PREFIXES.some((prefix) =>
-          summary.passThroughTarget?.startsWith(prefix),
-        ),
-    );
-    const noisy = [
-      ...redundantReturnAwait.map((summary) => ({ summary, kind: "return-await" as const })),
-      ...asyncPassThroughWrappers.map((summary) => ({
-        summary,
-        kind: "async-pass-through" as const,
-      })),
-    ];
+    const noisy = findAsyncNoiseMatches(functions);
 
     if (noisy.length === 0) {
       return [];
     }
 
+    const redundantReturnAwaitCount = noisy.filter(({ kind }) => kind === "return-await").length;
+    const asyncPassThroughWrapperCount = noisy.length - redundantReturnAwaitCount;
+
     // Bound the contribution from one file so this stays a hotspot signal rather
     // than dominating the total repo score.
     const score = Math.min(
       4,
-      redundantReturnAwait.length * 1.5 + asyncPassThroughWrappers.length * 0.75,
-    );
-    const deltaOccurrences = buildFileOrdinalDeltaDescriptors(
-      context.file!.path,
-      noisy,
-      ({ summary, kind }) =>
-        JSON.stringify({
-          kind,
-          name: summary.name,
-          parameterCount: summary.parameterCount,
-          passThroughTarget: summary.passThroughTarget,
-          statementCount: summary.statementCount,
-        }),
-      ({ summary }) => summary.line,
-      ({ summary, kind }, ordinal) => ({
-        path: context.file!.path,
-        kind,
-        name: summary.name,
-        parameterCount: summary.parameterCount,
-        passThroughTarget: summary.passThroughTarget,
-        statementCount: summary.statementCount,
-        ordinal,
-      }),
+      redundantReturnAwaitCount * 1.5 + asyncPassThroughWrapperCount * 0.75,
     );
 
     return [
@@ -95,7 +130,6 @@ export const asyncNoiseRule: RulePlugin = {
         ),
         score,
         locations: noisy.map(({ summary }) => ({ path: context.file!.path, line: summary.line })),
-        deltaIdentity: createFindingDeltaIdentity("defensive.async-noise", deltaOccurrences),
       },
     ];
   },

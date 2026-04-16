@@ -1,3 +1,4 @@
+import type { Finding } from "../core/types";
 import type { DeltaIdentityDescriptor } from "../delta-identity";
 
 // These segments are intentionally conservative. The goal is to recognize common
@@ -89,6 +90,28 @@ export function buildFileOrdinalDeltaDescriptors<T>(
     line: lineOf(value),
     occurrenceKey: occurrenceKeyOf(value, ordinal),
   }));
+}
+
+/**
+ * Lets semantic delta builders stay aligned with the finding they are post-processing instead of re-emitting every candidate.
+ */
+export function filterValuesByFindingLines<T>(
+  finding: Finding,
+  filePath: string,
+  values: T[],
+  lineOf: (value: T) => number,
+): T[] {
+  const lines = new Set(
+    finding.locations
+      .filter((location) => location.path === filePath)
+      .map((location) => location.line),
+  );
+
+  if (lines.size === 0) {
+    return values;
+  }
+
+  return values.filter((value) => lines.has(lineOf(value)));
 }
 
 /**

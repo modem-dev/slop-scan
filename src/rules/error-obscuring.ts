@@ -1,7 +1,7 @@
-import { createFindingDeltaIdentity } from "../delta-identity";
-import type { RulePlugin } from "../core/types";
+import type { Finding, ProviderContext, RulePlugin } from "../core/types";
 import type { TryCatchSummary } from "../facts/types";
-import { buildFileOrdinalDeltaDescriptors } from "./helpers";
+import { delta } from "../rule-delta";
+import { buildFileOrdinalDeltaDescriptors, filterValuesByFindingLines } from "./helpers";
 import {
   buildTryCatchIdentityBase,
   formatTryCatchBoundary,
@@ -24,6 +24,50 @@ function obscuringKind(summary: TryCatchSummary): string {
   return "generic-rethrow";
 }
 
+function findErrorObscuringSummaries(summaries: TryCatchSummary[]): TryCatchSummary[] {
+  return summaries.filter(
+    (summary) =>
+      isValidTryCatchTarget(summary) &&
+      summary.tryStatementCount <= 2 &&
+      (summary.catchReturnsDefault ||
+        summary.catchThrowsGeneric ||
+        (summary.catchHasLogging && summary.catchHasDefaultReturn)),
+  );
+}
+
+function buildErrorObscuringDeltaDescriptors(finding: Finding, context: ProviderContext) {
+  const filePath = context.file?.path ?? finding.path;
+  if (!filePath) {
+    return [];
+  }
+
+  const summaries =
+    context.runtime.store.getFileFact<TryCatchSummary[]>(filePath, "file.tryCatchSummaries") ?? [];
+  const flagged = filterValuesByFindingLines(
+    finding,
+    filePath,
+    findErrorObscuringSummaries(summaries),
+    (summary) => summary.line,
+  );
+
+  return buildFileOrdinalDeltaDescriptors(
+    filePath,
+    flagged,
+    (summary) =>
+      JSON.stringify({
+        ...buildTryCatchIdentityBase(summary),
+        kind: obscuringKind(summary),
+      }),
+    (summary) => summary.line,
+    (summary, ordinal) => ({
+      path: filePath,
+      kind: obscuringKind(summary),
+      ...buildTryCatchIdentityBase(summary),
+      ordinal,
+    }),
+  );
+}
+
 /**
  * Flags catch blocks that convert the original failure into a default value or
  * generic replacement error, making downstream diagnosis harder.
@@ -34,6 +78,7 @@ export const errorObscuringRule: RulePlugin = {
   severity: "strong",
   scope: "file",
   requires: ["file.tryCatchSummaries"],
+  delta: delta.bySemantic(buildErrorObscuringDeltaDescriptors),
   supports(context) {
     return context.scope === "file" && Boolean(context.file);
   },
@@ -44,35 +89,11 @@ export const errorObscuringRule: RulePlugin = {
         "file.tryCatchSummaries",
       ) ?? [];
 
-    const flagged = summaries.filter(
-      (summary) =>
-        isValidTryCatchTarget(summary) &&
-        summary.tryStatementCount <= 2 &&
-        (summary.catchReturnsDefault ||
-          summary.catchThrowsGeneric ||
-          (summary.catchHasLogging && summary.catchHasDefaultReturn)),
-    );
+    const flagged = findErrorObscuringSummaries(summaries);
 
     if (flagged.length === 0) {
       return [];
     }
-
-    const deltaOccurrences = buildFileOrdinalDeltaDescriptors(
-      context.file!.path,
-      flagged,
-      (summary) =>
-        JSON.stringify({
-          ...buildTryCatchIdentityBase(summary),
-          kind: obscuringKind(summary),
-        }),
-      (summary) => summary.line,
-      (summary, ordinal) => ({
-        path: context.file!.path,
-        kind: obscuringKind(summary),
-        ...buildTryCatchIdentityBase(summary),
-        ordinal,
-      }),
-    );
 
     return [
       {
@@ -91,7 +112,6 @@ export const errorObscuringRule: RulePlugin = {
           flagged.reduce((total, summary) => total + scoreTryCatch(summary), 0),
         ),
         locations: flagged.map((summary) => ({ path: context.file!.path, line: summary.line })),
-        deltaIdentity: createFindingDeltaIdentity("defensive.error-obscuring", deltaOccurrences),
       },
     ];
   },

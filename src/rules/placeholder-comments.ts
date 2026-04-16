@@ -1,7 +1,11 @@
-import { createFindingDeltaIdentity } from "../delta-identity";
-import type { RulePlugin } from "../core/types";
+import type { Finding, ProviderContext, RulePlugin } from "../core/types";
 import type { CommentSummary } from "../facts/types";
-import { buildFileOrdinalDeltaDescriptors, normalizeWhitespace } from "./helpers";
+import { delta } from "../rule-delta";
+import {
+  buildFileOrdinalDeltaDescriptors,
+  filterValuesByFindingLines,
+  normalizeWhitespace,
+} from "./helpers";
 
 /**
  * Flags filler comments that gesture at future work without explaining current
@@ -18,12 +22,47 @@ const PLACEHOLDER_PATTERNS = [
   /implement\s+.+\s+here/i,
 ];
 
+function findPlaceholderCommentMatches(comments: CommentSummary[]): CommentSummary[] {
+  return comments.filter((comment) =>
+    PLACEHOLDER_PATTERNS.some((pattern) => pattern.test(comment.text)),
+  );
+}
+
+function buildPlaceholderCommentDeltaDescriptors(finding: Finding, context: ProviderContext) {
+  const filePath = context.file?.path ?? finding.path;
+  if (!filePath) {
+    return [];
+  }
+
+  const comments =
+    context.runtime.store.getFileFact<CommentSummary[]>(filePath, "file.comments") ?? [];
+  const matches = filterValuesByFindingLines(
+    finding,
+    filePath,
+    findPlaceholderCommentMatches(comments),
+    (match) => match.line,
+  );
+
+  return buildFileOrdinalDeltaDescriptors(
+    filePath,
+    matches,
+    (match) => normalizeWhitespace(match.text),
+    (match) => match.line,
+    (match, ordinal) => ({
+      path: filePath,
+      normalizedText: normalizeWhitespace(match.text),
+      ordinal,
+    }),
+  );
+}
+
 export const placeholderCommentsRule: RulePlugin = {
   id: "comments.placeholder-comments",
   family: "comments",
   severity: "weak",
   scope: "file",
   requires: ["file.comments"],
+  delta: delta.bySemantic(buildPlaceholderCommentDeltaDescriptors),
   supports(context) {
     return context.scope === "file" && Boolean(context.file);
   },
@@ -32,25 +71,11 @@ export const placeholderCommentsRule: RulePlugin = {
     const comments =
       context.runtime.store.getFileFact<CommentSummary[]>(context.file!.path, "file.comments") ??
       [];
-    const matches = comments.filter((comment) =>
-      PLACEHOLDER_PATTERNS.some((pattern) => pattern.test(comment.text)),
-    );
+    const matches = findPlaceholderCommentMatches(comments);
 
     if (matches.length === 0) {
       return [];
     }
-
-    const deltaOccurrences = buildFileOrdinalDeltaDescriptors(
-      context.file!.path,
-      matches,
-      (match) => normalizeWhitespace(match.text),
-      (match) => match.line,
-      (match, ordinal) => ({
-        path: context.file!.path,
-        normalizedText: normalizeWhitespace(match.text),
-        ordinal,
-      }),
-    );
 
     return [
       {
@@ -65,10 +90,6 @@ export const placeholderCommentsRule: RulePlugin = {
         // without overwhelming stronger structural rules.
         score: Math.min(1.5, matches.length * 0.75),
         locations: matches.map((match) => ({ path: context.file!.path, line: match.line })),
-        deltaIdentity: createFindingDeltaIdentity(
-          "comments.placeholder-comments",
-          deltaOccurrences,
-        ),
       },
     ];
   },

@@ -1,8 +1,8 @@
 import path from "node:path";
-import { createPathDeltaIdentity } from "../delta-identity";
 import type { RulePlugin } from "../core/types";
 import { isTestFile } from "../facts/ts-helpers";
 import type { DirectoryMetrics } from "../facts/types";
+import { delta } from "../rule-delta";
 import { average, countMatching, isAssetLikeDirectoryPath, median, ratio } from "./helpers";
 
 /**
@@ -19,6 +19,7 @@ export const directoryFanoutHotspotRule: RulePlugin = {
   severity: "medium",
   scope: "directory",
   requires: ["directory.metrics"],
+  delta: delta.byPath(),
   supports(context) {
     return context.scope === "directory" && Boolean(context.directory);
   },
@@ -91,10 +92,6 @@ export const directoryFanoutHotspotRule: RulePlugin = {
         // stays bounded so this remains a hotspot indicator.
         score: 2 + Math.min(4, metrics.fileCount / Math.max(1, threshold)),
         locations: [{ path: context.directory!.path, line: 1 }],
-        deltaIdentity: createPathDeltaIdentity(
-          "structure.directory-fanout-hotspot",
-          context.directory!.path,
-        ),
       },
     ];
   },

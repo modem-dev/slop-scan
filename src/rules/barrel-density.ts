@@ -1,6 +1,6 @@
-import { createPathDeltaIdentity } from "../delta-identity";
 import type { RulePlugin } from "../core/types";
 import type { ExportSummary } from "../facts/types";
+import { delta } from "../rule-delta";
 
 /**
  * Flags files that are mostly re-export barrels.
@@ -15,6 +15,7 @@ export const barrelDensityRule: RulePlugin = {
   severity: "medium",
   scope: "file",
   requires: ["file.exportSummary"],
+  delta: delta.byPath(),
   supports(context) {
     return context.scope === "file" && Boolean(context.file);
   },
@@ -42,7 +43,6 @@ export const barrelDensityRule: RulePlugin = {
         // catastrophic file-level failure.
         score: Math.min(3, 1 + summary.reExportCount * 0.5),
         locations: [{ path: context.file!.path, line: 1 }],
-        deltaIdentity: createPathDeltaIdentity("structure.barrel-density", context.file!.path),
       },
     ];
   },

@@ -3,8 +3,9 @@ import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { loadConfigFile } from "../src/config";
-import { createDefaultRegistry } from "../src/default-registry";
 import { analyzeRepository } from "../src/core/engine";
+import { createDefaultRegistry } from "../src/default-registry";
+import { createPathDeltaIdentity } from "../src/delta-identity";
 
 const tempDirs: string[] = [];
 
@@ -96,6 +97,67 @@ describe("plugin api", () => {
     expect(loaded.config.rules["local/contains-word"]?.options).toEqual({ word: "danger" });
     expect(result.findings.map((finding) => finding.ruleId)).toContain("local/contains-word");
     expect(result.findings[0]?.evidence).toEqual(["danger"]);
+  });
+
+  test("synthesizes delta identities for declarative plugin rules", async () => {
+    const rootDir = await createTempRepo({
+      "src/index.ts": 'export const note = "danger zone";\n',
+      "plugins/local-word-plugin.mjs": [
+        "export default {",
+        '  meta: { name: "local-word-plugin", namespace: "local", apiVersion: 1 },',
+        "  rules: {",
+        '    "contains-word": {',
+        '      id: "local/contains-word",',
+        '      family: "local",',
+        '      severity: "weak",',
+        '      scope: "file",',
+        '      requires: ["file.text"],',
+        '      delta: { mode: "path" },',
+        "      supports(context) {",
+        '        return context.scope === "file" && Boolean(context.file);',
+        "      },",
+        "      evaluate(context) {",
+        '        const text = context.runtime.store.getFileFact(context.file.path, "file.text") ?? "";',
+        '        return text.includes("danger")',
+        "          ? [{",
+        '              ruleId: "local/contains-word",',
+        '              family: "local",',
+        '              severity: "weak",',
+        '              scope: "file",',
+        "              path: context.file.path,",
+        '              message: "Found danger in file text",',
+        '              evidence: ["danger"],',
+        "              score: 1,",
+        "              locations: [{ path: context.file.path, line: 1 }],",
+        "            }]",
+        "          : [];",
+        "      },",
+        "    },",
+        "  },",
+        "};",
+      ].join("\n"),
+      "slop-scan.config.ts": [
+        'import plugin from "./plugins/local-word-plugin.mjs";',
+        "",
+        "export default {",
+        "  plugins: { local: plugin },",
+        "  rules: {",
+        '    "local/contains-word": { enabled: true },',
+        "  },",
+        "};",
+      ].join("\n"),
+    });
+
+    const { result } = await analyzeWithConfiguredPlugins(rootDir);
+    const finding = result.findings.find(
+      (candidate) =>
+        candidate.ruleId === "local/contains-word" && candidate.path === "src/index.ts",
+    );
+
+    expect(finding).toBeDefined();
+    expect(finding?.deltaIdentity).toEqual(
+      createPathDeltaIdentity("local/contains-word", "src/index.ts"),
+    );
   });
 
   test("loads a package plugin and resolves plugin presets from extends", async () => {

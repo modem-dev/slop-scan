@@ -1,4 +1,5 @@
 import type { AnalyzerConfig, ResolvedRuleConfig } from "../config";
+import type { DeltaStrategy } from "../rule-delta";
 
 export type Scope = "file" | "directory" | "repo";
 
@@ -134,6 +135,8 @@ export interface FactProvider extends ProviderBase {
 export interface RulePlugin extends ProviderBase {
   family: string;
   severity: "strong" | "medium" | "weak";
+  /** Optional matching policy used when the rule does not set deltaIdentity explicitly. */
+  delta?: DeltaStrategy;
   evaluate(context: ProviderContext): Promise<Finding[]> | Finding[];
 }
 

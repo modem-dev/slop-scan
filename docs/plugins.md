@@ -71,8 +71,12 @@ A plugin module exports an object with:
 
 Use `PLUGIN_API_VERSION` when authoring a plugin in TypeScript.
 
+If your rule should participate in stable deltas, prefer a declarative `delta`
+strategy such as `delta.byPath()` or `delta.byLocations()` instead of hand-building
+`deltaIdentity` inside `evaluate()`.
+
 ```ts
-import { definePlugin, PLUGIN_API_VERSION } from "slop-scan";
+import { definePlugin, delta, PLUGIN_API_VERSION } from "slop-scan";
 
 export default definePlugin({
   meta: {
@@ -87,6 +91,7 @@ export default definePlugin({
       severity: "weak",
       scope: "file",
       requires: ["file.text"],
+      delta: delta.byPath(),
       supports(context) {
         return context.scope === "file" && Boolean(context.file);
       },
@@ -121,6 +126,9 @@ export default definePlugin({
   },
 });
 ```
+
+Use `delta.bySemantic(...)` only for rules whose occurrences need a custom
+semantic key, such as duplication clusters that span multiple files.
 
 ## Naming rules
 

@@ -6,6 +6,7 @@ import type { AnalyzerConfig, RuleConfig } from "../config";
 import { discoverSourceFiles } from "../discovery/walk";
 import { countLogicalLines, countPhysicalLines } from "../facts/ts-helpers";
 import type { FunctionSummary } from "../facts/types";
+import { buildFindingDeltaIdentity, delta as deltaStrategies } from "../rule-delta";
 import { FactStore } from "./fact-store";
 import { Registry } from "./registry";
 import { orderFactProviders, validateRuleRequirements } from "./scheduler";
@@ -282,9 +283,21 @@ async function runRules(
         ? await nextFindingsResult
         : nextFindingsResult;
       for (const finding of nextFindings) {
-        findings.push({
+        const weightedFinding = {
           ...finding,
           score: finding.score * resolvedRuleConfig.weight,
+        } satisfies Finding;
+
+        findings.push({
+          ...weightedFinding,
+          deltaIdentity:
+            weightedFinding.deltaIdentity ??
+            buildFindingDeltaIdentity(
+              rule.id,
+              weightedFinding,
+              ruleContext,
+              rule.delta ?? deltaStrategies.auto(),
+            ),
         });
       }
     }

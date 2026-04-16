@@ -2,8 +2,13 @@ import { PLUGIN_API_VERSION as pluginApiVersion } from "./plugin";
 
 export const PLUGIN_API_VERSION = pluginApiVersion;
 
-export { FINDING_FINGERPRINT_VERSION, createFindingDeltaIdentity } from "./delta-identity";
+export {
+  FINDING_FINGERPRINT_VERSION,
+  createFindingDeltaIdentity,
+  createPathDeltaIdentity,
+} from "./delta-identity";
 export { diffReports, formatDeltaText, parseFailOn, shouldFailDelta } from "./delta";
+export { delta } from "./rule-delta";
 export { formatHelp, run } from "./cli";
 export { DEFAULT_CONFIG, loadConfig, loadConfigFile, resolveRuleConfigDefaults } from "./config";
 export { analyzeRepository } from "./core/engine";
@@ -45,6 +50,8 @@ export type {
   RulePlugin,
   Scope,
 } from "./core/types";
+export type { DeltaIdentityDescriptor } from "./delta-identity";
+export type { DeltaStrategy, SemanticDeltaBuilder } from "./rule-delta";
 export type {
   DeltaChange,
   DeltaEndpoint,

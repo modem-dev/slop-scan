@@ -1,8 +1,10 @@
-export default {
+import { PLUGIN_API_VERSION, definePlugin, delta } from "../../src/node-entry.ts";
+
+export default definePlugin({
   meta: {
     name: "slop-scan-plugin-contains-word",
     namespace: "local",
-    apiVersion: 1,
+    apiVersion: PLUGIN_API_VERSION,
   },
   rules: {
     "contains-word": {
@@ -11,6 +13,7 @@ export default {
       severity: "weak",
       scope: "file",
       requires: ["file.text"],
+      delta: delta.byPath(),
       supports(context) {
         return context.scope === "file" && Boolean(context.file);
       },
@@ -49,4 +52,4 @@ export default {
       },
     },
   },
-};
+});
