@@ -53,13 +53,37 @@ Or do all three:
 bun run benchmark:update
 ```
 
+## Rolling history
+
+A separate rolling-history pipeline tracks the same repos at their **latest default-branch revisions** over time.
+
+Refresh it locally with:
+
+```bash
+bun run benchmark:history
+```
+
+That writes:
+
+- per-repo JSONL histories under `benchmarks/history/known-ai-vs-solid-oss/*.jsonl`
+- a latest aggregate summary at `benchmarks/history/known-ai-vs-solid-oss/latest.json`
+- a generated markdown summary at `reports/known-ai-vs-solid-oss-history.md`
+
+The rolling history is intentionally separate from the pinned benchmark snapshot so reproducible benchmark claims still point at exact SHAs.
+
 ## Artifacts
 
-For the current set:
+For the current pinned set:
 
 - manifest: `benchmarks/sets/known-ai-vs-solid-oss.json`
 - saved snapshot: `benchmarks/results/known-ai-vs-solid-oss.json`
 - generated report: `reports/known-ai-vs-solid-oss-benchmark.md`
+
+For rolling history:
+
+- per-repo JSONL: `benchmarks/history/known-ai-vs-solid-oss/*.jsonl`
+- latest summary: `benchmarks/history/known-ai-vs-solid-oss/latest.json`
+- generated history report: `reports/known-ai-vs-solid-oss-history.md`
 
 ## Notes
 

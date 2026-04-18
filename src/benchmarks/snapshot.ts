@@ -1,4 +1,5 @@
 import type { Finding, NormalizedMetrics } from "../core/types";
+import { buildMedianMetrics, computeRawBlendedScore, median, rescaleBlendedScore } from "./metrics";
 import type {
   BenchmarkCohort,
   BenchmarkCohortSnapshot,
@@ -9,23 +10,6 @@ import type {
   BenchmarkedAnalysis,
 } from "./types";
 import { NORMALIZED_METRIC_KEYS } from "./types";
-
-function median(values: number[]): number | null {
-  if (values.length === 0) {
-    return null;
-  }
-
-  const sorted = [...values].sort((left, right) => left - right);
-  const middle = Math.floor(sorted.length / 2);
-
-  if (sorted.length % 2 === 1) {
-    return sorted[middle] ?? null;
-  }
-
-  const left = sorted[middle - 1];
-  const right = sorted[middle];
-  return left !== undefined && right !== undefined ? (left + right) / 2 : null;
-}
 
 function divideOrNull(numerator: number | null, denominator: number | null): number | null {
   return numerator !== null && denominator !== null && denominator !== 0
@@ -59,47 +43,6 @@ function buildRepoSnapshot({ spec, result }: BenchmarkedAnalysis): BenchmarkRepo
     topFiles: result.fileScores.slice(0, 5),
     topDirectories: result.directoryScores.slice(0, 5),
   };
-}
-
-function buildMedianMetrics(repos: BenchmarkRepoSnapshot[]): NormalizedMetrics {
-  const entries = NORMALIZED_METRIC_KEYS.map((metricKey) => {
-    const values = repos
-      .map((repo) => repo.summary.normalized[metricKey])
-      .filter((value): value is number => value !== null);
-    return [metricKey, median(values)];
-  });
-
-  return Object.fromEntries(entries) as NormalizedMetrics;
-}
-
-function geometricMean(values: number[]): number | null {
-  if (values.length === 0) {
-    return null;
-  }
-
-  if (values.some((value) => value === 0)) {
-    return 0;
-  }
-
-  return Math.exp(values.reduce((sum, value) => sum + Math.log(value), 0) / values.length);
-}
-
-function computeRawBlendedScore(
-  metrics: NormalizedMetrics,
-  matureMedian: NormalizedMetrics,
-): number | null {
-  const ratios = NORMALIZED_METRIC_KEYS.flatMap((metricKey) => {
-    const value = metrics[metricKey];
-    const baseline = matureMedian[metricKey];
-
-    if (value === null || baseline === null || baseline <= 0) {
-      return [];
-    }
-
-    return [value / baseline];
-  });
-
-  return geometricMean(ratios);
 }
 
 function buildCohortSnapshots(
@@ -148,10 +91,7 @@ function applyBlendedScores(
 
   return rawScores.map(({ repo, rawBlendedScore }) => ({
     ...repo,
-    blendedScore:
-      rawBlendedScore !== null && matureBaseline !== null && matureBaseline > 0
-        ? rawBlendedScore / matureBaseline
-        : rawBlendedScore,
+    blendedScore: rescaleBlendedScore(rawBlendedScore, matureBaseline),
   }));
 }
 

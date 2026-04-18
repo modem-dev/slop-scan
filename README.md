@@ -290,6 +290,7 @@ That keeps the analyzer deterministic and extensible without turning it into one
 - built-in rule docs: browse [`src/rules/`](src/rules)
 - benchmark guide: [`benchmarks/README.md`](benchmarks/README.md)
 - pinned benchmark report: [`reports/known-ai-vs-solid-oss-benchmark.md`](reports/known-ai-vs-solid-oss-benchmark.md)
+- rolling benchmark history: [`reports/known-ai-vs-solid-oss-history.md`](reports/known-ai-vs-solid-oss-history.md)
 - exploratory note on non-JS/TS candidates: [`reports/exploratory-vite-astro-openclaw-beads.md`](reports/exploratory-vite-astro-openclaw-beads.md)
 - contributing guide: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
