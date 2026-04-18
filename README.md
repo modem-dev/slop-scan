@@ -35,12 +35,6 @@ npm install --save-dev slop-scan
 npx slop-scan scan .
 ```
 
-For local development in this repo:
-
-```bash
-bun install
-```
-
 ## Quick start
 
 Scan the current repo:
@@ -59,12 +53,6 @@ Scan another repo and get JSON:
 
 ```bash
 slop-scan scan /path/to/repo --json
-```
-
-Recreate the pinned benchmark set from a source checkout:
-
-```bash
-bun run benchmark:update
 ```
 
 ## Use it like a linter
@@ -298,55 +286,13 @@ That keeps the analyzer deterministic and extensible without turning it into one
 - benchmark guide: [`benchmarks/README.md`](benchmarks/README.md)
 - pinned benchmark report: [`reports/known-ai-vs-solid-oss-benchmark.md`](reports/known-ai-vs-solid-oss-benchmark.md)
 - exploratory note on non-JS/TS candidates: [`reports/exploratory-vite-astro-openclaw-beads.md`](reports/exploratory-vite-astro-openclaw-beads.md)
+- contributing guide: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ## Contributing
 
 Issues and pull requests are welcome.
 
-### Local validation
-
-```bash
-bun run format:check
-bun run lint
-bun test
-```
-
-### Stable self-scan
-
-`bun run lint` includes a stable self-scan.
-
-It runs the last published `slop-scan` release against this repo using the committed root config in [`slop-scan.config.json`](slop-scan.config.json), then compares the result to [`tests/fixtures/self-scan-stable-baseline.json`](tests/fixtures/self-scan-stable-baseline.json).
-
-The check currently fails only when the stable release reports either:
-
-- a higher finding count; or
-- a higher repo score.
-
-Useful commands:
-
-```bash
-bun run lint:self
-bun run lint:self:update
-```
-
-Use `bun run lint:self:update` only when you intentionally accept the new stable self-scan baseline.
-
-### Pre-commit hook
-
-A Husky pre-commit hook runs:
-
-```bash
-bun run format:check
-bun run lint
-```
-
-### Heuristic changes
-
-If you change rule behavior materially, also rerun:
-
-```bash
-bun run benchmark:update
-```
+For local development, validation, and benchmark reproduction, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
