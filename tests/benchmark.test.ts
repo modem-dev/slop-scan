@@ -24,6 +24,9 @@ describe("benchmark support", () => {
     expect(set.repos.some((repo) => repo.id === "zustand" && repo.cohort === "mature-oss")).toBe(
       true,
     );
+    expect(set.repos.some((repo) => repo.id === "payload" && repo.cohort === "mature-oss")).toBe(
+      true,
+    );
   });
 
   test("creates a benchmark snapshot and report from local fixture repos", async () => {
