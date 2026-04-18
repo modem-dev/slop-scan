@@ -141,20 +141,7 @@ Current checks focus on patterns that often show up in unreviewed generated code
 - [placeholder comments](src/rules/placeholder-comments/README.md)
 - [duplicated test mock/setup patterns](src/rules/duplicate-mock-setup/README.md)
 
-## What you get back
-
-- raw repo score
-- normalized metrics:
-  - score / file
-  - score / KLOC
-  - score / function
-  - findings / file
-  - findings / KLOC
-  - findings / function
-- top file hotspots
-- top directory hotspots
-- grouped lint-style findings with `--lint`
-- full-fidelity findings with evidence in `--json`
+`scan` reports raw + normalized scores, hotspot tables, and grouped findings. Use `--json` when you want the full evidence payload.
 
 ## Supported files
 
@@ -272,17 +259,6 @@ See also:
 - [`examples/local-plugin/slop-scan.config.ts`](examples/local-plugin/slop-scan.config.ts)
 
 This repo also commits a root [`slop-scan.config.json`](slop-scan.config.json) for self-scans and local development. It keeps the scan focused on the tool itself by excluding heavyweight benchmark checkouts and intentionally disables directory-structure rules under `src/rules/**`.
-
-## How it works
-
-`slop-scan` is built as a pluggable engine:
-
-- language plugins
-- fact providers
-- rule plugins
-- reporters
-
-That keeps the analyzer deterministic and extensible without turning it into one giant loop of ad hoc checks.
 
 ## Docs
 
