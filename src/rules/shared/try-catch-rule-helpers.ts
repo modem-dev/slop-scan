@@ -1,4 +1,4 @@
-import type { TryCatchSummary } from "../facts/types";
+import type { TryCatchSummary } from "../../facts/types";
 
 /**
  * Screens out probe-style catches that would dominate results without being meaningfully slop-like.

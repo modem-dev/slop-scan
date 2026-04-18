@@ -1,7 +1,7 @@
-import type { RulePlugin } from "../core/types";
-import type { CommentSummary, FunctionSummary } from "../facts/types";
-import { delta } from "../rule-delta";
-import { BOUNDARY_WRAPPER_TARGET_PREFIXES } from "./helpers";
+import type { RulePlugin } from "../../core/types";
+import type { CommentSummary, FunctionSummary } from "../../facts/types";
+import { delta } from "../../rule-delta";
+import { BOUNDARY_WRAPPER_TARGET_PREFIXES } from "../shared/helpers";
 
 // Nearby wording like "alias" or "backward compatibility" usually means the
 // wrapper exists to preserve an API name rather than because the author lazily

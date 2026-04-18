@@ -1,6 +1,6 @@
-import type { RulePlugin } from "../core/types";
-import type { CommentSummary } from "../facts/types";
-import { delta } from "../rule-delta";
+import type { RulePlugin } from "../../core/types";
+import type { CommentSummary } from "../../facts/types";
+import { delta } from "../../rule-delta";
 
 /**
  * Flags filler comments that gesture at future work without explaining current

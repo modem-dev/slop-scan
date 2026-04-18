@@ -125,17 +125,17 @@ slop-scan delta --base ../main --fail-on added,worsened
 
 Current checks focus on patterns that often show up in unreviewed generated code:
 
-- log-and-continue catch blocks
-- error-obscuring catch blocks (default-return or generic replacement error)
-- empty catch blocks
-- async wrapper / `return await` noise
-- pass-through wrappers
-- barrel density
-- duplicate helper/function signatures across source files
-- over-fragmentation
-- directory fan-out hotspots
-- placeholder comments
-- duplicated test mock/setup patterns
+- [log-and-continue catch blocks](src/rules/error-swallowing/README.md)
+- [error-obscuring catch blocks](src/rules/error-obscuring/README.md) (default-return or generic replacement error)
+- [empty catch blocks](src/rules/empty-catch/README.md)
+- [async wrapper / `return await` noise](src/rules/async-noise/README.md)
+- [pass-through wrappers](src/rules/pass-through-wrappers/README.md)
+- [barrel density](src/rules/barrel-density/README.md)
+- [duplicate helper/function signatures across source files](src/rules/duplicate-function-signatures/README.md)
+- [over-fragmentation](src/rules/over-fragmentation/README.md)
+- [directory fan-out hotspots](src/rules/directory-fanout-hotspot/README.md)
+- [placeholder comments](src/rules/placeholder-comments/README.md)
+- [duplicated test mock/setup patterns](src/rules/duplicate-mock-setup/README.md)
 
 ## What you get back
 
@@ -283,6 +283,7 @@ That keeps the analyzer deterministic and extensible without turning it into one
 ## Docs
 
 - plugin guide: [`docs/plugins.md`](docs/plugins.md)
+- built-in rule docs: browse [`src/rules/`](src/rules)
 - benchmark guide: [`benchmarks/README.md`](benchmarks/README.md)
 - pinned benchmark report: [`reports/known-ai-vs-solid-oss-benchmark.md`](reports/known-ai-vs-solid-oss-benchmark.md)
 - exploratory note on non-JS/TS candidates: [`reports/exploratory-vite-astro-openclaw-beads.md`](reports/exploratory-vite-astro-openclaw-beads.md)

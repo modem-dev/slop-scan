@@ -1,6 +1,6 @@
-import type { RulePlugin } from "../core/types";
-import type { DuplicateFunctionIndex } from "../facts/types";
-import { isTestFile } from "../facts/ts-helpers";
+import type { RulePlugin } from "../../core/types";
+import type { DuplicateFunctionIndex } from "../../facts/types";
+import { isTestFile } from "../../facts/ts-helpers";
 
 function findUniqueDuplicateFunctionClusters(
   duplication: DuplicateFunctionIndex | undefined,

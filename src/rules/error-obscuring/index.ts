@@ -1,11 +1,11 @@
-import type { RulePlugin } from "../core/types";
-import type { TryCatchSummary } from "../facts/types";
-import { delta } from "../rule-delta";
+import type { RulePlugin } from "../../core/types";
+import type { TryCatchSummary } from "../../facts/types";
+import { delta } from "../../rule-delta";
 import {
   formatTryCatchBoundary,
   isValidTryCatchTarget,
   scoreTryCatch,
-} from "./try-catch-rule-helpers";
+} from "../shared/try-catch-rule-helpers";
 
 /**
  * Keeps evidence strings aligned on the same catch-transformation categories the rule reports.

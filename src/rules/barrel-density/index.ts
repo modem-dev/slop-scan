@@ -1,6 +1,6 @@
-import type { RulePlugin } from "../core/types";
-import type { ExportSummary } from "../facts/types";
-import { delta } from "../rule-delta";
+import type { RulePlugin } from "../../core/types";
+import type { ExportSummary } from "../../facts/types";
+import { delta } from "../../rule-delta";
 
 /**
  * Flags files that are mostly re-export barrels.

@@ -1,7 +1,7 @@
-import type { RulePlugin } from "../core/types";
-import type { FunctionSummary } from "../facts/types";
-import { delta } from "../rule-delta";
-import { BOUNDARY_WRAPPER_TARGET_PREFIXES } from "./helpers";
+import type { RulePlugin } from "../../core/types";
+import type { FunctionSummary } from "../../facts/types";
+import { delta } from "../../rule-delta";
+import { BOUNDARY_WRAPPER_TARGET_PREFIXES } from "../shared/helpers";
 
 type AsyncNoiseMatch = {
   summary: FunctionSummary;

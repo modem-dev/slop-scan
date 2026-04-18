@@ -1,8 +1,8 @@
-import type { RulePlugin } from "../core/types";
-import { isTestFile } from "../facts/ts-helpers";
-import type { DirectoryMetrics } from "../facts/types";
-import { delta } from "../rule-delta";
-import { countMatching, isAssetLikeDirectoryPath, ratio } from "./helpers";
+import type { RulePlugin } from "../../core/types";
+import { isTestFile } from "../../facts/ts-helpers";
+import type { DirectoryMetrics } from "../../facts/types";
+import { delta } from "../../rule-delta";
+import { countMatching, isAssetLikeDirectoryPath, ratio } from "../shared/helpers";
 
 /**
  * Flags directories dominated by tiny files and structural ceremony.

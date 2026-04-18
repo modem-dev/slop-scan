@@ -32,7 +32,7 @@
 - Public plugin helpers and plugin object shape: `src/plugin.ts`
 - Discovery / ignore handling: `src/discovery/walk.ts`
 - Reusable signals: `src/facts/*`
-- Findings logic: `src/rules/*` (flat files; grouping is by rule `id` / `family`, not folders)
+- Findings logic: `src/rules/<rule>/index.ts` with per-rule docs in `src/rules/<rule>/README.md` and shared helpers in `src/rules/shared/*`
 - Output formats: `src/reporters/*`
 - Current language scope: `src/languages/javascript-like.ts`
 
