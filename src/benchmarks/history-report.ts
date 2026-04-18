@@ -81,13 +81,13 @@ function sortByPinnedTrend(
 
 function renderRepoTable(repos: BenchmarkHistoryRepoSummary[]): string[] {
   const lines = [
-    "| Repo | Points | Trend (pinned) | Latest ref | Current blended | Pinned blended | Δ prev (pinned) | Δ first (pinned) | Score/file | Findings/file |",
-    "|---|---:|---|---|---:|---:|---:|---:|---:|---:|",
+    "| Repo | Points | Trend (pinned) | Latest ref | Current blended | Latest pinned | Highest pinned | Δ prev (pinned) | Δ first (pinned) | Score/file | Findings/file |",
+    "|---|---:|---|---|---:|---:|---:|---:|---:|---:|---:|",
   ];
 
   for (const repo of repos) {
     lines.push(
-      `| ${renderRepoLink(repo)} | ${repo.pointCount} | ${renderPinnedTrend(repo)} | \`${repo.latest.defaultBranch}@${shortRef(repo.latest.ref)}\` | **${formatMetric(repo.latest.blended.vsCurrentCohort)}** | **${formatMetric(repo.latest.blended.vsPinnedBaseline)}** | ${formatSigned(repo.deltaFromPrevious?.blendedVsPinnedBaseline ?? null)} | ${formatSigned(repo.deltaFromFirst.blendedVsPinnedBaseline)} | ${formatMetric(repo.latest.summary.normalized.scorePerFile)} | ${formatMetric(repo.latest.summary.normalized.findingsPerFile)} |`,
+      `| ${renderRepoLink(repo)} | ${repo.pointCount} | ${renderPinnedTrend(repo)} | \`${repo.latest.defaultBranch}@${shortRef(repo.latest.ref)}\` | **${formatMetric(repo.latest.blended.vsCurrentCohort)}** | **${formatMetric(repo.latest.blended.vsPinnedBaseline)}** | **${formatMetric(repo.highest?.blendedVsPinnedBaseline ?? null)}** | ${formatSigned(repo.deltaFromPrevious?.blendedVsPinnedBaseline ?? null)} | ${formatSigned(repo.deltaFromFirst.blendedVsPinnedBaseline)} | ${formatMetric(repo.latest.summary.normalized.scorePerFile)} | ${formatMetric(repo.latest.summary.normalized.findingsPerFile)} |`,
     );
   }
 
@@ -179,7 +179,8 @@ export function renderBenchmarkHistoryReport(
     "## Notes",
     "",
     "- `Current blended` is relative to the latest mature-OSS cohort medians from the same run, so it is best for week-by-week ranking.",
-    "- `Pinned blended` is relative to the frozen pinned benchmark baseline, so it is the cleaner long-term trend line.",
+    "- `Latest pinned` is the newest stored score relative to the frozen pinned benchmark baseline.",
+    "- `Highest pinned` is the peak stored pinned-blended value for that repo across its weekly history.",
     "- `Trend (pinned)` is a mini sparkline of the repo's stored pinned-blended values across recent weekly points.",
     "- Each repo stores one JSONL datapoint per UTC week; reruns in the same week replace that week's datapoint instead of appending duplicates.",
     "- Older backfills can have fewer points for newer repos because the history job skips weeks before a repo had any commit on its current default branch.",

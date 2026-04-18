@@ -189,6 +189,13 @@
           "defensive.async-noise": 1
         }
       },
+      "highest": {
+        "periodStart": "2026-03-23",
+        "recordedAt": "2026-03-23T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "7fbf68bb3f253ef799f38862fb1cb0b62d756a64",
+        "blendedVsPinnedBaseline": 6.370934113832667
+      },
       "series": [
         {
           "periodStart": "2026-03-23",
@@ -390,6 +397,13 @@
           "structure.pass-through-wrappers": 1
         }
       },
+      "highest": {
+        "periodStart": "2026-04-13",
+        "recordedAt": "2026-04-13T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "c61f27d7734c74a9c0b9efa7bb833ff451c8b61c",
+        "blendedVsPinnedBaseline": 3.913159449141177
+      },
       "series": [
         {
           "periodStart": "2026-03-23",
@@ -590,6 +604,13 @@
           "structure.directory-fanout-hotspot": 1,
           "structure.pass-through-wrappers": 1
         }
+      },
+      "highest": {
+        "periodStart": "2026-03-30",
+        "recordedAt": "2026-03-30T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "39921948fe542c046d16a64af884f05280b9b9b9",
+        "blendedVsPinnedBaseline": 3.404537301007842
       },
       "series": [
         {
@@ -797,6 +818,13 @@
           "defensive.error-swallowing": 3,
           "structure.directory-fanout-hotspot": 2
         }
+      },
+      "highest": {
+        "periodStart": "2026-03-23",
+        "recordedAt": "2026-03-23T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "fa06dbff4fce4f29b788f1c45224e43982d6098e",
+        "blendedVsPinnedBaseline": 3.0611127125987165
       },
       "series": [
         {
@@ -1014,6 +1042,13 @@
           "defensive.error-swallowing": 15
         }
       },
+      "highest": {
+        "periodStart": "2026-04-06",
+        "recordedAt": "2026-04-06T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "88aa81422653bc123de17550d62e2c4e5ced74fe",
+        "blendedVsPinnedBaseline": 3.149687882423783
+      },
       "series": [
         {
           "periodStart": "2026-03-23",
@@ -1222,6 +1257,13 @@
           "structure.directory-fanout-hotspot": 3,
           "tests.duplicate-mock-setup": 3
         }
+      },
+      "highest": {
+        "periodStart": "2026-03-30",
+        "recordedAt": "2026-03-30T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "5cfc59ad3d3b33f58b6579dd8392bcb8ffb18f95",
+        "blendedVsPinnedBaseline": 2.1599929963104616
       },
       "series": [
         {
@@ -1436,6 +1478,13 @@
           "defensive.async-noise": 5
         }
       },
+      "highest": {
+        "periodStart": "2026-04-06",
+        "recordedAt": "2026-04-06T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "5f448d1035073283fd7435d2f320d1f3c94898a0",
+        "blendedVsPinnedBaseline": 2.1745830762415395
+      },
       "series": [
         {
           "periodStart": "2026-04-06",
@@ -1635,6 +1684,13 @@
           "structure.over-fragmentation": 3,
           "defensive.error-swallowing": 2
         }
+      },
+      "highest": {
+        "periodStart": "2026-03-30",
+        "recordedAt": "2026-03-30T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "a7dd2d56af100ea7c109834d65ec76a3dbcefe32",
+        "blendedVsPinnedBaseline": 1.9929446040102008
       },
       "series": [
         {
@@ -1839,6 +1895,13 @@
           "defensive.error-swallowing": 1,
           "structure.barrel-density": 1
         }
+      },
+      "highest": {
+        "periodStart": "2026-04-13",
+        "recordedAt": "2026-04-13T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "53242b4b45afc3ee728f2ee10054c4cec83314c8",
+        "blendedVsPinnedBaseline": 1.5139973465611831
       },
       "series": [
         {
@@ -2056,6 +2119,13 @@
           "tests.duplicate-mock-setup": 6
         }
       },
+      "highest": {
+        "periodStart": "2026-03-23",
+        "recordedAt": "2026-03-23T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "ff91c319facd602dc5eea81ed7e7d79ae7dadb95",
+        "blendedVsPinnedBaseline": 1.5186761757032523
+      },
       "series": [
         {
           "periodStart": "2026-03-23",
@@ -2269,6 +2339,13 @@
           "structure.over-fragmentation": 1
         }
       },
+      "highest": {
+        "periodStart": "2026-03-23",
+        "recordedAt": "2026-03-23T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "15b25e8cf4e00c363ad0fd20c00b0a2af4a33002",
+        "blendedVsPinnedBaseline": 1.546199658685362
+      },
       "series": [
         {
           "periodStart": "2026-03-23",
@@ -2472,6 +2549,13 @@
           "defensive.error-swallowing": 1,
           "structure.pass-through-wrappers": 1
         }
+      },
+      "highest": {
+        "periodStart": "2026-03-30",
+        "recordedAt": "2026-03-30T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "206012dbd1ae046ea0aefb9cd7bf8bba913c6459",
+        "blendedVsPinnedBaseline": 1.3832714824628354
       },
       "series": [
         {
@@ -2692,6 +2776,13 @@
           "comments.placeholder-comments": 1
         }
       },
+      "highest": {
+        "periodStart": "2026-04-13",
+        "recordedAt": "2026-04-13T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "5afcef5d85d596b0536d02e10bb3e7d254d48bc8",
+        "blendedVsPinnedBaseline": 1.3433999155463558
+      },
       "series": [
         {
           "periodStart": "2026-03-23",
@@ -2902,6 +2993,13 @@
           "structure.over-fragmentation": 1
         }
       },
+      "highest": {
+        "periodStart": "2026-03-23",
+        "recordedAt": "2026-03-23T12:00:00Z",
+        "defaultBranch": "master",
+        "ref": "60376624db2159acefd91e13bb9498770464c37c",
+        "blendedVsPinnedBaseline": 1.0441733639448667
+      },
       "series": [
         {
           "periodStart": "2026-03-23",
@@ -3096,6 +3194,13 @@
           "defensive.error-obscuring": 1,
           "structure.directory-fanout-hotspot": 1
         }
+      },
+      "highest": {
+        "periodStart": "2026-04-13",
+        "recordedAt": "2026-04-13T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "b906f86102c02f1ef66ebd4a3f7ff50bdc07af65",
+        "blendedVsPinnedBaseline": 0.9209401145791967
       },
       "series": [
         {
@@ -3301,6 +3406,13 @@
           "structure.barrel-density": 1
         }
       },
+      "highest": {
+        "periodStart": "2026-04-13",
+        "recordedAt": "2026-04-13T12:00:00Z",
+        "defaultBranch": "main",
+        "ref": "f3a2e8481a1e9138de3895827895c834078b9456",
+        "blendedVsPinnedBaseline": 0.8866405779036939
+      },
       "series": [
         {
           "periodStart": "2026-03-23",
@@ -3489,6 +3601,13 @@
         "ruleCounts": {
           "defensive.empty-catch": 1
         }
+      },
+      "highest": {
+        "periodStart": "2026-04-13",
+        "recordedAt": "2026-04-13T12:00:00Z",
+        "defaultBranch": "master",
+        "ref": "b36c237f0d913f9df3a2bd45adc08b33ff717f6a",
+        "blendedVsPinnedBaseline": 0.41256198156120816
       },
       "series": [
         {
@@ -3690,6 +3809,13 @@
           "defensive.async-noise": 1,
           "defensive.error-obscuring": 1
         }
+      },
+      "highest": {
+        "periodStart": "2026-04-13",
+        "recordedAt": "2026-04-13T12:00:00Z",
+        "defaultBranch": "canary",
+        "ref": "2a7bb18259d975f27b30b502af1be7576f6f5656",
+        "blendedVsPinnedBaseline": 0.4106818605605101
       },
       "series": [
         {

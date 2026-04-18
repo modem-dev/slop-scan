@@ -74,6 +74,14 @@ export interface BenchmarkHistoryDelta {
   findingsPerFunction: number | null;
 }
 
+export interface BenchmarkHistoryPeak {
+  periodStart: string;
+  recordedAt: string;
+  defaultBranch: string;
+  ref: string;
+  blendedVsPinnedBaseline: number | null;
+}
+
 export interface BenchmarkHistoryRepoSummary {
   id: string;
   repo: string;
@@ -84,6 +92,7 @@ export interface BenchmarkHistoryRepoSummary {
   first: BenchmarkHistoryPoint;
   previous: BenchmarkHistoryPoint | null;
   latest: BenchmarkHistoryPoint;
+  highest: BenchmarkHistoryPeak | null;
   series: BenchmarkHistorySeriesPoint[];
   deltaFromFirst: BenchmarkHistoryDelta;
   deltaFromPrevious: BenchmarkHistoryDelta | null;
@@ -184,6 +193,34 @@ function buildDelta(
       previous.summary.normalized.findingsPerFunction,
     ),
   };
+}
+
+function findHighestPinnedPoint(points: BenchmarkHistoryPoint[]): BenchmarkHistoryPoint | null {
+  let highest: BenchmarkHistoryPoint | null = null;
+
+  for (const point of points) {
+    const value = point.blended.vsPinnedBaseline;
+    if (value === null) {
+      continue;
+    }
+
+    if (!highest) {
+      highest = point;
+      continue;
+    }
+
+    const highestValue = highest.blended.vsPinnedBaseline;
+    if (highestValue === null || value > highestValue) {
+      highest = point;
+      continue;
+    }
+
+    if (value === highestValue && point.recordedAt > highest.recordedAt) {
+      highest = point;
+    }
+  }
+
+  return highest;
 }
 
 function buildCohortSnapshots(
@@ -422,6 +459,7 @@ export function createBenchmarkHistoryLatestSummary(
       const first = sortedPoints[0];
       const latest = sortedPoints.at(-1);
       const previous = sortedPoints.length > 1 ? (sortedPoints.at(-2) ?? null) : null;
+      const highest = findHighestPinnedPoint(sortedPoints);
 
       if (!first || !latest) {
         throw new Error("History summary received an empty repo point set");
@@ -437,6 +475,15 @@ export function createBenchmarkHistoryLatestSummary(
         first,
         previous,
         latest,
+        highest: highest
+          ? {
+              periodStart: highest.periodStart,
+              recordedAt: highest.recordedAt,
+              defaultBranch: highest.defaultBranch,
+              ref: highest.ref,
+              blendedVsPinnedBaseline: highest.blended.vsPinnedBaseline,
+            }
+          : null,
         series: sortedPoints.map((point) => ({
           periodStart: point.periodStart,
           recordedAt: point.recordedAt,

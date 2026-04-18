@@ -212,11 +212,19 @@ describe("benchmark history support", () => {
     expect(summary.repos.find((repo) => repo.id === "mixed")?.deltaFromPrevious?.repoScore).toBe(
       -1,
     );
+    expect(
+      summary.repos.find((repo) => repo.id === "slop-heavy")?.highest?.blendedVsPinnedBaseline,
+    ).toBe(adjustedSlopHeavyWeekTwo.blended.vsPinnedBaseline);
+    expect(
+      summary.repos.find((repo) => repo.id === "mixed")?.highest?.blendedVsPinnedBaseline,
+    ).toBe(mixedWeekOne!.blended.vsPinnedBaseline);
     expect(summary.generatedAt).toBe("2026-04-22T12:00:00Z");
     expect(summary.baseline.snapshotPath).toBe("benchmarks/results/fixture-benchmark.json");
     expect(report).toContain("Rolling benchmark history: Fixture benchmark");
     expect(report).toContain("bun run benchmark:history --recorded-at 2026-04-06T12:00:00Z");
     expect(report).toContain("Trend (pinned)");
+    expect(report).toContain("Latest pinned");
+    expect(report).toContain("Highest pinned");
     expect(report).toContain("▁█");
     expect(report).toContain("█▁");
     expect(report).toContain("fixtures/slop-heavy");
