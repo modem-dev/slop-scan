@@ -24,7 +24,7 @@ Scan a repo, surface the hotspots, and compare codebases using normalized slop m
 
 ## Why can you trust it?
 
-Every rule is tested and benchmarked against popular, mature OSS repos pinned to commits from before AI coding was common. See [Benchmarks](#benchmarks).
+Every rule is tested and benchmarked against popular, mature OSS repos pinned to exact commit SHAs from before AI coding was common. See [Benchmarks](#benchmarks).
 
 ## Install
 
