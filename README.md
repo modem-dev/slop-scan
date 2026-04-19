@@ -134,6 +134,7 @@ Current checks focus on patterns that often show up in unreviewed generated code
 - [log-and-continue catch blocks](src/rules/error-swallowing/README.md)
 - [error-obscuring catch blocks](src/rules/error-obscuring/README.md) (default-return or generic replacement error)
 - [empty catch blocks](src/rules/empty-catch/README.md)
+- [promise `.catch()` default fallbacks](src/rules/promise-default-fallbacks/README.md)
 - [async wrapper / `return await` noise](src/rules/async-noise/README.md)
 - [pass-through wrappers](src/rules/pass-through-wrappers/README.md)
 - [barrel density](src/rules/barrel-density/README.md)

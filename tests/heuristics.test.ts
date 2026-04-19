@@ -54,6 +54,10 @@ describe("heuristic rule pack", () => {
         "  return await getData(id);",
         "}",
         "",
+        "export async function fetchDataSafely(id: string) {",
+        "  return getData(id).catch(() => null);",
+        "}",
+        "",
         "export function wrap(id: string) {",
         "  return getData(id);",
         "}",
@@ -75,6 +79,7 @@ describe("heuristic rule pack", () => {
 
     expect(ruleIds.has("comments.placeholder-comments")).toBe(true);
     expect(ruleIds.has("defensive.error-obscuring")).toBe(true);
+    expect(ruleIds.has("defensive.promise-default-fallbacks")).toBe(true);
     expect(ruleIds.has("defensive.async-noise")).toBe(true);
     expect(ruleIds.has("structure.pass-through-wrappers")).toBe(true);
     expect(ruleIds.has("structure.barrel-density")).toBe(true);
