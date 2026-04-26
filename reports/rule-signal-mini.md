@@ -1,6 +1,6 @@
 # Per-rule signal benchmark: Per-rule signal mini benchmark
 
-Date: 2026-04-19
+Date: 2026-04-26
 Analyzer version: 0.3.0
 Manifest: `benchmarks/sets/rule-signal-mini.json`
 Summary: `benchmarks/results/rule-signal-mini.json`
@@ -16,22 +16,98 @@ Signal score = average AUROC across the six normalized metrics when each rule ru
 
 | Rank | Rule | Signal score | AI hit rate | OSS hit rate | Best metric | Best AUROC |
 |---:|---|---:|---:|---:|---|---:|
-| 1 | `defensive.error-swallowing` | **0.72** | 6/6 (100%) | 3/5 (60%) | findings / file | 0.87 |
-| 2 | `defensive.empty-catch` | **0.67** | 6/6 (100%) | 5/5 (100%) | findings / file | 0.93 |
-| 3 | `structure.pass-through-wrappers` | **0.67** | 5/6 (83%) | 4/5 (80%) | findings / file | 0.85 |
-| 4 | `defensive.error-obscuring` | **0.66** | 5/6 (83%) | 5/5 (100%) | findings / file | 0.83 |
-| 5 | `tests.duplicate-mock-setup` | **0.63** | 3/6 (50%) | 1/5 (20%) | findings / file | 0.70 |
-| 6 | `comments.placeholder-comments` | **0.50** | 0/6 (0%) | 0/5 (0%) | findings / file | 0.50 |
-| 7 | `defensive.async-noise` | **0.41** | 3/6 (50%) | 4/5 (80%) | findings / function | 0.50 |
-| 8 | `structure.barrel-density` | **0.35** | 3/6 (50%) | 5/5 (100%) | findings / function | 0.50 |
-| 9 | `structure.duplicate-function-signatures` | **0.32** | 2/6 (33%) | 4/5 (80%) | findings / file | 0.40 |
-| 10 | `structure.directory-fanout-hotspot` | **0.22** | 6/6 (100%) | 5/5 (100%) | findings / file | 0.50 |
-| 11 | `structure.over-fragmentation` | **0.17** | 1/6 (17%) | 4/5 (80%) | findings / file | 0.18 |
+| 1 | `defensive.promise-default-fallbacks` | **0.81** | 6/6 (100%) | 4/5 (80%) | findings / file | 1.00 |
+| 2 | `api.generic-status-envelopes` | **0.76** | 5/6 (83%) | 2/5 (40%) | findings / file | 0.88 |
+| 3 | `defensive.error-swallowing` | **0.72** | 6/6 (100%) | 3/5 (60%) | findings / file | 0.87 |
+| 4 | `defensive.stringified-unknown-errors` | **0.70** | 4/6 (67%) | 1/5 (20%) | findings / file | 0.80 |
+| 5 | `defensive.empty-catch` | **0.67** | 6/6 (100%) | 5/5 (100%) | findings / file | 0.93 |
+| 6 | `structure.pass-through-wrappers` | **0.67** | 5/6 (83%) | 4/5 (80%) | findings / file | 0.85 |
+| 7 | `types.generic-record-casts` | **0.67** | 3/6 (50%) | 0/5 (0%) | findings / file | 0.75 |
+| 8 | `defensive.error-obscuring` | **0.66** | 5/6 (83%) | 5/5 (100%) | findings / file | 0.83 |
+| 9 | `tests.duplicate-mock-setup` | **0.63** | 3/6 (50%) | 1/5 (20%) | findings / file | 0.70 |
 
+
+## defensive.promise-default-fallbacks
+
+- Rank: **#1** of 9
+- Signal score: **0.81 / 1.00**
+- Family / severity / scope: `defensive` / `strong` / `file`
+- Best metric: findings / file (1.00)
+
+### Cohort summary
+
+| Cohort | Hit rate | Median findings | Median repo score | Median score / file | Median score / KLOC | Median findings / KLOC |
+|---|---:|---:|---:|---:|---:|---:|
+| explicit-ai | 6/6 (100%) | 3.00 | 10.00 | 0.09 | 1.32 | 0.34 |
+| mature-oss | 4/5 (80%) | 3.00 | 6.00 | 0.00 | 0.10 | 0.05 |
+
+### AUROC by normalized metric
+
+- score / file: 1.00
+- score / KLOC: 0.97
+- score / function: 0.50
+- findings / file: 1.00
+- findings / KLOC: 0.90
+- findings / function: 0.50
+
+### Repo results
+
+| Repo | Cohort | Ref | Findings | Repo score | Score / file | Score / KLOC | Findings / KLOC |
+|---|---|---|---:|---:|---:|---:|---:|
+| [jiayun/DevWorkbench](https://github.com/jiayun/DevWorkbench) | explicit-ai | `ea50862` | 1 | 8.00 | 0.25 | 2.68 | 0.33 |
+| [garrytan/gstack](https://github.com/garrytan/gstack) | explicit-ai | `6cc094c` | 7 | 40.00 | 0.23 | 2.11 | 0.37 |
+| [cloudflare/vinext](https://github.com/cloudflare/vinext) | explicit-ai | `28980b0` | 30 | 87.00 | 0.08 | 1.46 | 0.50 |
+| [redwoodjs/agent-ci](https://github.com/redwoodjs/agent-ci) | explicit-ai | `4de00d6` | 3 | 10.00 | 0.11 | 1.18 | 0.35 |
+| [modem-dev/hunk](https://github.com/modem-dev/hunk) | explicit-ai | `b37663f` | 3 | 10.00 | 0.06 | 0.74 | 0.22 |
+| [robinebers/openusage](https://github.com/robinebers/openusage) | explicit-ai | `857f537` | 1 | 4.00 | 0.03 | 0.18 | 0.04 |
+| [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 9 | 20.50 | 0.01 | 0.25 | 0.11 |
+| [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 3 | 6.00 | 0.00 | 0.16 | 0.08 |
+| [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 1 | 2.00 | 0.00 | 0.10 | 0.05 |
+| [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 3 | 6.00 | 0.00 | 0.02 | 0.01 |
+| [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+
+## api.generic-status-envelopes
+
+- Rank: **#2** of 9
+- Signal score: **0.76 / 1.00**
+- Family / severity / scope: `api` / `strong` / `file`
+- Best metric: findings / file (0.88)
+
+### Cohort summary
+
+| Cohort | Hit rate | Median findings | Median repo score | Median score / file | Median score / KLOC | Median findings / KLOC |
+|---|---:|---:|---:|---:|---:|---:|
+| explicit-ai | 5/6 (83%) | 1.00 | 5.00 | 0.02 | 0.24 | 0.06 |
+| mature-oss | 2/5 (40%) | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+
+### AUROC by normalized metric
+
+- score / file: 0.88
+- score / KLOC: 0.88
+- score / function: 0.50
+- findings / file: 0.88
+- findings / KLOC: 0.88
+- findings / function: 0.50
+
+### Repo results
+
+| Repo | Cohort | Ref | Findings | Repo score | Score / file | Score / KLOC | Findings / KLOC |
+|---|---|---|---:|---:|---:|---:|---:|
+| [garrytan/gstack](https://github.com/garrytan/gstack) | explicit-ai | `6cc094c` | 1 | 8.00 | 0.05 | 0.42 | 0.05 |
+| [robinebers/openusage](https://github.com/robinebers/openusage) | explicit-ai | `857f537` | 1 | 8.00 | 0.06 | 0.36 | 0.04 |
+| [redwoodjs/agent-ci](https://github.com/redwoodjs/agent-ci) | explicit-ai | `4de00d6` | 1 | 2.00 | 0.02 | 0.24 | 0.12 |
+| [cloudflare/vinext](https://github.com/cloudflare/vinext) | explicit-ai | `28980b0` | 5 | 14.00 | 0.01 | 0.24 | 0.08 |
+| [modem-dev/hunk](https://github.com/modem-dev/hunk) | explicit-ai | `b37663f` | 1 | 2.00 | 0.01 | 0.15 | 0.07 |
+| [jiayun/DevWorkbench](https://github.com/jiayun/DevWorkbench) | explicit-ai | `ea50862` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 1 | 2.00 | 0.00 | 0.02 | 0.01 |
+| [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 1 | 6.00 | 0.00 | 0.02 | 0.00 |
+| [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
 
 ## defensive.error-swallowing
 
-- Rank: **#1** of 11
+- Rank: **#3** of 9
 - Signal score: **0.72 / 1.00**
 - Family / severity / scope: `defensive` / `strong` / `file`
 - Best metric: findings / file (0.87)
@@ -68,9 +144,48 @@ Signal score = average AUROC across the six normalized metrics when each rule ru
 | [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
 | [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
 
+## defensive.stringified-unknown-errors
+
+- Rank: **#4** of 9
+- Signal score: **0.70 / 1.00**
+- Family / severity / scope: `defensive` / `strong` / `file`
+- Best metric: findings / file (0.80)
+
+### Cohort summary
+
+| Cohort | Hit rate | Median findings | Median repo score | Median score / file | Median score / KLOC | Median findings / KLOC |
+|---|---:|---:|---:|---:|---:|---:|
+| explicit-ai | 4/6 (67%) | 1.50 | 5.00 | 0.03 | 0.31 | 0.10 |
+| mature-oss | 1/5 (20%) | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+
+### AUROC by normalized metric
+
+- score / file: 0.80
+- score / KLOC: 0.80
+- score / function: 0.50
+- findings / file: 0.80
+- findings / KLOC: 0.80
+- findings / function: 0.50
+
+### Repo results
+
+| Repo | Cohort | Ref | Findings | Repo score | Score / file | Score / KLOC | Findings / KLOC |
+|---|---|---|---:|---:|---:|---:|---:|
+| [jiayun/DevWorkbench](https://github.com/jiayun/DevWorkbench) | explicit-ai | `ea50862` | 2 | 8.00 | 0.25 | 2.68 | 0.67 |
+| [cloudflare/vinext](https://github.com/cloudflare/vinext) | explicit-ai | `28980b0` | 11 | 30.00 | 0.03 | 0.50 | 0.18 |
+| [garrytan/gstack](https://github.com/garrytan/gstack) | explicit-ai | `6cc094c` | 1 | 6.00 | 0.03 | 0.32 | 0.05 |
+| [modem-dev/hunk](https://github.com/modem-dev/hunk) | explicit-ai | `b37663f` | 2 | 4.00 | 0.02 | 0.29 | 0.15 |
+| [redwoodjs/agent-ci](https://github.com/redwoodjs/agent-ci) | explicit-ai | `4de00d6` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [robinebers/openusage](https://github.com/robinebers/openusage) | explicit-ai | `857f537` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 1 | 2.00 | 0.00 | 0.02 | 0.01 |
+| [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+
 ## defensive.empty-catch
 
-- Rank: **#2** of 11
+- Rank: **#5** of 9
 - Signal score: **0.67 / 1.00**
 - Family / severity / scope: `defensive` / `strong` / `file`
 - Best metric: findings / file (0.93)
@@ -109,7 +224,7 @@ Signal score = average AUROC across the six normalized metrics when each rule ru
 
 ## structure.pass-through-wrappers
 
-- Rank: **#3** of 11
+- Rank: **#6** of 9
 - Signal score: **0.67 / 1.00**
 - Family / severity / scope: `structure` / `strong` / `file`
 - Best metric: findings / file (0.85)
@@ -146,9 +261,48 @@ Signal score = average AUROC across the six normalized metrics when each rule ru
 | [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 13 | 41.00 | 0.01 | 0.16 | 0.05 |
 | [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
 
+## types.generic-record-casts
+
+- Rank: **#7** of 9
+- Signal score: **0.67 / 1.00**
+- Family / severity / scope: `types` / `strong` / `file`
+- Best metric: findings / file (0.75)
+
+### Cohort summary
+
+| Cohort | Hit rate | Median findings | Median repo score | Median score / file | Median score / KLOC | Median findings / KLOC |
+|---|---:|---:|---:|---:|---:|---:|
+| explicit-ai | 3/6 (50%) | 0.50 | 1.00 | 0.00 | 0.03 | 0.01 |
+| mature-oss | 0/5 (0%) | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+
+### AUROC by normalized metric
+
+- score / file: 0.75
+- score / KLOC: 0.75
+- score / function: 0.50
+- findings / file: 0.75
+- findings / KLOC: 0.75
+- findings / function: 0.50
+
+### Repo results
+
+| Repo | Cohort | Ref | Findings | Repo score | Score / file | Score / KLOC | Findings / KLOC |
+|---|---|---|---:|---:|---:|---:|---:|
+| [modem-dev/hunk](https://github.com/modem-dev/hunk) | explicit-ai | `b37663f` | 2 | 6.00 | 0.04 | 0.44 | 0.15 |
+| [garrytan/gstack](https://github.com/garrytan/gstack) | explicit-ai | `6cc094c` | 1 | 2.00 | 0.01 | 0.11 | 0.05 |
+| [cloudflare/vinext](https://github.com/cloudflare/vinext) | explicit-ai | `28980b0` | 1 | 4.00 | 0.00 | 0.07 | 0.02 |
+| [jiayun/DevWorkbench](https://github.com/jiayun/DevWorkbench) | explicit-ai | `ea50862` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [redwoodjs/agent-ci](https://github.com/redwoodjs/agent-ci) | explicit-ai | `4de00d6` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [robinebers/openusage](https://github.com/robinebers/openusage) | explicit-ai | `857f537` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+| [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
+
 ## defensive.error-obscuring
 
-- Rank: **#4** of 11
+- Rank: **#8** of 9
 - Signal score: **0.66 / 1.00**
 - Family / severity / scope: `defensive` / `strong` / `file`
 - Best metric: findings / file (0.83)
@@ -187,7 +341,7 @@ Signal score = average AUROC across the six normalized metrics when each rule ru
 
 ## tests.duplicate-mock-setup
 
-- Rank: **#5** of 11
+- Rank: **#9** of 9
 - Signal score: **0.63 / 1.00**
 - Family / severity / scope: `tests` / `medium` / `file`
 - Best metric: findings / file (0.70)
@@ -223,237 +377,3 @@ Signal score = average AUROC across the six normalized metrics when each rule ru
 | [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
 | [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
 | [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-
-## comments.placeholder-comments
-
-- Rank: **#6** of 11
-- Signal score: **0.50 / 1.00**
-- Family / severity / scope: `comments` / `weak` / `file`
-- Best metric: findings / file (0.50)
-
-### Cohort summary
-
-| Cohort | Hit rate | Median findings | Median repo score | Median score / file | Median score / KLOC | Median findings / KLOC |
-|---|---:|---:|---:|---:|---:|---:|
-| explicit-ai | 0/6 (0%) | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
-| mature-oss | 0/5 (0%) | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
-
-### AUROC by normalized metric
-
-- score / file: 0.50
-- score / KLOC: 0.50
-- score / function: 0.50
-- findings / file: 0.50
-- findings / KLOC: 0.50
-- findings / function: 0.50
-
-### Repo results
-
-| Repo | Cohort | Ref | Findings | Repo score | Score / file | Score / KLOC | Findings / KLOC |
-|---|---|---|---:|---:|---:|---:|---:|
-| [cloudflare/vinext](https://github.com/cloudflare/vinext) | explicit-ai | `28980b0` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [garrytan/gstack](https://github.com/garrytan/gstack) | explicit-ai | `6cc094c` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [jiayun/DevWorkbench](https://github.com/jiayun/DevWorkbench) | explicit-ai | `ea50862` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [modem-dev/hunk](https://github.com/modem-dev/hunk) | explicit-ai | `b37663f` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [redwoodjs/agent-ci](https://github.com/redwoodjs/agent-ci) | explicit-ai | `4de00d6` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [robinebers/openusage](https://github.com/robinebers/openusage) | explicit-ai | `857f537` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-
-## defensive.async-noise
-
-- Rank: **#7** of 11
-- Signal score: **0.41 / 1.00**
-- Family / severity / scope: `defensive` / `medium` / `file`
-- Best metric: findings / function (0.50)
-
-### Cohort summary
-
-| Cohort | Hit rate | Median findings | Median repo score | Median score / file | Median score / KLOC | Median findings / KLOC |
-|---|---:|---:|---:|---:|---:|---:|
-| explicit-ai | 3/6 (50%) | 0.50 | 0.38 | 0.00 | 0.03 | 0.03 |
-| mature-oss | 4/5 (80%) | 6.00 | 9.00 | 0.00 | 0.07 | 0.10 |
-
-### AUROC by normalized metric
-
-- score / file: 0.42
-- score / KLOC: 0.35
-- score / function: 0.50
-- findings / file: 0.42
-- findings / KLOC: 0.28
-- findings / function: 0.50
-
-### Repo results
-
-| Repo | Cohort | Ref | Findings | Repo score | Score / file | Score / KLOC | Findings / KLOC |
-|---|---|---|---:|---:|---:|---:|---:|
-| [garrytan/gstack](https://github.com/garrytan/gstack) | explicit-ai | `6cc094c` | 2 | 4.50 | 0.03 | 0.24 | 0.11 |
-| [cloudflare/vinext](https://github.com/cloudflare/vinext) | explicit-ai | `28980b0` | 4 | 6.00 | 0.01 | 0.10 | 0.07 |
-| [modem-dev/hunk](https://github.com/modem-dev/hunk) | explicit-ai | `b37663f` | 1 | 0.75 | 0.00 | 0.06 | 0.07 |
-| [jiayun/DevWorkbench](https://github.com/jiayun/DevWorkbench) | explicit-ai | `ea50862` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [redwoodjs/agent-ci](https://github.com/redwoodjs/agent-ci) | explicit-ai | `4de00d6` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [robinebers/openusage](https://github.com/robinebers/openusage) | explicit-ai | `857f537` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 8 | 11.25 | 0.01 | 0.30 | 0.21 |
-| [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 11 | 18.00 | 0.01 | 0.22 | 0.14 |
-| [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 2 | 1.50 | 0.00 | 0.07 | 0.10 |
-| [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 6 | 9.00 | 0.00 | 0.04 | 0.02 |
-| [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-
-## structure.barrel-density
-
-- Rank: **#8** of 11
-- Signal score: **0.35 / 1.00**
-- Family / severity / scope: `structure` / `medium` / `file`
-- Best metric: findings / function (0.50)
-
-### Cohort summary
-
-| Cohort | Hit rate | Median findings | Median repo score | Median score / file | Median score / KLOC | Median findings / KLOC |
-|---|---:|---:|---:|---:|---:|---:|
-| explicit-ai | 3/6 (50%) | 0.50 | 1.00 | 0.00 | 0.06 | 0.03 |
-| mature-oss | 5/5 (100%) | 8.00 | 19.00 | 0.02 | 0.44 | 0.15 |
-
-### AUROC by normalized metric
-
-- score / file: 0.33
-- score / KLOC: 0.20
-- score / function: 0.50
-- findings / file: 0.33
-- findings / KLOC: 0.23
-- findings / function: 0.50
-
-### Repo results
-
-| Repo | Cohort | Ref | Findings | Repo score | Score / file | Score / KLOC | Findings / KLOC |
-|---|---|---|---:|---:|---:|---:|---:|
-| [jiayun/DevWorkbench](https://github.com/jiayun/DevWorkbench) | explicit-ai | `ea50862` | 1 | 3.00 | 0.09 | 1.00 | 0.33 |
-| [redwoodjs/agent-ci](https://github.com/redwoodjs/agent-ci) | explicit-ai | `4de00d6` | 1 | 2.00 | 0.02 | 0.24 | 0.12 |
-| [cloudflare/vinext](https://github.com/cloudflare/vinext) | explicit-ai | `28980b0` | 3 | 7.00 | 0.01 | 0.12 | 0.05 |
-| [garrytan/gstack](https://github.com/garrytan/gstack) | explicit-ai | `6cc094c` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [modem-dev/hunk](https://github.com/modem-dev/hunk) | explicit-ai | `b37663f` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [robinebers/openusage](https://github.com/robinebers/openusage) | explicit-ai | `857f537` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 27 | 68.50 | 0.04 | 0.85 | 0.33 |
-| [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 8 | 19.00 | 0.02 | 0.51 | 0.21 |
-| [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 3 | 9.00 | 0.02 | 0.44 | 0.15 |
-| [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 33 | 83.00 | 0.02 | 0.33 | 0.13 |
-| [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 1 | 3.00 | 0.01 | 0.15 | 0.05 |
-
-## structure.duplicate-function-signatures
-
-- Rank: **#9** of 11
-- Signal score: **0.32 / 1.00**
-- Family / severity / scope: `structure` / `medium` / `file`
-- Best metric: findings / file (0.40)
-
-### Cohort summary
-
-| Cohort | Hit rate | Median findings | Median repo score | Median score / file | Median score / KLOC | Median findings / KLOC |
-|---|---:|---:|---:|---:|---:|---:|
-| explicit-ai | 2/6 (33%) | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
-| mature-oss | 4/5 (80%) | 12.00 | 25.75 | 0.04 | 0.94 | 0.35 |
-
-### AUROC by normalized metric
-
-- score / file: 0.40
-- score / KLOC: 0.30
-- score / function: 0.27
-- findings / file: 0.40
-- findings / KLOC: 0.27
-- findings / function: 0.30
-
-### Repo results
-
-| Repo | Cohort | Ref | Findings | Repo score | Score / file | Score / KLOC | Findings / KLOC |
-|---|---|---|---:|---:|---:|---:|---:|
-| [cloudflare/vinext](https://github.com/cloudflare/vinext) | explicit-ai | `28980b0` | 50 | 143.25 | 0.13 | 2.41 | 0.84 |
-| [robinebers/openusage](https://github.com/robinebers/openusage) | explicit-ai | `857f537` | 5 | 11.25 | 0.08 | 0.51 | 0.22 |
-| [garrytan/gstack](https://github.com/garrytan/gstack) | explicit-ai | `6cc094c` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [jiayun/DevWorkbench](https://github.com/jiayun/DevWorkbench) | explicit-ai | `ea50862` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [modem-dev/hunk](https://github.com/modem-dev/hunk) | explicit-ai | `b37663f` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [redwoodjs/agent-ci](https://github.com/redwoodjs/agent-ci) | explicit-ai | `4de00d6` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 12 | 25.75 | 0.05 | 1.26 | 0.59 |
-| [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 131 | 309.00 | 0.07 | 1.23 | 0.52 |
-| [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 28 | 76.00 | 0.04 | 0.94 | 0.35 |
-| [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 6 | 7.50 | 0.01 | 0.37 | 0.29 |
-| [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-
-## structure.directory-fanout-hotspot
-
-- Rank: **#10** of 11
-- Signal score: **0.22 / 1.00**
-- Family / severity / scope: `structure` / `medium` / `directory`
-- Best metric: findings / file (0.50)
-
-### Cohort summary
-
-| Cohort | Hit rate | Median findings | Median repo score | Median score / file | Median score / KLOC | Median findings / KLOC |
-|---|---:|---:|---:|---:|---:|---:|
-| explicit-ai | 6/6 (100%) | 1.50 | 6.10 | 0.05 | 0.54 | 0.17 |
-| mature-oss | 5/5 (100%) | 21.00 | 76.98 | 0.04 | 1.13 | 0.31 |
-
-### AUROC by normalized metric
-
-- score / file: 0.47
-- score / KLOC: 0.13
-- score / function: 0.10
-- findings / file: 0.50
-- findings / KLOC: 0.10
-- findings / function: 0.03
-
-### Repo results
-
-| Repo | Cohort | Ref | Findings | Repo score | Score / file | Score / KLOC | Findings / KLOC |
-|---|---|---|---:|---:|---:|---:|---:|
-| [jiayun/DevWorkbench](https://github.com/jiayun/DevWorkbench) | explicit-ai | `ea50862` | 1 | 4.83 | 0.15 | 1.62 | 0.33 |
-| [cloudflare/vinext](https://github.com/cloudflare/vinext) | explicit-ai | `28980b0` | 15 | 56.28 | 0.05 | 0.95 | 0.25 |
-| [modem-dev/hunk](https://github.com/modem-dev/hunk) | explicit-ai | `b37663f` | 3 | 9.72 | 0.06 | 0.72 | 0.22 |
-| [redwoodjs/agent-ci](https://github.com/redwoodjs/agent-ci) | explicit-ai | `4de00d6` | 1 | 3.13 | 0.03 | 0.37 | 0.12 |
-| [robinebers/openusage](https://github.com/robinebers/openusage) | explicit-ai | `857f537` | 2 | 7.36 | 0.05 | 0.33 | 0.09 |
-| [garrytan/gstack](https://github.com/garrytan/gstack) | explicit-ai | `6cc094c` | 1 | 3.00 | 0.02 | 0.16 | 0.05 |
-| [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 21 | 76.98 | 0.06 | 2.07 | 0.56 |
-| [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 7 | 25.68 | 0.04 | 1.26 | 0.34 |
-| [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 77 | 285.92 | 0.07 | 1.13 | 0.31 |
-| [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 6 | 22.79 | 0.04 | 1.11 | 0.29 |
-| [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 24 | 86.61 | 0.04 | 1.07 | 0.30 |
-
-## structure.over-fragmentation
-
-- Rank: **#11** of 11
-- Signal score: **0.17 / 1.00**
-- Family / severity / scope: `structure` / `strong` / `directory`
-- Best metric: findings / file (0.18)
-
-### Cohort summary
-
-| Cohort | Hit rate | Median findings | Median repo score | Median score / file | Median score / KLOC | Median findings / KLOC |
-|---|---:|---:|---:|---:|---:|---:|
-| explicit-ai | 1/6 (17%) | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
-| mature-oss | 4/5 (80%) | 2.00 | 13.93 | 0.01 | 0.14 | 0.02 |
-
-### AUROC by normalized metric
-
-- score / file: 0.18
-- score / KLOC: 0.18
-- score / function: 0.15
-- findings / file: 0.18
-- findings / KLOC: 0.18
-- findings / function: 0.15
-
-### Repo results
-
-| Repo | Cohort | Ref | Findings | Repo score | Score / file | Score / KLOC | Findings / KLOC |
-|---|---|---|---:|---:|---:|---:|---:|
-| [cloudflare/vinext](https://github.com/cloudflare/vinext) | explicit-ai | `28980b0` | 3 | 20.12 | 0.02 | 0.34 | 0.05 |
-| [garrytan/gstack](https://github.com/garrytan/gstack) | explicit-ai | `6cc094c` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [jiayun/DevWorkbench](https://github.com/jiayun/DevWorkbench) | explicit-ai | `ea50862` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [modem-dev/hunk](https://github.com/modem-dev/hunk) | explicit-ai | `b37663f` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [redwoodjs/agent-ci](https://github.com/redwoodjs/agent-ci) | explicit-ai | `4de00d6` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [robinebers/openusage](https://github.com/robinebers/openusage) | explicit-ai | `857f537` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |
-| [vitejs/vite](https://github.com/vitejs/vite) | mature-oss | `a492253` | 8 | 54.02 | 0.04 | 1.45 | 0.21 |
-| [sindresorhus/execa](https://github.com/sindresorhus/execa) | mature-oss | `99d1741` | 2 | 13.93 | 0.02 | 0.68 | 0.10 |
-| [payloadcms/payload](https://github.com/payloadcms/payload) | mature-oss | `f3f36d8` | 5 | 34.86 | 0.01 | 0.14 | 0.02 |
-| [withastro/astro](https://github.com/withastro/astro) | mature-oss | `f706899` | 1 | 6.50 | 0.00 | 0.08 | 0.01 |
-| [umami-software/umami](https://github.com/umami-software/umami) | mature-oss | `227b255` | 0 | 0.00 | 0.00 | 0.00 | 0.00 |

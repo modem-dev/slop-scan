@@ -129,7 +129,7 @@ slop-scan delta --base ../main --fail-on added,worsened
 
 ## What it catches
 
-Current checks focus on patterns that often show up in unreviewed generated code:
+Current default-pack checks focus on patterns that often show up in unreviewed generated code:
 
 - [log-and-continue catch blocks](src/rules/error-swallowing/README.md)
 - [error-obscuring catch blocks](src/rules/error-obscuring/README.md) (default-return or generic replacement error)
@@ -166,13 +166,13 @@ _Why before Jan 1, 2025?_ Because this cutoff aims to catch mature OSS before AI
 
 | Metric              | AI median | Mature OSS median |     Ratio |
 | ------------------- | --------: | ----------------: | --------: |
-| Blended score       |  **3.02** |          **1.00** | **3.02x** |
-| Score / file        |  **0.99** |          **0.24** | **4.11x** |
-| Score / KLOC        |  **9.51** |          **4.04** | **2.35x** |
-| Score / function    |  **0.22** |          **0.10** | **2.28x** |
-| Findings / file     |  **0.31** |          **0.08** | **3.74x** |
-| Findings / KLOC     |  **2.96** |          **1.38** | **2.14x** |
-| Findings / function |  **0.08** |          **0.04** | **2.21x** |
+| Blended score       |  **6.91** |          **1.00** | **6.91x** |
+| Score / file        |  **1.07** |          **0.12** | **8.82x** |
+| Score / KLOC        | **10.90** |          **1.48** | **7.38x** |
+| Score / function    |  **0.28** |          **0.05** | **5.51x** |
+| Findings / file     |  **0.29** |          **0.04** | **6.97x** |
+| Findings / KLOC     |  **3.04** |          **0.56** | **5.39x** |
+| Findings / function |  **0.08** |          **0.02** | **3.51x** |
 
 ### Rolling benchmark snapshot
 
@@ -180,24 +180,24 @@ Latest default-branch history, still normalized against the frozen pinned baseli
 
 | Repository                                                            | Cohort     | Latest ref       | Current blended | Latest pinned | Highest pinned | Δ prev | Δ peak |
 | --------------------------------------------------------------------- | ---------- | ---------------- | --------------: | ------------: | -------------: | -----: | -----: |
-| [`garrytan/gstack`](https://github.com/garrytan/gstack)               | ai         | `main@c6e6a21`   |        **4.59** |      **4.77** |       **6.37** |  -0.64 |  -1.60 |
-| [`redwoodjs/agent-ci`](https://github.com/redwoodjs/agent-ci)         | ai         | `main@c61f27d`   |        **3.76** |      **3.91** |       **3.91** |  +0.51 |   0.00 |
-| [`jiayun/DevWorkbench`](https://github.com/jiayun/DevWorkbench)       | ai         | `main@ea50862`   |        **3.26** |      **3.39** |       **3.40** |   0.00 |  -0.02 |
-| [`robinebers/openusage`](https://github.com/robinebers/openusage)     | ai         | `main@06113d6`   |        **2.91** |      **3.03** |       **3.06** |  +0.01 |  -0.03 |
-| [`openclaw/openclaw`](https://github.com/openclaw/openclaw)           | ai         | `main@1de5610`   |        **2.81** |      **2.92** |       **3.15** |  -0.23 |  -0.23 |
-| [`FullAgent/fulling`](https://github.com/FullAgent/fulling)           | ai         | `main@d95060f`   |        **2.07** |      **2.16** |       **2.16** |   0.00 |   0.00 |
-| [`emdash-cms/emdash`](https://github.com/emdash-cms/emdash)           | ai         | `main@a1dac00`   |        **1.94** |      **2.01** |       **2.17** |  -0.16 |  -0.16 |
-| [`cloudflare/vinext`](https://github.com/cloudflare/vinext)           | ai         | `main@e81a621`   |        **1.85** |      **1.93** |       **1.99** |  -0.06 |  -0.07 |
-| [`vitejs/vite`](https://github.com/vitejs/vite)                       | mature-oss | `main@bc5c6a7`   |        **1.46** |      **1.52** |       **1.52** |  +0.02 |   0.00 |
-| [`modem-dev/hunk`](https://github.com/modem-dev/hunk)                 | ai         | `main@53242b4`   |        **1.46** |      **1.51** |       **1.51** |  +0.44 |   0.00 |
-| [`withastro/astro`](https://github.com/withastro/astro)               | mature-oss | `main@7fe40bc`   |        **1.40** |      **1.46** |       **1.55** |   0.00 |  -0.09 |
-| [`pmndrs/zustand`](https://github.com/pmndrs/zustand)                 | mature-oss | `main@00f96a3`   |        **1.33** |      **1.38** |       **1.38** |   0.00 |  -0.01 |
-| [`payloadcms/payload`](https://github.com/payloadcms/payload)         | mature-oss | `main@5afcef5`   |        **1.29** |      **1.34** |       **1.34** |  +0.02 |   0.00 |
-| [`umami-software/umami`](https://github.com/umami-software/umami)     | mature-oss | `master@3a31ad3` |        **1.00** |      **1.04** |       **1.04** |  +0.00 |   0.00 |
-| [`egoist/tsup`](https://github.com/egoist/tsup)                       | mature-oss | `main@b906f86`   |        **0.89** |      **0.92** |       **0.92** |   0.00 |   0.00 |
-| [`sindresorhus/execa`](https://github.com/sindresorhus/execa)         | mature-oss | `main@f3a2e84`   |        **0.85** |      **0.89** |       **0.89** |   0.00 |   0.00 |
-| [`mikaelbr/node-notifier`](https://github.com/mikaelbr/node-notifier) | mature-oss | `master@b36c237` |        **0.40** |      **0.41** |       **0.41** |   0.00 |   0.00 |
-| [`vercel/hyper`](https://github.com/vercel/hyper)                     | mature-oss | `canary@2a7bb18` |        **0.40** |      **0.41** |       **0.41** |   0.00 |   0.00 |
+| [`garrytan/gstack`](https://github.com/garrytan/gstack)               | ai         | `main@ed1e4be`   |        **9.15** |     **11.14** |      **11.14** |  +6.37 |   0.00 |
+| [`FullAgent/fulling`](https://github.com/FullAgent/fulling)           | ai         | `main@d95060f`   |        **8.42** |     **10.24** |      **10.24** |  +8.08 |   0.00 |
+| [`redwoodjs/agent-ci`](https://github.com/redwoodjs/agent-ci)         | ai         | `main@76b46f9`   |        **7.83** |      **9.53** |       **9.53** |  +5.61 |   0.00 |
+| [`jiayun/DevWorkbench`](https://github.com/jiayun/DevWorkbench)       | ai         | `main@ea50862`   |        **7.39** |      **8.99** |       **8.99** |  +5.60 |   0.00 |
+| [`robinebers/openusage`](https://github.com/robinebers/openusage)     | ai         | `main@584d44d`   |        **5.27** |      **6.41** |       **6.41** |  +3.39 |   0.00 |
+| [`openclaw/openclaw`](https://github.com/openclaw/openclaw)           | ai         | `main@6b6dcaf`   |        **5.26** |      **6.40** |       **6.40** |  +3.48 |   0.00 |
+| [`emdash-cms/emdash`](https://github.com/emdash-cms/emdash)           | ai         | `main@3dd1a1f`   |        **4.15** |      **5.06** |       **5.06** |  +3.04 |   0.00 |
+| [`cloudflare/vinext`](https://github.com/cloudflare/vinext)           | ai         | `main@67a929b`   |        **3.06** |      **3.73** |       **3.73** |  +1.80 |   0.00 |
+| [`modem-dev/hunk`](https://github.com/modem-dev/hunk)                 | ai         | `main@a6aa1cb`   |        **2.95** |      **3.59** |       **3.59** |  +2.08 |   0.00 |
+| [`vitejs/vite`](https://github.com/vitejs/vite)                       | mature-oss | `main@640202a`   |        **1.71** |      **2.08** |       **2.08** |  +0.56 |   0.00 |
+| [`withastro/astro`](https://github.com/withastro/astro)               | mature-oss | `main@1058428`   |        **1.69** |      **2.05** |       **2.05** |  +0.59 |   0.00 |
+| [`egoist/tsup`](https://github.com/egoist/tsup)                       | mature-oss | `main@b906f86`   |        **1.25** |      **1.52** |       **1.52** |  +0.60 |   0.00 |
+| [`pmndrs/zustand`](https://github.com/pmndrs/zustand)                 | mature-oss | `main@95d3f33`   |        **1.12** |      **1.36** |       **1.38** |  -0.02 |  -0.02 |
+| [`payloadcms/payload`](https://github.com/payloadcms/payload)         | mature-oss | `main@0ceba02`   |        **1.00** |      **1.22** |       **1.34** |  -0.13 |  -0.13 |
+| [`sindresorhus/execa`](https://github.com/sindresorhus/execa)         | mature-oss | `main@f3a2e84`   |        **0.82** |      **0.99** |       **0.99** |  +0.11 |   0.00 |
+| [`mikaelbr/node-notifier`](https://github.com/mikaelbr/node-notifier) | mature-oss | `master@b36c237` |        **0.78** |      **0.95** |       **0.95** |  +0.53 |   0.00 |
+| [`vercel/hyper`](https://github.com/vercel/hyper)                     | mature-oss | `canary@2a7bb18` |        **0.74** |      **0.90** |       **0.90** |  +0.49 |   0.00 |
+| [`umami-software/umami`](https://github.com/umami-software/umami)     | mature-oss | `master@c78ff36` |        **0.70** |      **0.85** |       **1.04** |  -0.19 |  -0.19 |
 
 Legend:
 
@@ -207,7 +207,7 @@ Legend:
 - `Δ prev` = latest pinned - previous week's pinned score
 - `Δ peak` = latest pinned - highest pinned score, so more negative means the repo is below its own historical high
 
-For exact pinned SHAs and the full per-metric breakdowns, see the saved snapshot and pinned benchmark report.
+For exact pinned SHAs, the current default-pack medians, and the full per-metric breakdowns, see the saved snapshot and pinned benchmark report.
 
 Full benchmark assets:
 

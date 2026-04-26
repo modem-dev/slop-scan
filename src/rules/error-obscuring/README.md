@@ -81,7 +81,7 @@ Generic rethrows are still noisy, but scored slightly lower than silent default-
 
 Small pinned rule benchmark ([manifest](../../../benchmarks/sets/rule-signal-mini.json)):
 
-- Signal rank: **#4 of 11**
+- Signal rank: **#8 of 9**
 - Signal score: **0.66 / 1.00**
 - Best separating metric: **findings / file (0.83)**
 - Hit rate: **5/6 AI repos** vs **5/5 mature OSS repos**

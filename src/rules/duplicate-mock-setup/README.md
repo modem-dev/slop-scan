@@ -65,7 +65,7 @@ Each duplicate setup cluster adds `1 + 0.5 * (fileCount - 2)` for the current fi
 
 Small pinned rule benchmark ([manifest](../../../benchmarks/sets/rule-signal-mini.json)):
 
-- Signal rank: **#5 of 11**
+- Signal rank: **#9 of 9**
 - Signal score: **0.63 / 1.00**
 - Best separating metric: **findings / file (0.70)**
 - Hit rate: **3/6 AI repos** vs **1/5 mature OSS repos**

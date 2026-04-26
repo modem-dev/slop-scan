@@ -69,7 +69,7 @@ Each flagged catch uses the shared try/catch scoring helper, then the file total
 
 Small pinned rule benchmark ([manifest](../../../benchmarks/sets/rule-signal-mini.json)):
 
-- Signal rank: **#1 of 11**
+- Signal rank: **#3 of 9**
 - Signal score: **0.72 / 1.00**
 - Best separating metric: **findings / file (0.87)**
 - Hit rate: **6/6 AI repos** vs **3/5 mature OSS repos**

@@ -61,9 +61,10 @@ The file total is capped at `8`.
 
 ## Benchmark signal
 
-Full pinned benchmark against the exact `known-ai-vs-solid-oss` cohort:
+Small pinned rule benchmark ([manifest](../../../benchmarks/sets/rule-signal-mini.json)):
 
-- Signal score: **0.93 / 1.00**
-- Best separating metric: **findings / file (0.93)**
-- Hit rate: **8/9 AI repos** vs **2/9 mature OSS repos**
-- Full results: [experimental rule report](../../../reports/autoresearch-candidate-rule.md#apigeneric-status-envelopes)
+- Signal rank: **#2 of 9**
+- Signal score: **0.76 / 1.00**
+- Best separating metric: **findings / file (0.88)**
+- Hit rate: **5/6 AI repos** vs **2/5 mature OSS repos**
+- Full results: [rule signal report](../../../reports/rule-signal-mini.md#apigeneric-status-envelopes)
