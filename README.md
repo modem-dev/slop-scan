@@ -289,9 +289,9 @@ For local development, validation, and benchmark reproduction, see [CONTRIBUTING
 
 ## Sponsor
 
-Sponsored by [Modem](https://modem.dev?utm_source=github&utm_medium=oss&utm_campaign=slop-scan).
+Sponsored by [Modem](https://modem.dev?utm_source=github&utm_medium=oss&utm_campaign=oss_slop_scan&utm_content=readme_footer).
 
-<a href="https://modem.dev?utm_source=github&utm_medium=oss&utm_campaign=slop-scan">
+<a href="https://modem.dev?utm_source=github&utm_medium=oss&utm_campaign=oss_slop_scan&utm_content=readme_footer">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://modem.dev/images/logo/svg/modem-combined-white.svg">
     <source media="(prefers-color-scheme: light)" srcset="https://modem.dev/images/logo/svg/modem-combined-black.svg">
