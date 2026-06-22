@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "benchmarkSetId": "known-ai-vs-solid-oss",
   "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-  "generatedAt": "2026-06-15T14:04:43.057Z",
+  "generatedAt": "2026-06-22T13:51:21.418Z",
   "baseline": {
     "snapshotPath": "benchmarks/results/known-ai-vs-solid-oss.json",
     "generatedAt": "2026-04-26T18:00:48.544Z",
@@ -20,7 +20,7 @@
   "analyzers": [
     {
       "version": "0.4.0",
-      "commit": "4deb423d64cff6c72ef880c7817c02f2844d283a",
+      "commit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
       "repoCount": 18
     }
   ],
@@ -28,14 +28,14 @@
     "explicit-ai": {
       "repoCount": 9,
       "medians": {
-        "scorePerFile": 1.2750390296625436,
-        "scorePerKloc": 11.165228236625333,
-        "scorePerFunction": 0.27929547088425605,
+        "scorePerFile": 1.2844748858447486,
+        "scorePerKloc": 11.314460656205922,
+        "scorePerFunction": 0.2831494132072168,
         "findingsPerFile": 0.3333333333333333,
-        "findingsPerKloc": 3.1522071759904344,
+        "findingsPerKloc": 3.1728660176852794,
         "findingsPerFunction": 0.07861635220125786
       },
-      "blendedScoreMedian": 5.583933360085907
+      "blendedScoreMedian": 5.6947696836123685
     },
     "mature-oss": {
       "repoCount": 9,
@@ -43,7 +43,7 @@
         "scorePerFile": 0.14583333333333334,
         "scorePerKloc": 1.716738197424893,
         "scorePerFunction": 0.05049603174603175,
-        "findingsPerFile": 0.05077860528097495,
+        "findingsPerFile": 0.05074424898511502,
         "findingsPerKloc": 0.6002581109877246,
         "findingsPerFunction": 0.023255813953488372
       },
@@ -55,9 +55,9 @@
       "id": "gstack",
       "repo": "garrytan/gstack",
       "cohort": "explicit-ai",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -105,52 +105,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "gstack",
-        "repo": "garrytan/gstack",
-        "cohort": "explicit-ai",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "45cc95d5f484ebc0869691939a20a42e93300bd4",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 673,
-          "directoryCount": 31,
-          "findingCount": 296,
-          "repoScore": 1110.8,
-          "physicalLineCount": 166118,
-          "logicalLineCount": 58706,
-          "functionCount": 2404,
-          "normalized": {
-            "scorePerFile": 1.650520059435364,
-            "scorePerKloc": 18.921404967124314,
-            "scorePerFunction": 0.462063227953411,
-            "findingsPerFile": 0.4398216939078752,
-            "findingsPerKloc": 5.042074063979832,
-            "findingsPerFunction": 0.12312811980033278
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 8.93317969251532,
-          "vsPinnedBaseline": 11.088374624028477
-        },
-        "ruleCounts": {
-          "defensive.empty-catch": 162,
-          "defensive.error-obscuring": 62,
-          "structure.pass-through-wrappers": 26,
-          "defensive.promise-default-fallbacks": 16,
-          "defensive.error-swallowing": 11,
-          "defensive.stringified-unknown-errors": 11,
-          "api.generic-status-envelopes": 5,
-          "types.generic-record-casts": 3
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "gstack",
@@ -184,6 +138,52 @@
         },
         "ruleCounts": {
           "defensive.empty-catch": 170,
+          "defensive.error-obscuring": 65,
+          "structure.pass-through-wrappers": 27,
+          "defensive.promise-default-fallbacks": 16,
+          "defensive.error-swallowing": 12,
+          "defensive.stringified-unknown-errors": 11,
+          "api.generic-status-envelopes": 5,
+          "types.generic-record-casts": 3
+        }
+      },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "gstack",
+        "repo": "garrytan/gstack",
+        "cohort": "explicit-ai",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "9fd03fae9e74f5daa7a138366aca8f86c7367c5c",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 701,
+          "directoryCount": 33,
+          "findingCount": 310,
+          "repoScore": 1158.7999999999997,
+          "physicalLineCount": 174558,
+          "logicalLineCount": 61725,
+          "functionCount": 2515,
+          "normalized": {
+            "scorePerFile": 1.653067047075606,
+            "scorePerKloc": 18.773592547590113,
+            "scorePerFunction": 0.460755467196819,
+            "findingsPerFile": 0.442225392296719,
+            "findingsPerKloc": 5.022276225192385,
+            "findingsPerFunction": 0.12326043737574553
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 8.931750652963684,
+          "vsPinnedBaseline": 11.076285972008849
+        },
+        "ruleCounts": {
+          "defensive.empty-catch": 171,
           "defensive.error-obscuring": 65,
           "structure.pass-through-wrappers": 27,
           "defensive.promise-default-fallbacks": 16,
@@ -304,46 +304,54 @@
           "blendedVsPinnedBaseline": 11.141086874161092,
           "repoScore": 1156.8999999999999,
           "findingCount": 309
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 8.931750652963684,
+          "blendedVsPinnedBaseline": 11.076285972008849,
+          "repoScore": 1158.7999999999997,
+          "findingCount": 310
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 2.8367861818739337,
-        "blendedVsPinnedBaseline": 4.770152760328425,
-        "repoScore": 951.7999999999998,
-        "findingCount": 262,
-        "fileCount": 620,
-        "logicalLineCount": 51524,
-        "functionCount": 2213,
-        "scorePerFile": -0.9720373227536563,
-        "scorePerKloc": -3.2143236075417825,
-        "scorePerFunction": -0.24279022979041115,
-        "findingsPerFile": -0.15987069282198219,
-        "findingsPerKloc": -0.01397859117821465,
-        "findingsPerFunction": -0.03810947158086582
+        "blendedVsCurrentCohort": 2.8303365259422817,
+        "blendedVsPinnedBaseline": 4.705351858176182,
+        "repoScore": 953.6999999999997,
+        "findingCount": 263,
+        "fileCount": 623,
+        "logicalLineCount": 52512,
+        "functionCount": 2224,
+        "scorePerFile": -0.9764201324115744,
+        "scorePerKloc": -3.4884285096116763,
+        "scorePerFunction": -0.24405552936675506,
+        "findingsPerFile": -0.16033871026738356,
+        "findingsPerKloc": -0.07921080400548774,
+        "findingsPerFunction": -0.03825159011566341
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": 0.005020616380015497,
-        "blendedVsPinnedBaseline": 0.05271225013261471,
-        "repoScore": 46.09999999999991,
-        "findingCount": 13,
-        "fileCount": 25,
-        "logicalLineCount": 2031,
-        "functionCount": 100,
-        "scorePerFile": 0.006929797298160123,
-        "scorePerKloc": 0.12629248253569259,
-        "scorePerFunction": -0.00004246118024808787,
-        "findingsPerFile": 0.00287171583424517,
-        "findingsPerKloc": 0.045434374039826864,
-        "findingsPerFunction": 0.00027443611021034375
+        "blendedVsCurrentCohort": -0.006449655931652032,
+        "blendedVsPinnedBaseline": -0.06480090215224266,
+        "repoScore": 1.8999999999998636,
+        "findingCount": 1,
+        "fileCount": 3,
+        "logicalLineCount": 988,
+        "functionCount": 11,
+        "scorePerFile": -0.004382809657918152,
+        "scorePerKloc": -0.2741049020698938,
+        "scorePerFunction": -0.0012652995763439145,
+        "findingsPerFile": -0.0004680174454013697,
+        "findingsPerKloc": -0.0652322128272731,
+        "findingsPerFunction": -0.00014211853479759173
       }
     },
     {
       "id": "fulling",
       "repo": "FullAgent/fulling",
       "cohort": "explicit-ai",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -393,52 +401,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "fulling",
-        "repo": "FullAgent/fulling",
-        "cohort": "explicit-ai",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "a524c5ec86518c8d415bcb949da6c81879bdb956",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 219,
-          "directoryCount": 78,
-          "findingCount": 64,
-          "repoScore": 281.29999999999995,
-          "physicalLineCount": 26800,
-          "logicalLineCount": 12150,
-          "functionCount": 574,
-          "normalized": {
-            "scorePerFile": 1.2844748858447486,
-            "scorePerKloc": 23.152263374485592,
-            "scorePerFunction": 0.49006968641114973,
-            "findingsPerFile": 0.2922374429223744,
-            "findingsPerKloc": 5.267489711934156,
-            "findingsPerFunction": 0.11149825783972125
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 8.281653251574008,
-          "vsPinnedBaseline": 10.279662664425759
-        },
-        "ruleCounts": {
-          "api.generic-status-envelopes": 31,
-          "defensive.error-swallowing": 11,
-          "defensive.stringified-unknown-errors": 6,
-          "defensive.error-obscuring": 5,
-          "structure.pass-through-wrappers": 4,
-          "defensive.empty-catch": 3,
-          "tests.duplicate-mock-setup": 3,
-          "defensive.promise-default-fallbacks": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "fulling",
@@ -481,9 +443,55 @@
           "defensive.promise-default-fallbacks": 1
         }
       },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "fulling",
+        "repo": "FullAgent/fulling",
+        "cohort": "explicit-ai",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "a524c5ec86518c8d415bcb949da6c81879bdb956",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 219,
+          "directoryCount": 78,
+          "findingCount": 64,
+          "repoScore": 281.29999999999995,
+          "physicalLineCount": 26800,
+          "logicalLineCount": 12150,
+          "functionCount": 574,
+          "normalized": {
+            "scorePerFile": 1.2844748858447486,
+            "scorePerKloc": 23.152263374485592,
+            "scorePerFunction": 0.49006968641114973,
+            "findingsPerFile": 0.2922374429223744,
+            "findingsPerKloc": 5.267489711934156,
+            "findingsPerFunction": 0.11149825783972125
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 8.289365582223148,
+          "vsPinnedBaseline": 10.279662664425759
+        },
+        "ruleCounts": {
+          "api.generic-status-envelopes": 31,
+          "defensive.error-swallowing": 11,
+          "defensive.stringified-unknown-errors": 6,
+          "defensive.error-obscuring": 5,
+          "structure.pass-through-wrappers": 4,
+          "defensive.empty-catch": 3,
+          "tests.duplicate-mock-setup": 3,
+          "defensive.promise-default-fallbacks": 1
+        }
+      },
       "highest": {
-        "periodStart": "2026-06-15",
-        "recordedAt": "2026-06-15T14:04:43.057Z",
+        "periodStart": "2026-06-22",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
         "defaultBranch": "main",
         "ref": "a524c5ec86518c8d415bcb949da6c81879bdb956",
         "blendedVsPinnedBaseline": 10.279662664425759
@@ -592,10 +600,18 @@
           "blendedVsPinnedBaseline": 10.279662664425759,
           "repoScore": 281.29999999999995,
           "findingCount": 64
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 8.289365582223148,
+          "blendedVsPinnedBaseline": 10.279662664425759,
+          "repoScore": 281.29999999999995,
+          "findingCount": 64
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 6.178487073622336,
+        "blendedVsCurrentCohort": 6.220750282413115,
         "blendedVsPinnedBaseline": 8.119669668115296,
         "repoScore": 170.20833333333326,
         "findingCount": 31,
@@ -610,7 +626,7 @@
         "findingsPerFunction": 0.053704912830964686
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.03455087814163882,
+        "blendedVsCurrentCohort": 0.042263208790778606,
         "blendedVsPinnedBaseline": 0,
         "repoScore": 0,
         "findingCount": 0,
@@ -629,9 +645,9 @@
       "id": "agent-ci",
       "repo": "redwoodjs/agent-ci",
       "cohort": "explicit-ai",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -678,52 +694,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "agent-ci",
-        "repo": "redwoodjs/agent-ci",
-        "cohort": "explicit-ai",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "c3316730b304bfbded573c9a792e38da73fe4402",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 181,
-          "directoryCount": 43,
-          "findingCount": 70,
-          "repoScore": 237.9,
-          "physicalLineCount": 35204,
-          "logicalLineCount": 16943,
-          "functionCount": 659,
-          "normalized": {
-            "scorePerFile": 1.314364640883978,
-            "scorePerKloc": 14.041196954494481,
-            "scorePerFunction": 0.3610015174506829,
-            "findingsPerFile": 0.3867403314917127,
-            "findingsPerKloc": 4.131499734403588,
-            "findingsPerFunction": 0.1062215477996965
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 7.255172773391387,
-          "vsPinnedBaseline": 9.00553626395973
-        },
-        "ruleCounts": {
-          "defensive.empty-catch": 29,
-          "defensive.error-obscuring": 15,
-          "defensive.promise-default-fallbacks": 9,
-          "defensive.error-swallowing": 6,
-          "structure.pass-through-wrappers": 4,
-          "tests.duplicate-mock-setup": 4,
-          "defensive.stringified-unknown-errors": 2,
-          "api.generic-status-envelopes": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "agent-ci",
@@ -753,6 +723,52 @@
         },
         "blended": {
           "vsCurrentCohort": 7.228961758644555,
+          "vsPinnedBaseline": 9.010593651934057
+        },
+        "ruleCounts": {
+          "defensive.empty-catch": 29,
+          "defensive.error-obscuring": 15,
+          "defensive.promise-default-fallbacks": 9,
+          "defensive.error-swallowing": 6,
+          "structure.pass-through-wrappers": 5,
+          "tests.duplicate-mock-setup": 4,
+          "defensive.stringified-unknown-errors": 2,
+          "api.generic-status-envelopes": 1
+        }
+      },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "agent-ci",
+        "repo": "redwoodjs/agent-ci",
+        "cohort": "explicit-ai",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "37a094e5ba4bc7959683ca4e8b522875c4929791",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 182,
+          "directoryCount": 43,
+          "findingCount": 71,
+          "repoScore": 241.1,
+          "physicalLineCount": 35681,
+          "logicalLineCount": 17141,
+          "functionCount": 674,
+          "normalized": {
+            "scorePerFile": 1.3247252747252747,
+            "scorePerKloc": 14.06569044979873,
+            "scorePerFunction": 0.35771513353115725,
+            "findingsPerFile": 0.3901098901098901,
+            "findingsPerKloc": 4.14211539583455,
+            "findingsPerFunction": 0.10534124629080119
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 7.266007390711687,
           "vsPinnedBaseline": 9.010593651934057
         },
         "ruleCounts": {
@@ -877,10 +893,18 @@
           "blendedVsPinnedBaseline": 9.010593651934057,
           "repoScore": 241.1,
           "findingCount": 71
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 7.266007390711687,
+          "blendedVsPinnedBaseline": 9.010593651934057,
+          "repoScore": 241.1,
+          "findingCount": 71
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 3.4911295185044633,
+        "blendedVsCurrentCohort": 3.5281751505715953,
         "blendedVsPinnedBaseline": 5.1076487878854,
         "repoScore": 164.21428571428572,
         "findingCount": 47,
@@ -895,28 +919,28 @@
         "findingsPerFunction": -0.02509353631789446
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.026211014746832184,
-        "blendedVsPinnedBaseline": 0.005057387974327199,
-        "repoScore": 3.1999999999999886,
-        "findingCount": 1,
-        "fileCount": 1,
-        "logicalLineCount": 198,
-        "functionCount": 15,
-        "scorePerFile": 0.010360633841296707,
-        "scorePerKloc": 0.024493495304248825,
-        "scorePerFunction": -0.003286383919525626,
-        "findingsPerFile": 0.003369558618177393,
-        "findingsPerKloc": 0.010615661430961154,
-        "findingsPerFunction": -0.0008803015088953148
+        "blendedVsCurrentCohort": 0.03704563206713196,
+        "blendedVsPinnedBaseline": 0,
+        "repoScore": 0,
+        "findingCount": 0,
+        "fileCount": 0,
+        "logicalLineCount": 0,
+        "functionCount": 0,
+        "scorePerFile": 0,
+        "scorePerKloc": 0,
+        "scorePerFunction": 0,
+        "findingsPerFile": 0,
+        "findingsPerKloc": 0,
+        "findingsPerFunction": 0
       }
     },
     {
       "id": "devworkbench",
       "repo": "jiayun/DevWorkbench",
       "cohort": "explicit-ai",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -964,49 +988,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "devworkbench",
-        "repo": "jiayun/DevWorkbench",
-        "cohort": "explicit-ai",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "ea50862107c377b0cdd6e508073ad0330b367576",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 32,
-          "directoryCount": 7,
-          "findingCount": 15,
-          "repoScore": 40.300000000000004,
-          "physicalLineCount": 9408,
-          "logicalLineCount": 2986,
-          "functionCount": 147,
-          "normalized": {
-            "scorePerFile": 1.2593750000000001,
-            "scorePerKloc": 13.496316141995981,
-            "scorePerFunction": 0.2741496598639456,
-            "findingsPerFile": 0.46875,
-            "findingsPerKloc": 5.023442732752846,
-            "findingsPerFunction": 0.10204081632653061
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 7.243226487270663,
-          "vsPinnedBaseline": 8.990707848946045
-        },
-        "ruleCounts": {
-          "defensive.error-swallowing": 10,
-          "defensive.stringified-unknown-errors": 2,
-          "defensive.empty-catch": 1,
-          "defensive.promise-default-fallbacks": 1,
-          "structure.pass-through-wrappers": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "devworkbench",
@@ -1046,9 +1027,52 @@
           "structure.pass-through-wrappers": 1
         }
       },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "devworkbench",
+        "repo": "jiayun/DevWorkbench",
+        "cohort": "explicit-ai",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "e524b1f9105506f86b4961e5dd14cf5b97d239b8",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 32,
+          "directoryCount": 7,
+          "findingCount": 15,
+          "repoScore": 40.300000000000004,
+          "physicalLineCount": 9408,
+          "logicalLineCount": 2986,
+          "functionCount": 147,
+          "normalized": {
+            "scorePerFile": 1.2593750000000001,
+            "scorePerKloc": 13.496316141995981,
+            "scorePerFunction": 0.2741496598639456,
+            "findingsPerFile": 0.46875,
+            "findingsPerKloc": 5.023442732752846,
+            "findingsPerFunction": 0.10204081632653061
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 7.249971777847254,
+          "vsPinnedBaseline": 8.990707848946045
+        },
+        "ruleCounts": {
+          "defensive.error-swallowing": 10,
+          "defensive.stringified-unknown-errors": 2,
+          "defensive.empty-catch": 1,
+          "defensive.promise-default-fallbacks": 1,
+          "structure.pass-through-wrappers": 1
+        }
+      },
       "highest": {
-        "periodStart": "2026-06-15",
-        "recordedAt": "2026-06-15T14:04:43.057Z",
+        "periodStart": "2026-06-22",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
         "defaultBranch": "main",
         "ref": "e524b1f9105506f86b4961e5dd14cf5b97d239b8",
         "blendedVsPinnedBaseline": 8.990707848946045
@@ -1157,10 +1181,18 @@
           "blendedVsPinnedBaseline": 8.990707848946045,
           "repoScore": 40.300000000000004,
           "findingCount": 15
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 7.249971777847254,
+          "blendedVsPinnedBaseline": 8.990707848946045,
+          "repoScore": 40.300000000000004,
+          "findingCount": 15
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 3.9524982803226143,
+        "blendedVsCurrentCohort": 3.9894621550528484,
         "blendedVsPinnedBaseline": 5.5861705479382024,
         "repoScore": 8.166666666666671,
         "findingCount": 1,
@@ -1175,7 +1207,7 @@
         "findingsPerFunction": 0.00615040536762651
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.030218584153643313,
+        "blendedVsCurrentCohort": 0.0369638747302341,
         "blendedVsPinnedBaseline": 0,
         "repoScore": 0,
         "findingCount": 0,
@@ -1194,9 +1226,9 @@
       "id": "openclaw",
       "repo": "openclaw/openclaw",
       "cohort": "explicit-ai",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -1249,53 +1281,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "openclaw",
-        "repo": "openclaw/openclaw",
-        "cohort": "explicit-ai",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "a04de1a0ceacb658f2371da1e3a1fc5b4f5fec78",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 16512,
-          "directoryCount": 646,
-          "findingCount": 5890,
-          "repoScore": 20805.100000000006,
-          "physicalLineCount": 4389943,
-          "logicalLineCount": 1850445,
-          "functionCount": 89875,
-          "normalized": {
-            "scorePerFile": 1.2599987887596902,
-            "scorePerKloc": 11.243295531615372,
-            "scorePerFunction": 0.23148929068150215,
-            "findingsPerFile": 0.35671027131782945,
-            "findingsPerKloc": 3.1830181388801075,
-            "findingsPerFunction": 0.06553546592489569
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 5.6189769148183375,
-          "vsPinnedBaseline": 6.974596188575056
-        },
-        "ruleCounts": {
-          "tests.duplicate-mock-setup": 1489,
-          "structure.pass-through-wrappers": 1359,
-          "defensive.error-obscuring": 829,
-          "defensive.promise-default-fallbacks": 534,
-          "api.generic-status-envelopes": 527,
-          "defensive.empty-catch": 483,
-          "defensive.stringified-unknown-errors": 357,
-          "types.generic-record-casts": 283,
-          "defensive.error-swallowing": 29
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "openclaw",
@@ -1339,12 +1324,59 @@
           "defensive.error-swallowing": 29
         }
       },
-      "highest": {
-        "periodStart": "2026-06-08",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "openclaw",
+        "repo": "openclaw/openclaw",
+        "cohort": "explicit-ai",
+        "scanMode": "default-branch-as-of-recorded-at",
         "defaultBranch": "main",
-        "ref": "a04de1a0ceacb658f2371da1e3a1fc5b4f5fec78",
-        "blendedVsPinnedBaseline": 6.974596188575056
+        "ref": "d3781cc4b8ec9f572450f16f11fbcc2d8b2891f9",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 16909,
+          "directoryCount": 655,
+          "findingCount": 6210,
+          "repoScore": 22144.900000000012,
+          "physicalLineCount": 4752289,
+          "logicalLineCount": 1957221,
+          "functionCount": 95024,
+          "normalized": {
+            "scorePerFile": 1.3096516647938974,
+            "scorePerKloc": 11.314460656205922,
+            "scorePerFunction": 0.23304533591513735,
+            "findingsPerFile": 0.3672600390324679,
+            "findingsPerKloc": 3.1728660176852794,
+            "findingsPerFunction": 0.06535191109614413
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 5.6947696836123685,
+          "vsPinnedBaseline": 7.062097903448203
+        },
+        "ruleCounts": {
+          "tests.duplicate-mock-setup": 1564,
+          "structure.pass-through-wrappers": 1402,
+          "defensive.error-obscuring": 884,
+          "defensive.promise-default-fallbacks": 575,
+          "api.generic-status-envelopes": 544,
+          "defensive.empty-catch": 520,
+          "defensive.stringified-unknown-errors": 392,
+          "types.generic-record-casts": 299,
+          "defensive.error-swallowing": 30
+        }
+      },
+      "highest": {
+        "periodStart": "2026-06-22",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "defaultBranch": "main",
+        "ref": "d3781cc4b8ec9f572450f16f11fbcc2d8b2891f9",
+        "blendedVsPinnedBaseline": 7.062097903448203
       },
       "series": [
         {
@@ -1450,46 +1482,54 @@
           "blendedVsPinnedBaseline": 6.960135655309789,
           "repoScore": 21234.5,
           "findingCount": 5995
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 5.6947696836123685,
+          "blendedVsPinnedBaseline": 7.062097903448203,
+          "repoScore": 22144.900000000012,
+          "findingCount": 6210
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 2.7768646137236566,
-        "blendedVsPinnedBaseline": 4.029069239596218,
-        "repoScore": 13511.898111037162,
-        "findingCount": 3654,
-        "fileCount": 8964,
-        "logicalLineCount": 1142087,
-        "functionCount": 62521,
-        "scorePerFile": 0.2707995122421485,
-        "scorePerKloc": 1.000633217227188,
-        "scorePerFunction": -0.02881851989710399,
-        "findingsPerFile": 0.055552253522820394,
-        "findingsPerKloc": 0.07095071831657895,
-        "findingsPerFunction": -0.013520289709024344
+        "blendedVsCurrentCohort": 2.887700937250118,
+        "blendedVsPinnedBaseline": 4.131031487734632,
+        "repoScore": 14422.298111037175,
+        "findingCount": 3869,
+        "fileCount": 9219,
+        "logicalLineCount": 1197466,
+        "functionCount": 65172,
+        "scorePerFile": 0.3054121473735023,
+        "scorePerKloc": 1.1498656368077764,
+        "scorePerFunction": -0.025650962120600224,
+        "findingsPerFile": 0.06283871263454854,
+        "findingsPerKloc": 0.09160956001142395,
+        "findingsPerFunction": -0.013068295255189114
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.03504355473243059,
-        "blendedVsPinnedBaseline": -0.014460533265267195,
-        "repoScore": 429.3999999999942,
-        "findingCount": 105,
-        "fileCount": 142,
-        "logicalLineCount": 51397,
-        "functionCount": 2498,
-        "scorePerFile": 0.015040240902853386,
-        "scorePerKloc": -0.0780672949900385,
-        "scorePerFunction": -0.001611512542868565,
-        "findingsPerFile": 0.0032633086029102976,
-        "findingsPerKloc": -0.03081096288967311,
-        "findingsPerFunction": -0.0006355492825867864
+        "blendedVsCurrentCohort": 0.11083632352646156,
+        "blendedVsPinnedBaseline": 0.10196224813841415,
+        "repoScore": 910.4000000000124,
+        "findingCount": 215,
+        "fileCount": 255,
+        "logicalLineCount": 55379,
+        "functionCount": 2651,
+        "scorePerFile": 0.03461263513135382,
+        "scorePerKloc": 0.14923241958058853,
+        "scorePerFunction": 0.0031675577765037655,
+        "findingsPerFile": 0.00728645911172815,
+        "findingsPerKloc": 0.020658841694844998,
+        "findingsPerFunction": 0.0004519944538352305
       }
     },
     {
       "id": "openusage",
       "repo": "robinebers/openusage",
       "cohort": "explicit-ai",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -1539,51 +1579,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "openusage",
-        "repo": "robinebers/openusage",
-        "cohort": "explicit-ai",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "009b409c73af813b0c119c66071999b39d7920e2",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 148,
-          "directoryCount": 31,
-          "findingCount": 48,
-          "repoScore": 203.7,
-          "physicalLineCount": 39867,
-          "logicalLineCount": 27275,
-          "functionCount": 627,
-          "normalized": {
-            "scorePerFile": 1.3763513513513512,
-            "scorePerKloc": 7.468377635197067,
-            "scorePerFunction": 0.3248803827751196,
-            "findingsPerFile": 0.32432432432432434,
-            "findingsPerKloc": 1.7598533455545373,
-            "findingsPerFunction": 0.07655502392344497
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 5.15748230024051,
-          "vsPinnedBaseline": 6.401762623198772
-        },
-        "ruleCounts": {
-          "tests.duplicate-mock-setup": 30,
-          "structure.pass-through-wrappers": 5,
-          "defensive.empty-catch": 4,
-          "defensive.error-obscuring": 4,
-          "defensive.error-swallowing": 3,
-          "api.generic-status-envelopes": 1,
-          "defensive.promise-default-fallbacks": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "openusage",
@@ -1625,9 +1620,54 @@
           "defensive.promise-default-fallbacks": 1
         }
       },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "openusage",
+        "repo": "robinebers/openusage",
+        "cohort": "explicit-ai",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "d88abd16b0d4d43bcab98142676e20230a93bd5b",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 150,
+          "directoryCount": 31,
+          "findingCount": 50,
+          "repoScore": 213.2,
+          "physicalLineCount": 40741,
+          "logicalLineCount": 28039,
+          "functionCount": 636,
+          "normalized": {
+            "scorePerFile": 1.4213333333333333,
+            "scorePerKloc": 7.603694853596775,
+            "scorePerFunction": 0.3352201257861635,
+            "findingsPerFile": 0.3333333333333333,
+            "findingsPerKloc": 1.7832305003744784,
+            "findingsPerFunction": 0.07861635220125786
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 5.291744163122951,
+          "vsPinnedBaseline": 6.562304963362344
+        },
+        "ruleCounts": {
+          "tests.duplicate-mock-setup": 31,
+          "structure.pass-through-wrappers": 5,
+          "defensive.empty-catch": 4,
+          "defensive.error-obscuring": 4,
+          "defensive.error-swallowing": 4,
+          "api.generic-status-envelopes": 1,
+          "defensive.promise-default-fallbacks": 1
+        }
+      },
       "highest": {
-        "periodStart": "2026-06-15",
-        "recordedAt": "2026-06-15T14:04:43.057Z",
+        "periodStart": "2026-06-22",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
         "defaultBranch": "main",
         "ref": "d88abd16b0d4d43bcab98142676e20230a93bd5b",
         "blendedVsPinnedBaseline": 6.562304963362344
@@ -1736,10 +1776,18 @@
           "blendedVsPinnedBaseline": 6.562304963362344,
           "repoScore": 213.2,
           "findingCount": 50
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 5.291744163122951,
+          "blendedVsPinnedBaseline": 6.562304963362344,
+          "repoScore": 213.2,
+          "findingCount": 50
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 2.333150799896117,
+        "blendedVsCurrentCohort": 2.3601306798658284,
         "blendedVsPinnedBaseline": 3.5011922507636273,
         "repoScore": 37,
         "findingCount": 4,
@@ -1754,28 +1802,28 @@
         "findingsPerFunction": -0.016229008623484406
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": 0.10728198291273028,
-        "blendedVsPinnedBaseline": 0.1605423401635715,
-        "repoScore": 9.5,
-        "findingCount": 2,
-        "fileCount": 2,
-        "logicalLineCount": 764,
-        "functionCount": 9,
-        "scorePerFile": 0.04498198198198211,
-        "scorePerKloc": 0.13531721839970867,
-        "scorePerFunction": 0.0103397430110439,
-        "findingsPerFile": 0.009009009009008973,
-        "findingsPerKloc": 0.02337715481994107,
-        "findingsPerFunction": 0.002061328277812885
+        "blendedVsCurrentCohort": 0.026979879969711185,
+        "blendedVsPinnedBaseline": 0,
+        "repoScore": 0,
+        "findingCount": 0,
+        "fileCount": 0,
+        "logicalLineCount": 0,
+        "functionCount": 0,
+        "scorePerFile": 0,
+        "scorePerKloc": 0,
+        "scorePerFunction": 0,
+        "findingsPerFile": 0,
+        "findingsPerKloc": 0,
+        "findingsPerFunction": 0
       }
     },
     {
       "id": "emdash",
       "repo": "emdash-cms/emdash",
       "cohort": "explicit-ai",
-      "pointCount": 11,
+      "pointCount": 12,
       "firstRecordedAt": "2026-04-06T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -1827,53 +1875,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "emdash",
-        "repo": "emdash-cms/emdash",
-        "cohort": "explicit-ai",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "1986dd45427ecd59da28674affb66e892fa47307",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 1662,
-          "directoryCount": 435,
-          "findingCount": 397,
-          "repoScore": 1490.0000000000005,
-          "physicalLineCount": 490950,
-          "logicalLineCount": 226839,
-          "functionCount": 5449,
-          "normalized": {
-            "scorePerFile": 0.8965102286401928,
-            "scorePerKloc": 6.568535392943896,
-            "scorePerFunction": 0.2734446687465591,
-            "findingsPerFile": 0.2388688327316486,
-            "findingsPerKloc": 1.750139967113239,
-            "findingsPerFunction": 0.0728574050284456
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 4.300505313847547,
-          "vsPinnedBaseline": 5.338033671540294
-        },
-        "ruleCounts": {
-          "defensive.error-obscuring": 60,
-          "api.generic-status-envelopes": 55,
-          "defensive.empty-catch": 55,
-          "defensive.promise-default-fallbacks": 53,
-          "structure.pass-through-wrappers": 50,
-          "tests.duplicate-mock-setup": 45,
-          "defensive.stringified-unknown-errors": 36,
-          "types.generic-record-casts": 22,
-          "defensive.error-swallowing": 21
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "emdash",
@@ -1917,12 +1918,59 @@
           "types.generic-record-casts": 22
         }
       },
-      "highest": {
-        "periodStart": "2026-06-15",
-        "recordedAt": "2026-06-15T14:04:43.057Z",
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "emdash",
+        "repo": "emdash-cms/emdash",
+        "cohort": "explicit-ai",
+        "scanMode": "default-branch-as-of-recorded-at",
         "defaultBranch": "main",
-        "ref": "1ec2bfd442957857a423b56e64ea182190371255",
-        "blendedVsPinnedBaseline": 5.437842227513337
+        "ref": "ca47da485ddcf46f7fa7b8efa15c3c20a11c2300",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 1736,
+          "directoryCount": 445,
+          "findingCount": 429,
+          "repoScore": 1616.5000000000007,
+          "physicalLineCount": 505398,
+          "logicalLineCount": 232668,
+          "functionCount": 5709,
+          "normalized": {
+            "scorePerFile": 0.9311635944700465,
+            "scorePerKloc": 6.947667921673804,
+            "scorePerFunction": 0.2831494132072168,
+            "findingsPerFile": 0.24711981566820276,
+            "findingsPerKloc": 1.8438289751921193,
+            "findingsPerFunction": 0.07514450867052024
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 4.484612219363219,
+          "vsPinnedBaseline": 5.5613786529911815
+        },
+        "ruleCounts": {
+          "defensive.error-obscuring": 62,
+          "api.generic-status-envelopes": 59,
+          "defensive.promise-default-fallbacks": 57,
+          "defensive.empty-catch": 55,
+          "structure.pass-through-wrappers": 55,
+          "tests.duplicate-mock-setup": 54,
+          "defensive.stringified-unknown-errors": 39,
+          "defensive.error-swallowing": 26,
+          "types.generic-record-casts": 22
+        }
+      },
+      "highest": {
+        "periodStart": "2026-06-22",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "defaultBranch": "main",
+        "ref": "ca47da485ddcf46f7fa7b8efa15c3c20a11c2300",
+        "blendedVsPinnedBaseline": 5.5613786529911815
       },
       "series": [
         {
@@ -2012,46 +2060,54 @@
           "blendedVsPinnedBaseline": 5.437842227513337,
           "repoScore": 1554.0000000000007,
           "findingCount": 410
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 4.484612219363219,
+          "blendedVsPinnedBaseline": 5.5613786529911815,
+          "repoScore": 1616.5000000000007,
+          "findingCount": 429
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 2.269320454688428,
-        "blendedVsPinnedBaseline": 3.2632591512717974,
-        "repoScore": 766.7474206349218,
-        "findingCount": 171,
-        "fileCount": 622,
-        "logicalLineCount": 110059,
-        "functionCount": 2051,
-        "scorePerFile": 0.18297796577668612,
-        "scorePerKloc": 0.20472277510395998,
-        "scorePerFunction": 0.05519852258790567,
-        "findingsPerFile": 0.019082935382121274,
-        "findingsPerKloc": -0.20588632478742963,
-        "findingsPerFunction": 0.005654974038095742
+        "blendedVsCurrentCohort": 2.391295201902535,
+        "blendedVsPinnedBaseline": 3.386795576749642,
+        "repoScore": 829.2474206349218,
+        "findingCount": 190,
+        "fileCount": 664,
+        "logicalLineCount": 112256,
+        "functionCount": 2196,
+        "scorePerFile": 0.19678618834590578,
+        "scorePerKloc": 0.4096768629331562,
+        "scorePerFunction": 0.05905246491086644,
+        "findingsPerFile": 0.02417205447417292,
+        "findingsPerKloc": -0.14102303291338503,
+        "findingsPerFunction": 0.0071114884598740685
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": 0.06213215830156482,
-        "blendedVsPinnedBaseline": 0.09980855597304306,
-        "repoScore": 64.00000000000023,
-        "findingCount": 13,
-        "fileCount": 32,
-        "logicalLineCount": 3632,
-        "functionCount": 115,
-        "scorePerFile": 0.020845143260634025,
-        "scorePerKloc": 0.17417844090071188,
-        "scorePerFunction": 0.005850802137696953,
-        "findingsPerFile": 0.0031618638445025105,
-        "findingsPerKloc": 0.02882571620483576,
-        "findingsPerFunction": 0.0008305892202963155
+        "blendedVsCurrentCohort": 0.12197474721410728,
+        "blendedVsPinnedBaseline": 0.1235364254778446,
+        "repoScore": 62.5,
+        "findingCount": 19,
+        "fileCount": 42,
+        "logicalLineCount": 2197,
+        "functionCount": 145,
+        "scorePerFile": 0.013808222569219653,
+        "scorePerKloc": 0.20495408782919622,
+        "scorePerFunction": 0.0038539423229607683,
+        "findingsPerFile": 0.005089119092051647,
+        "findingsPerKloc": 0.0648632918740446,
+        "findingsPerFunction": 0.0014565144217783266
       }
     },
     {
       "id": "vinext",
       "repo": "cloudflare/vinext",
       "cohort": "explicit-ai",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -2104,53 +2160,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "vinext",
-        "repo": "cloudflare/vinext",
-        "cohort": "explicit-ai",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "6005541c195b84d5a473c7f32421f16acafeed24",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 1952,
-          "directoryCount": 764,
-          "findingCount": 295,
-          "repoScore": 1018.8000000000001,
-          "physicalLineCount": 308923,
-          "logicalLineCount": 121824,
-          "functionCount": 7045,
-          "normalized": {
-            "scorePerFile": 0.5219262295081968,
-            "scorePerKloc": 8.362884160756503,
-            "scorePerFunction": 0.14461320085166787,
-            "findingsPerFile": 0.15112704918032788,
-            "findingsPerKloc": 2.421526136065143,
-            "findingsPerFunction": 0.04187366926898509
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 3.2810325509145937,
-          "vsPinnedBaseline": 4.072605648877179
-        },
-        "ruleCounts": {
-          "structure.pass-through-wrappers": 70,
-          "defensive.promise-default-fallbacks": 61,
-          "defensive.error-obscuring": 50,
-          "defensive.empty-catch": 38,
-          "tests.duplicate-mock-setup": 33,
-          "defensive.stringified-unknown-errors": 22,
-          "api.generic-status-envelopes": 10,
-          "types.generic-record-casts": 6,
-          "defensive.error-swallowing": 5
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "vinext",
@@ -2189,6 +2198,53 @@
           "defensive.empty-catch": 40,
           "tests.duplicate-mock-setup": 40,
           "defensive.stringified-unknown-errors": 25,
+          "api.generic-status-envelopes": 10,
+          "defensive.error-swallowing": 6,
+          "types.generic-record-casts": 6
+        }
+      },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "vinext",
+        "repo": "cloudflare/vinext",
+        "cohort": "explicit-ai",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "65f9531d00073221bad888ef2a67fa3b7abdae3c",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 2279,
+          "directoryCount": 887,
+          "findingCount": 342,
+          "repoScore": 1208.8000000000002,
+          "physicalLineCount": 370457,
+          "logicalLineCount": 146822,
+          "functionCount": 8356,
+          "normalized": {
+            "scorePerFile": 0.5304080737165424,
+            "scorePerKloc": 8.233098581956384,
+            "scorePerFunction": 0.14466251795117283,
+            "findingsPerFile": 0.1500658183413778,
+            "findingsPerKloc": 2.329351187151789,
+            "findingsPerFunction": 0.04092867400670177
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 3.2471537318728063,
+          "vsPinnedBaseline": 4.026803336405811
+        },
+        "ruleCounts": {
+          "structure.pass-through-wrappers": 77,
+          "defensive.promise-default-fallbacks": 72,
+          "defensive.error-obscuring": 61,
+          "defensive.empty-catch": 42,
+          "tests.duplicate-mock-setup": 42,
+          "defensive.stringified-unknown-errors": 26,
           "api.generic-status-envelopes": 10,
           "defensive.error-swallowing": 6,
           "types.generic-record-casts": 6
@@ -2305,46 +2361,54 @@
           "blendedVsPinnedBaseline": 4.1095570496449225,
           "repoScore": 1153.3000000000002,
           "findingCount": 329
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 3.2471537318728063,
+          "blendedVsPinnedBaseline": 4.026803336405811,
+          "repoScore": 1208.8000000000002,
+          "findingCount": 342
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 1.393535377012831,
-        "blendedVsPinnedBaseline": 2.122021175379512,
-        "repoScore": 653.4762071262073,
-        "findingCount": 176,
-        "fileCount": 1104,
-        "logicalLineCount": 80648,
-        "functionCount": 5247,
-        "scorePerFile": 0.05919470955362088,
-        "scorePerKloc": -0.5321059784578424,
-        "scorePerFunction": -0.042992974434613696,
-        "findingsPerFile": 0.006956838995137021,
-        "findingsPerKloc": -0.3393755914847758,
-        "findingsPerFunction": -0.016207035755091297
+        "blendedVsCurrentCohort": 1.3436998200084596,
+        "blendedVsPinnedBaseline": 2.0392674621404003,
+        "repoScore": 708.9762071262073,
+        "findingCount": 189,
+        "fileCount": 1230,
+        "logicalLineCount": 91294,
+        "functionCount": 5714,
+        "scorePerFile": 0.053931626744385286,
+        "scorePerKloc": -0.7681943310567423,
+        "scorePerFunction": -0.04452135520317724,
+        "findingsPerFile": 0.004212624823741962,
+        "findingsPerKloc": -0.42601547471249557,
+        "findingsPerFunction": -0.016981999725319427
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": 0.01595673796258401,
-        "blendedVsPinnedBaseline": 0.036951400767743614,
-        "repoScore": 134.5000000000001,
-        "findingCount": 34,
-        "fileCount": 201,
-        "logicalLineCount": 14352,
-        "functionCount": 844,
-        "scorePerFile": 0.013744927017581232,
-        "scorePerKloc": 0.10630277379878095,
-        "scorePerFunction": 0.001577697868068495,
-        "findingsPerFile": 0.0016829833324449872,
-        "findingsPerKloc": -0.005535065685634333,
-        "findingsPerFunction": -0.00017003129205519357
+        "blendedVsCurrentCohort": -0.04983555700437137,
+        "blendedVsPinnedBaseline": -0.08275371323911163,
+        "repoScore": 55.5,
+        "findingCount": 13,
+        "fileCount": 126,
+        "logicalLineCount": 10646,
+        "functionCount": 467,
+        "scorePerFile": -0.0052630828092355975,
+        "scorePerKloc": -0.23608835259889993,
+        "scorePerFunction": -0.001528380768563542,
+        "findingsPerFile": -0.0027442141713950596,
+        "findingsPerKloc": -0.08663988322771976,
+        "findingsPerFunction": -0.0007749639702281305
       }
     },
     {
       "id": "hunk",
       "repo": "modem-dev/hunk",
       "cohort": "explicit-ai",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -2391,52 +2455,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "hunk",
-        "repo": "modem-dev/hunk",
-        "cohort": "explicit-ai",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "59cc85726abeae2406b4485e045c6a31e953f2e4",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 303,
-          "directoryCount": 49,
-          "findingCount": 53,
-          "repoScore": 150.30000000000004,
-          "physicalLineCount": 65628,
-          "logicalLineCount": 26250,
-          "functionCount": 1401,
-          "normalized": {
-            "scorePerFile": 0.49603960396039615,
-            "scorePerKloc": 5.725714285714287,
-            "scorePerFunction": 0.10728051391862958,
-            "findingsPerFile": 0.17491749174917492,
-            "findingsPerKloc": 2.019047619047619,
-            "findingsPerFunction": 0.03783012134189864
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 2.840318348986807,
-          "vsPinnedBaseline": 3.525565922675382
-        },
-        "ruleCounts": {
-          "defensive.error-obscuring": 16,
-          "structure.pass-through-wrappers": 10,
-          "defensive.empty-catch": 9,
-          "defensive.stringified-unknown-errors": 7,
-          "defensive.promise-default-fallbacks": 6,
-          "types.generic-record-casts": 3,
-          "api.generic-status-envelopes": 1,
-          "defensive.error-swallowing": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "hunk",
@@ -2473,6 +2491,52 @@
           "structure.pass-through-wrappers": 10,
           "defensive.empty-catch": 9,
           "defensive.promise-default-fallbacks": 7,
+          "defensive.stringified-unknown-errors": 7,
+          "types.generic-record-casts": 3,
+          "api.generic-status-envelopes": 1,
+          "defensive.error-swallowing": 1
+        }
+      },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "hunk",
+        "repo": "modem-dev/hunk",
+        "cohort": "explicit-ai",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "0a3cc064931a9d576882baee6daac7cfab3d0bbe",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 331,
+          "directoryCount": 49,
+          "findingCount": 58,
+          "repoScore": 151.70000000000002,
+          "physicalLineCount": 73541,
+          "logicalLineCount": 29298,
+          "functionCount": 1588,
+          "normalized": {
+            "scorePerFile": 0.4583081570996979,
+            "scorePerKloc": 5.177827838077685,
+            "scorePerFunction": 0.09552896725440807,
+            "findingsPerFile": 0.17522658610271905,
+            "findingsPerKloc": 1.979657314492457,
+            "findingsPerFunction": 0.036523929471032744
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 2.682410047759919,
+          "vsPinnedBaseline": 3.3264633035092834
+        },
+        "ruleCounts": {
+          "defensive.error-obscuring": 18,
+          "structure.pass-through-wrappers": 11,
+          "defensive.empty-catch": 9,
+          "defensive.promise-default-fallbacks": 8,
           "defensive.stringified-unknown-errors": 7,
           "types.generic-record-casts": 3,
           "api.generic-status-envelopes": 1,
@@ -2590,46 +2654,54 @@
           "blendedVsPinnedBaseline": 3.3814639315615698,
           "repoScore": 149.70000000000002,
           "findingCount": 56
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 2.682410047759919,
+          "blendedVsPinnedBaseline": 3.3264633035092834,
+          "repoScore": 151.70000000000002,
+          "findingCount": 58
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 1.9448384438520634,
-        "blendedVsPinnedBaseline": 2.579516933865742,
-        "repoScore": 120.30909090909093,
-        "findingCount": 47,
-        "fileCount": 198,
-        "logicalLineCount": 19918,
-        "functionCount": 1035,
-        "scorePerFile": 0.2278833718875795,
-        "scorePerKloc": 1.6362082455052693,
-        "scorePerFunction": 0.038297743354286574,
-        "findingsPerFile": 0.10133239831697054,
-        "findingsPerKloc": 0.8673997616914921,
-        "findingsPerFunction": 0.018380532528311535
+        "blendedVsCurrentCohort": 1.9143891181069277,
+        "blendedVsPinnedBaseline": 2.5245163058134557,
+        "repoScore": 122.30909090909093,
+        "findingCount": 49,
+        "fileCount": 207,
+        "logicalLineCount": 21486,
+        "functionCount": 1096,
+        "scorePerFile": 0.22128469668914075,
+        "scorePerKloc": 1.415550688703762,
+        "scorePerFunction": 0.035791347150934315,
+        "findingsPerFile": 0.10264594094142872,
+        "findingsPerKloc": 0.8275835817735631,
+        "findingsPerFunction": 0.018231246544203477
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.1274589754817521,
-        "blendedVsPinnedBaseline": -0.1441019911138124,
-        "repoScore": -0.6000000000000227,
-        "findingCount": 3,
-        "fileCount": 19,
-        "logicalLineCount": 1480,
-        "functionCount": 126,
-        "scorePerFile": -0.031132771662259473,
-        "scorePerKloc": -0.32722889083509443,
-        "scorePerFunction": -0.009245150460869253,
-        "findingsPerFile": -0.00100444827091406,
-        "findingsPerKloc": 0.0004258753627670586,
-        "findingsPerFunction": -0.0011569058867578405
+        "blendedVsCurrentCohort": -0.030449325745135702,
+        "blendedVsPinnedBaseline": -0.05500062805228634,
+        "repoScore": 2,
+        "findingCount": 2,
+        "fileCount": 9,
+        "logicalLineCount": 1568,
+        "functionCount": 61,
+        "scorePerFile": -0.006598675198438764,
+        "scorePerKloc": -0.22065755680150723,
+        "scorePerFunction": -0.0025063962033522597,
+        "findingsPerFile": 0.0013135426244581805,
+        "findingsPerKloc": -0.03981617991792907,
+        "findingsPerFunction": -0.00014928598410805793
       }
     },
     {
       "id": "astro",
       "repo": "withastro/astro",
       "cohort": "mature-oss",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -2681,51 +2753,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "astro",
-        "repo": "withastro/astro",
-        "cohort": "mature-oss",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "0e8c7e8bfd1699d2f2d9cbd99e0de5eef4f2f168",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 2820,
-          "directoryCount": 1103,
-          "findingCount": 178,
-          "repoScore": 500.2999999999996,
-          "physicalLineCount": 241865,
-          "logicalLineCount": 137236,
-          "functionCount": 4667,
-          "normalized": {
-            "scorePerFile": 0.17741134751773036,
-            "scorePerKloc": 3.6455449007549015,
-            "scorePerFunction": 0.1071994857510177,
-            "findingsPerFile": 0.06312056737588652,
-            "findingsPerKloc": 1.2970357632108194,
-            "findingsPerFunction": 0.03814013284765374
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 1.7417796704998054,
-          "vsPinnedBaseline": 2.1619967541009584
-        },
-        "ruleCounts": {
-          "structure.pass-through-wrappers": 64,
-          "defensive.empty-catch": 50,
-          "defensive.error-obscuring": 38,
-          "defensive.promise-default-fallbacks": 12,
-          "defensive.error-swallowing": 9,
-          "defensive.stringified-unknown-errors": 4,
-          "api.generic-status-envelopes": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "astro",
@@ -2756,6 +2783,51 @@
         "blended": {
           "vsCurrentCohort": 1.8203179275010422,
           "vsPinnedBaseline": 2.2689489458743637
+        },
+        "ruleCounts": {
+          "structure.pass-through-wrappers": 64,
+          "defensive.empty-catch": 51,
+          "defensive.error-obscuring": 40,
+          "defensive.promise-default-fallbacks": 13,
+          "defensive.error-swallowing": 9,
+          "defensive.stringified-unknown-errors": 3,
+          "api.generic-status-envelopes": 1
+        }
+      },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "astro",
+        "repo": "withastro/astro",
+        "cohort": "mature-oss",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "f55ba4caca7c587555da86e3211ae1f1b3407c5f",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 2758,
+          "directoryCount": 1073,
+          "findingCount": 181,
+          "repoScore": 513.5999999999997,
+          "physicalLineCount": 237115,
+          "logicalLineCount": 133755,
+          "functionCount": 4539,
+          "normalized": {
+            "scorePerFile": 0.18622189992748356,
+            "scorePerKloc": 3.8398564539643356,
+            "scorePerFunction": 0.11315267680105744,
+            "findingsPerFile": 0.06562726613488035,
+            "findingsPerKloc": 1.3532204403573698,
+            "findingsPerFunction": 0.039876624807226264
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 1.8267852952140826,
+          "vsPinnedBaseline": 2.2654009415878456
         },
         "ruleCounts": {
           "structure.pass-through-wrappers": 64,
@@ -2878,46 +2950,54 @@
           "blendedVsPinnedBaseline": 2.2689489458743637,
           "repoScore": 508.1999999999996,
           "findingCount": 181
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 1.8267852952140826,
+          "blendedVsPinnedBaseline": 2.2654009415878456,
+          "repoScore": 513.5999999999997,
+          "findingCount": 181
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 0.33952966754787717,
-        "blendedVsPinnedBaseline": 0.7227492871890018,
-        "repoScore": -261.5916666666667,
+        "blendedVsCurrentCohort": 0.34599703526091763,
+        "blendedVsPinnedBaseline": 0.7192012829024836,
+        "repoScore": -256.1916666666666,
         "findingCount": -89,
-        "fileCount": -3,
-        "logicalLineCount": 6286,
-        "functionCount": 288,
-        "scorePerFile": -0.09530282213383037,
-        "scorePerKloc": -2.2523479107630773,
-        "scorePerFunction": -0.0697368669930064,
-        "findingsPerFile": -0.03242115191227429,
-        "findingsPerKloc": -0.7693212708702291,
-        "findingsPerFunction": -0.02384897869913466
+        "fileCount": 19,
+        "logicalLineCount": 6956,
+        "functionCount": 322,
+        "scorePerFile": -0.09482653624143439,
+        "scorePerKloc": -2.2311036219563443,
+        "scorePerFunction": -0.06939218131292556,
+        "findingsPerFile": -0.03294885653762787,
+        "findingsPerKloc": -0.7761338920900467,
+        "findingsPerFunction": -0.024149934358057117
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": 0.07853825700123673,
-        "blendedVsPinnedBaseline": 0.10695219177340531,
-        "repoScore": 7.899999999999977,
-        "findingCount": 3,
-        "fileCount": -84,
-        "logicalLineCount": -4151,
-        "functionCount": -162,
-        "scorePerFile": 0.00833426651735722,
-        "scorePerKloc": 0.17306726440270115,
-        "scorePerFunction": 0.005608505369958897,
-        "findingsPerFile": 0.003034403384347406,
-        "findingsPerKloc": 0.06299729836636803,
-        "findingsPerFunction": 0.002037447618494982
+        "blendedVsCurrentCohort": 0.006467367713040462,
+        "blendedVsPinnedBaseline": -0.003548004286518136,
+        "repoScore": 5.400000000000091,
+        "findingCount": 0,
+        "fileCount": 22,
+        "logicalLineCount": 670,
+        "functionCount": 34,
+        "scorePerFile": 0.0004762858923959834,
+        "scorePerKloc": 0.021244288806733014,
+        "scorePerFunction": 0.0003446856800808362,
+        "findingsPerFile": -0.0005277046253535783,
+        "findingsPerKloc": -0.006812621219817627,
+        "findingsPerFunction": -0.00030095565892245685
       }
     },
     {
       "id": "vite",
       "repo": "vitejs/vite",
       "cohort": "mature-oss",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -2970,52 +3050,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "vite",
-        "repo": "vitejs/vite",
-        "cohort": "mature-oss",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "01337adca3e588a88ec47ab1736e18db14d38237",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 1466,
-          "directoryCount": 633,
-          "findingCount": 75,
-          "repoScore": 228.5,
-          "physicalLineCount": 98068,
-          "logicalLineCount": 47663,
-          "functionCount": 2339,
-          "normalized": {
-            "scorePerFile": 0.1558663028649386,
-            "scorePerKloc": 4.79407506871158,
-            "scorePerFunction": 0.0976913210773835,
-            "findingsPerFile": 0.05115961800818554,
-            "findingsPerKloc": 1.5735476155508468,
-            "findingsPerFunction": 0.03206498503634032
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 1.7019422906952015,
-          "vsPinnedBaseline": 2.112548315077252
-        },
-        "ruleCounts": {
-          "structure.pass-through-wrappers": 27,
-          "defensive.empty-catch": 16,
-          "defensive.error-obscuring": 11,
-          "defensive.error-swallowing": 6,
-          "tests.duplicate-mock-setup": 6,
-          "defensive.promise-default-fallbacks": 5,
-          "api.generic-status-envelopes": 3,
-          "defensive.stringified-unknown-errors": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "vite",
@@ -3046,6 +3080,52 @@
         "blended": {
           "vsCurrentCohort": 1.68225447283995,
           "vsPinnedBaseline": 2.096858716368629
+        },
+        "ruleCounts": {
+          "structure.pass-through-wrappers": 27,
+          "defensive.empty-catch": 16,
+          "defensive.error-obscuring": 11,
+          "defensive.error-swallowing": 6,
+          "tests.duplicate-mock-setup": 6,
+          "defensive.promise-default-fallbacks": 5,
+          "api.generic-status-envelopes": 3,
+          "defensive.stringified-unknown-errors": 1
+        }
+      },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "vite",
+        "repo": "vitejs/vite",
+        "cohort": "mature-oss",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "403cc608e4e8633b0335f5e8221c83dfca4994f8",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 1478,
+          "directoryCount": 637,
+          "findingCount": 75,
+          "repoScore": 228.5,
+          "physicalLineCount": 98958,
+          "logicalLineCount": 48181,
+          "functionCount": 2351,
+          "normalized": {
+            "scorePerFile": 0.15460081190798375,
+            "scorePerKloc": 4.742533363774102,
+            "scorePerFunction": 0.09719268396427053,
+            "findingsPerFile": 0.05074424898511502,
+            "findingsPerKloc": 1.5566302069280422,
+            "findingsPerFunction": 0.031901318587834966
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 1.689908972595308,
+          "vsPinnedBaseline": 2.095660276960197
         },
         "ruleCounts": {
           "structure.pass-through-wrappers": 27,
@@ -3169,46 +3249,54 @@
           "blendedVsPinnedBaseline": 2.096858716368629,
           "repoScore": 228.5,
           "findingCount": 75
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 1.689908972595308,
+          "blendedVsPinnedBaseline": 2.095660276960197,
+          "repoScore": 228.5,
+          "findingCount": 75
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 0.2278253252071054,
-        "blendedVsPinnedBaseline": 0.5781825406653767,
+        "blendedVsCurrentCohort": 0.23547982496246345,
+        "blendedVsPinnedBaseline": 0.5769841012569448,
         "repoScore": -152.14387822322607,
         "findingCount": -40,
-        "fileCount": 57,
-        "logicalLineCount": 2149,
+        "fileCount": 58,
+        "logicalLineCount": 2199,
         "functionCount": 63,
-        "scorePerFile": -0.11335358508191562,
-        "scorePerKloc": -3.5306461199070123,
+        "scorePerFile": -0.11345825726330222,
+        "scorePerKloc": -3.5355728130608775,
         "scorePerFunction": -0.0691726474269996,
-        "findingsPerFile": -0.0302073102119828,
-        "findingsPerKloc": -0.9427313603615766,
+        "findingsPerFile": -0.030241666507842727,
+        "findingsPerKloc": -0.9443484368891035,
         "findingsPerFunction": -0.018360919174402794
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.019687817855251533,
-        "blendedVsPinnedBaseline": -0.015689598708623187,
+        "blendedVsCurrentCohort": 0.007654499755358035,
+        "blendedVsPinnedBaseline": -0.001198439408431895,
         "repoScore": 0,
         "findingCount": 0,
-        "fileCount": 11,
-        "logicalLineCount": 468,
-        "functionCount": 12,
-        "scorePerFile": -0.0011608187755682564,
-        "scorePerKloc": -0.04661501178361238,
-        "scorePerFunction": -0.0004986371131129735,
-        "findingsPerFile": -0.0003810127272105904,
-        "findingsPerKloc": -0.015300332095277591,
-        "findingsPerFunction": -0.00016366644850535073
+        "fileCount": 1,
+        "logicalLineCount": 50,
+        "functionCount": 0,
+        "scorePerFile": -0.00010467218138660028,
+        "scorePerKloc": -0.00492669315386518,
+        "scorePerFunction": 0,
+        "findingsPerFile": -0.00003435629585992611,
+        "findingsPerKloc": -0.0016170765275269616,
+        "findingsPerFunction": 0
       }
     },
     {
       "id": "tsup",
       "repo": "egoist/tsup",
       "cohort": "mature-oss",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -3254,46 +3342,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "tsup",
-        "repo": "egoist/tsup",
-        "cohort": "mature-oss",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "b6bcae8504d018cfc94203f50f15a3ce43943332",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 48,
-          "directoryCount": 8,
-          "findingCount": 3,
-          "repoScore": 7,
-          "physicalLineCount": 6686,
-          "logicalLineCount": 2813,
-          "functionCount": 140,
-          "normalized": {
-            "scorePerFile": 0.14583333333333334,
-            "scorePerKloc": 2.4884464984002843,
-            "scorePerFunction": 0.05,
-            "findingsPerFile": 0.0625,
-            "findingsPerKloc": 1.066477070742979,
-            "findingsPerFunction": 0.02142857142857143
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 1.222783576963889,
-          "vsPinnedBaseline": 1.5177890574444977
-        },
-        "ruleCounts": {
-          "structure.pass-through-wrappers": 2,
-          "defensive.error-obscuring": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "tsup",
@@ -3330,9 +3378,49 @@
           "defensive.error-obscuring": 1
         }
       },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "tsup",
+        "repo": "egoist/tsup",
+        "cohort": "mature-oss",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "b6bcae8504d018cfc94203f50f15a3ce43943332",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 48,
+          "directoryCount": 8,
+          "findingCount": 3,
+          "repoScore": 7,
+          "physicalLineCount": 6686,
+          "logicalLineCount": 2813,
+          "functionCount": 140,
+          "normalized": {
+            "scorePerFile": 0.14583333333333334,
+            "scorePerKloc": 2.4884464984002843,
+            "scorePerFunction": 0.05,
+            "findingsPerFile": 0.0625,
+            "findingsPerKloc": 1.066477070742979,
+            "findingsPerFunction": 0.02142857142857143
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 1.223922300232228,
+          "vsPinnedBaseline": 1.5177890574444977
+        },
+        "ruleCounts": {
+          "structure.pass-through-wrappers": 2,
+          "defensive.error-obscuring": 1
+        }
+      },
       "highest": {
-        "periodStart": "2026-06-15",
-        "recordedAt": "2026-06-15T14:04:43.057Z",
+        "periodStart": "2026-06-22",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
         "defaultBranch": "main",
         "ref": "b6bcae8504d018cfc94203f50f15a3ce43943332",
         "blendedVsPinnedBaseline": 1.5177890574444977
@@ -3441,10 +3529,18 @@
           "blendedVsPinnedBaseline": 1.5177890574444977,
           "repoScore": 7,
           "findingCount": 3
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 1.223922300232228,
+          "blendedVsPinnedBaseline": 1.5177890574444977,
+          "repoScore": 7,
+          "findingCount": 3
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 0.3357020631477643,
+        "blendedVsCurrentCohort": 0.34194221303683836,
         "blendedVsPinnedBaseline": 0.596848942865301,
         "repoScore": -3.1428571428571423,
         "findingCount": -1,
@@ -3459,7 +3555,7 @@
         "findingsPerFunction": -0.007142857142857142
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.0051014266207352055,
+        "blendedVsCurrentCohort": 0.006240149889074065,
         "blendedVsPinnedBaseline": 0,
         "repoScore": 0,
         "findingCount": 0,
@@ -3478,9 +3574,9 @@
       "id": "zustand",
       "repo": "pmndrs/zustand",
       "cohort": "mature-oss",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -3529,48 +3625,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "zustand",
-        "repo": "pmndrs/zustand",
-        "cohort": "mature-oss",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "566b5bf448f4354eb8e35c6243ea3772bdb3be96",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 50,
-          "directoryCount": 15,
-          "findingCount": 4,
-          "repoScore": 9.7,
-          "physicalLineCount": 9741,
-          "logicalLineCount": 7831,
-          "functionCount": 172,
-          "normalized": {
-            "scorePerFile": 0.19399999999999998,
-            "scorePerKloc": 1.2386668369301492,
-            "scorePerFunction": 0.0563953488372093,
-            "findingsPerFile": 0.08,
-            "findingsPerKloc": 0.5107904482186183,
-            "findingsPerFunction": 0.023255813953488372
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 1.0882539593559715,
-          "vsPinnedBaseline": 1.3508031857381753
-        },
-        "ruleCounts": {
-          "defensive.empty-catch": 1,
-          "defensive.error-obscuring": 1,
-          "defensive.error-swallowing": 1,
-          "structure.pass-through-wrappers": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "zustand",
@@ -3600,6 +3654,48 @@
         },
         "blended": {
           "vsCurrentCohort": 1.0837137873885303,
+          "vsPinnedBaseline": 1.3508031857381753
+        },
+        "ruleCounts": {
+          "defensive.empty-catch": 1,
+          "defensive.error-obscuring": 1,
+          "defensive.error-swallowing": 1,
+          "structure.pass-through-wrappers": 1
+        }
+      },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "zustand",
+        "repo": "pmndrs/zustand",
+        "cohort": "mature-oss",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "a1f685ca744e56a982b1c5029620e0925c3ee996",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 50,
+          "directoryCount": 15,
+          "findingCount": 4,
+          "repoScore": 9.7,
+          "physicalLineCount": 9741,
+          "logicalLineCount": 7831,
+          "functionCount": 172,
+          "normalized": {
+            "scorePerFile": 0.19399999999999998,
+            "scorePerKloc": 1.2386668369301492,
+            "scorePerFunction": 0.0563953488372093,
+            "findingsPerFile": 0.08,
+            "findingsPerKloc": 0.5107904482186183,
+            "findingsPerFunction": 0.023255813953488372
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 1.089267401250945,
           "vsPinnedBaseline": 1.3508031857381753
         },
         "ruleCounts": {
@@ -3720,10 +3816,18 @@
           "blendedVsPinnedBaseline": 1.3508031857381753,
           "repoScore": 9.7,
           "findingCount": 4
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 1.089267401250945,
+          "blendedVsPinnedBaseline": 1.3508031857381753,
+          "repoScore": 9.7,
+          "findingCount": 4
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": -0.24103891194950156,
+        "blendedVsCurrentCohort": -0.23548529808708696,
         "blendedVsPinnedBaseline": -0.03246829672466012,
         "repoScore": -13.166666666666668,
         "findingCount": -5,
@@ -3738,7 +3842,7 @@
         "findingsPerFunction": -0.029375764993880046
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.0045401719674411645,
+        "blendedVsCurrentCohort": 0.005553613862414597,
         "blendedVsPinnedBaseline": 0,
         "repoScore": 0,
         "findingCount": 0,
@@ -3757,9 +3861,9 @@
       "id": "payload",
       "repo": "payloadcms/payload",
       "cohort": "mature-oss",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -3813,53 +3917,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "payload",
-        "repo": "payloadcms/payload",
-        "cohort": "mature-oss",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "7b3a134220f9aed40387c66ed4dafbdb472eabde",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 6492,
-          "directoryCount": 2613,
-          "findingCount": 207,
-          "repoScore": 676.5999999999998,
-          "physicalLineCount": 811578,
-          "logicalLineCount": 504098,
-          "functionCount": 5752,
-          "normalized": {
-            "scorePerFile": 0.10422057917436842,
-            "scorePerKloc": 1.3421993342564338,
-            "scorePerFunction": 0.11762865090403335,
-            "findingsPerFile": 0.03188539741219963,
-            "findingsPerKloc": 0.41063444012870515,
-            "findingsPerFunction": 0.035987482614742695
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 1,
-          "vsPinnedBaseline": 1.2412573132631473
-        },
-        "ruleCounts": {
-          "defensive.empty-catch": 47,
-          "defensive.error-obscuring": 43,
-          "defensive.error-swallowing": 36,
-          "structure.pass-through-wrappers": 20,
-          "api.generic-status-envelopes": 15,
-          "defensive.promise-default-fallbacks": 15,
-          "defensive.stringified-unknown-errors": 14,
-          "tests.duplicate-mock-setup": 13,
-          "types.generic-record-casts": 4
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "payload",
@@ -3899,6 +3956,53 @@
           "api.generic-status-envelopes": 15,
           "defensive.promise-default-fallbacks": 15,
           "defensive.stringified-unknown-errors": 14,
+          "tests.duplicate-mock-setup": 13,
+          "types.generic-record-casts": 4
+        }
+      },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "payload",
+        "repo": "payloadcms/payload",
+        "cohort": "mature-oss",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "1dd2f979ed3457dc0cd3afd2f4c5428cd5d16889",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 6614,
+          "directoryCount": 2638,
+          "findingCount": 209,
+          "repoScore": 688.0999999999999,
+          "physicalLineCount": 817687,
+          "logicalLineCount": 507718,
+          "functionCount": 5849,
+          "normalized": {
+            "scorePerFile": 0.1040368914423949,
+            "scorePerKloc": 1.3552798994717539,
+            "scorePerFunction": 0.11764404171653273,
+            "findingsPerFile": 0.031599637133353495,
+            "findingsPerKloc": 0.4116458348925979,
+            "findingsPerFunction": 0.03573260386390836
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 1,
+          "vsPinnedBaseline": 1.2401024616975371
+        },
+        "ruleCounts": {
+          "defensive.empty-catch": 48,
+          "defensive.error-obscuring": 43,
+          "defensive.error-swallowing": 36,
+          "structure.pass-through-wrappers": 20,
+          "api.generic-status-envelopes": 15,
+          "defensive.promise-default-fallbacks": 15,
+          "defensive.stringified-unknown-errors": 15,
           "tests.duplicate-mock-setup": 13,
           "types.generic-record-casts": 4
         }
@@ -4014,46 +4118,54 @@
           "blendedVsPinnedBaseline": 1.2464575070076958,
           "repoScore": 686.0999999999998,
           "findingCount": 210
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 1,
+          "blendedVsPinnedBaseline": 1.2401024616975371,
+          "repoScore": 688.0999999999999,
+          "findingCount": 209
         }
       ],
       "deltaFromFirst": {
         "blendedVsCurrentCohort": -0.2645255668573929,
-        "blendedVsPinnedBaseline": -0.07392640793207761,
-        "repoScore": -776.5718101343101,
-        "findingCount": -285,
-        "fileCount": 501,
-        "logicalLineCount": 44722,
-        "functionCount": 373,
-        "scorePerFile": -0.13591419130409244,
-        "scorePerKloc": -1.8132396071401256,
-        "scorePerFunction": -0.1510782645676963,
-        "findingsPerFile": -0.04935964263304525,
-        "findingsPerKloc": -0.6574598481508535,
-        "findingsPerFunction": -0.054950946253991086
+        "blendedVsPinnedBaseline": -0.08028145324223623,
+        "repoScore": -774.57181013431,
+        "findingCount": -286,
+        "fileCount": 517,
+        "logicalLineCount": 46024,
+        "functionCount": 417,
+        "scorePerFile": -0.1358633562424189,
+        "scorePerKloc": -1.812774721412013,
+        "scorePerFunction": -0.15162543732144776,
+        "findingsPerFile": -0.049587832113817246,
+        "findingsPerKloc": -0.660492854369121,
+        "findingsPerFunction": -0.055394052984397965
       },
       "deltaFromPrevious": {
         "blendedVsCurrentCohort": 0,
-        "blendedVsPinnedBaseline": 0.005200193744548498,
-        "repoScore": 9.5,
-        "findingCount": 3,
-        "fileCount": 106,
-        "logicalLineCount": 2318,
-        "functionCount": 53,
-        "scorePerFile": -0.00023452279364701012,
-        "scorePerKloc": 0.012615679487207432,
-        "scorePerFunction": 0.0005625635662508538,
-        "findingsPerFile": -0.00005757079807414134,
-        "findingsPerKloc": 0.004044400982160246,
-        "findingsPerFunction": 0.00018822797957254722
+        "blendedVsPinnedBaseline": -0.006355045310158625,
+        "repoScore": 2.0000000000001137,
+        "findingCount": -1,
+        "fileCount": 16,
+        "logicalLineCount": 1302,
+        "functionCount": 44,
+        "scorePerFile": 0.000050835061673498716,
+        "scorePerKloc": 0.0004648857281126517,
+        "scorePerFunction": -0.0005471727537514764,
+        "findingsPerFile": -0.0002281894807719953,
+        "findingsPerKloc": -0.00303300621826752,
+        "findingsPerFunction": -0.0004431067304068795
       }
     },
     {
       "id": "execa",
       "repo": "sindresorhus/execa",
       "cohort": "mature-oss",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -4102,47 +4214,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "execa",
-        "repo": "sindresorhus/execa",
-        "cohort": "mature-oss",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "main",
-        "ref": "f3a2e8481a1e9138de3895827895c834078b9456",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 581,
-          "directoryCount": 46,
-          "findingCount": 13,
-          "repoScore": 50.9,
-          "physicalLineCount": 36103,
-          "logicalLineCount": 20432,
-          "functionCount": 1008,
-          "normalized": {
-            "scorePerFile": 0.08760757314974182,
-            "scorePerKloc": 2.491190289741582,
-            "scorePerFunction": 0.05049603174603175,
-            "findingsPerFile": 0.022375215146299483,
-            "findingsPerKloc": 0.6362568519968677,
-            "findingsPerFunction": 0.012896825396825396
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 0.7994064917138574,
-          "vsPinnedBaseline": 0.992269154109861
-        },
-        "ruleCounts": {
-          "defensive.empty-catch": 11,
-          "defensive.error-obscuring": 1,
-          "defensive.promise-default-fallbacks": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "execa",
@@ -4180,9 +4251,50 @@
           "defensive.promise-default-fallbacks": 1
         }
       },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "execa",
+        "repo": "sindresorhus/execa",
+        "cohort": "mature-oss",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "main",
+        "ref": "f3a2e8481a1e9138de3895827895c834078b9456",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 581,
+          "directoryCount": 46,
+          "findingCount": 13,
+          "repoScore": 50.9,
+          "physicalLineCount": 36103,
+          "logicalLineCount": 20432,
+          "functionCount": 1008,
+          "normalized": {
+            "scorePerFile": 0.08760757314974182,
+            "scorePerKloc": 2.491190289741582,
+            "scorePerFunction": 0.05049603174603175,
+            "findingsPerFile": 0.022375215146299483,
+            "findingsPerKloc": 0.6362568519968677,
+            "findingsPerFunction": 0.012896825396825396
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 0.800150942972547,
+          "vsPinnedBaseline": 0.992269154109861
+        },
+        "ruleCounts": {
+          "defensive.empty-catch": 11,
+          "defensive.error-obscuring": 1,
+          "defensive.promise-default-fallbacks": 1
+        }
+      },
       "highest": {
-        "periodStart": "2026-06-15",
-        "recordedAt": "2026-06-15T14:04:43.057Z",
+        "periodStart": "2026-06-22",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
         "defaultBranch": "main",
         "ref": "f3a2e8481a1e9138de3895827895c834078b9456",
         "blendedVsPinnedBaseline": 0.992269154109861
@@ -4291,10 +4403,18 @@
           "blendedVsPinnedBaseline": 0.992269154109861,
           "repoScore": 50.9,
           "findingCount": 13
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 0.800150942972547,
+          "blendedVsPinnedBaseline": 0.992269154109861,
+          "repoScore": 50.9,
+          "findingCount": 13
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": -0.05306019447045596,
+        "blendedVsCurrentCohort": -0.04898063662835661,
         "blendedVsPinnedBaseline": 0.10562857620616717,
         "repoScore": -48.114862124898615,
         "findingCount": -15,
@@ -4309,7 +4429,7 @@
         "findingsPerFunction": -0.01488095238095238
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.0033351065834097415,
+        "blendedVsCurrentCohort": 0.004079557842099346,
         "blendedVsPinnedBaseline": 0,
         "repoScore": 0,
         "findingCount": 0,
@@ -4328,9 +4448,9 @@
       "id": "node-notifier",
       "repo": "mikaelbr/node-notifier",
       "cohort": "mature-oss",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -4374,45 +4494,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "node-notifier",
-        "repo": "mikaelbr/node-notifier",
-        "cohort": "mature-oss",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "master",
-        "ref": "b36c237f0d913f9df3a2bd45adc08b33ff717f6a",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 24,
-          "directoryCount": 5,
-          "findingCount": 1,
-          "repoScore": 1.9000000000000001,
-          "physicalLineCount": 2716,
-          "logicalLineCount": 2114,
-          "functionCount": 42,
-          "normalized": {
-            "scorePerFile": 0.07916666666666668,
-            "scorePerKloc": 0.8987701040681174,
-            "scorePerFunction": 0.045238095238095244,
-            "findingsPerFile": 0.041666666666666664,
-            "findingsPerKloc": 0.4730368968779565,
-            "findingsPerFunction": 0.023809523809523808
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 0.7613913062605266,
-          "vsPinnedBaseline": 0.9450825271508594
-        },
-        "ruleCounts": {
-          "defensive.empty-catch": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "node-notifier",
@@ -4448,9 +4529,48 @@
           "defensive.empty-catch": 1
         }
       },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "node-notifier",
+        "repo": "mikaelbr/node-notifier",
+        "cohort": "mature-oss",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "master",
+        "ref": "b36c237f0d913f9df3a2bd45adc08b33ff717f6a",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 24,
+          "directoryCount": 5,
+          "findingCount": 1,
+          "repoScore": 1.9000000000000001,
+          "physicalLineCount": 2716,
+          "logicalLineCount": 2114,
+          "functionCount": 42,
+          "normalized": {
+            "scorePerFile": 0.07916666666666668,
+            "scorePerKloc": 0.8987701040681174,
+            "scorePerFunction": 0.045238095238095244,
+            "findingsPerFile": 0.041666666666666664,
+            "findingsPerKloc": 0.4730368968779565,
+            "findingsPerFunction": 0.023809523809523808
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 0.762100355689292,
+          "vsPinnedBaseline": 0.9450825271508594
+        },
+        "ruleCounts": {
+          "defensive.empty-catch": 1
+        }
+      },
       "highest": {
-        "periodStart": "2026-06-15",
-        "recordedAt": "2026-06-15T14:04:43.057Z",
+        "periodStart": "2026-06-22",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
         "defaultBranch": "master",
         "ref": "b36c237f0d913f9df3a2bd45adc08b33ff717f6a",
         "blendedVsPinnedBaseline": 0.9450825271508594
@@ -4559,10 +4679,18 @@
           "blendedVsPinnedBaseline": 0.9450825271508594,
           "repoScore": 1.9000000000000001,
           "findingCount": 1
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 0.762100355689292,
+          "blendedVsPinnedBaseline": 0.9450825271508594,
+          "repoScore": 1.9000000000000001,
+          "findingCount": 1
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 0.363106097098816,
+        "blendedVsCurrentCohort": 0.3669916545799695,
         "blendedVsPinnedBaseline": 0.5325205455896512,
         "repoScore": 0,
         "findingCount": 0,
@@ -4577,7 +4705,7 @@
         "findingsPerFunction": 0
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.003176508052388116,
+        "blendedVsCurrentCohort": 0.00388555748115349,
         "blendedVsPinnedBaseline": 0,
         "repoScore": 0,
         "findingCount": 0,
@@ -4596,9 +4724,9 @@
       "id": "hyper",
       "repo": "vercel/hyper",
       "cohort": "mature-oss",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -4646,48 +4774,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "hyper",
-        "repo": "vercel/hyper",
-        "cohort": "mature-oss",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "canary",
-        "ref": "da0c401d7f9e197b1fa6f29854adffa43d3a3287",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 114,
-          "directoryCount": 21,
-          "findingCount": 17,
-          "repoScore": 71.60000000000001,
-          "physicalLineCount": 162755,
-          "logicalLineCount": 65089,
-          "functionCount": 5354,
-          "normalized": {
-            "scorePerFile": 0.6280701754385966,
-            "scorePerKloc": 1.1000322635161088,
-            "scorePerFunction": 0.013373178931639897,
-            "findingsPerFile": 0.14912280701754385,
-            "findingsPerKloc": 0.2611808446895789,
-            "findingsPerFunction": 0.003175196115054165
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 0.7267811434302272,
-          "vsPinnedBaseline": 0.9021224094245217
-        },
-        "ruleCounts": {
-          "defensive.error-swallowing": 8,
-          "structure.pass-through-wrappers": 5,
-          "defensive.empty-catch": 3,
-          "defensive.error-obscuring": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "hyper",
@@ -4717,6 +4803,48 @@
         },
         "blended": {
           "vsCurrentCohort": 0.7237490282281657,
+          "vsPinnedBaseline": 0.9021224094245217
+        },
+        "ruleCounts": {
+          "defensive.error-swallowing": 8,
+          "structure.pass-through-wrappers": 5,
+          "defensive.empty-catch": 3,
+          "defensive.error-obscuring": 1
+        }
+      },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "hyper",
+        "repo": "vercel/hyper",
+        "cohort": "mature-oss",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "canary",
+        "ref": "da0c401d7f9e197b1fa6f29854adffa43d3a3287",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 114,
+          "directoryCount": 21,
+          "findingCount": 17,
+          "repoScore": 71.60000000000001,
+          "physicalLineCount": 162755,
+          "logicalLineCount": 65089,
+          "functionCount": 5354,
+          "normalized": {
+            "scorePerFile": 0.6280701754385966,
+            "scorePerKloc": 1.1000322635161088,
+            "scorePerFunction": 0.013373178931639897,
+            "findingsPerFile": 0.14912280701754385,
+            "findingsPerKloc": 0.2611808446895789,
+            "findingsPerFunction": 0.003175196115054165
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 0.7274579619732672,
           "vsPinnedBaseline": 0.9021224094245217
         },
         "ruleCounts": {
@@ -4837,10 +4965,18 @@
           "blendedVsPinnedBaseline": 0.9021224094245217,
           "repoScore": 71.60000000000001,
           "findingCount": 17
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 0.7274579619732672,
+          "blendedVsPinnedBaseline": 0.9021224094245217,
+          "repoScore": 71.60000000000001,
+          "findingCount": 17
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": 0.3304409103032246,
+        "blendedVsCurrentCohort": 0.3341498440483261,
         "blendedVsPinnedBaseline": 0.4914405488640116,
         "repoScore": -1.5,
         "findingCount": -1,
@@ -4855,7 +4991,7 @@
         "findingsPerFunction": -0.0001867762420620098
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.0030321152020614806,
+        "blendedVsCurrentCohort": 0.003708933745101506,
         "blendedVsPinnedBaseline": 0,
         "repoScore": 0,
         "findingCount": 0,
@@ -4874,9 +5010,9 @@
       "id": "umami",
       "repo": "umami-software/umami",
       "cohort": "mature-oss",
-      "pointCount": 13,
+      "pointCount": 14,
       "firstRecordedAt": "2026-03-23T12:00:00Z",
-      "latestRecordedAt": "2026-06-15T14:04:43.057Z",
+      "latestRecordedAt": "2026-06-22T13:51:21.418Z",
       "first": {
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
@@ -4927,49 +5063,6 @@
         "schemaVersion": 1,
         "benchmarkSetId": "known-ai-vs-solid-oss",
         "benchmarkSetName": "Known AI repos vs older solid OSS repos",
-        "recordedAt": "2026-06-08T13:24:52.482Z",
-        "periodStart": "2026-06-08",
-        "repoId": "umami",
-        "repo": "umami-software/umami",
-        "cohort": "mature-oss",
-        "scanMode": "default-branch-as-of-recorded-at",
-        "defaultBranch": "master",
-        "ref": "c0ea3aefbee7a3429ee2f824b06dc4a9dbe0b7e1",
-        "analyzerVersion": "0.4.0",
-        "analyzerCommit": "f1b60b65689a1fe952a686db34b4653cdedb2a9f",
-        "summary": {
-          "fileCount": 838,
-          "directoryCount": 195,
-          "findingCount": 20,
-          "repoScore": 57.20000000000001,
-          "physicalLineCount": 51522,
-          "logicalLineCount": 33319,
-          "functionCount": 1577,
-          "normalized": {
-            "scorePerFile": 0.06825775656324584,
-            "scorePerKloc": 1.716738197424893,
-            "scorePerFunction": 0.03627140139505391,
-            "findingsPerFile": 0.02386634844868735,
-            "findingsPerKloc": 0.6002581109877246,
-            "findingsPerFunction": 0.012682308180088777
-          }
-        },
-        "blended": {
-          "vsCurrentCohort": 0.6808374037304217,
-          "vsPinnedBaseline": 0.84509440652348
-        },
-        "ruleCounts": {
-          "defensive.error-obscuring": 9,
-          "structure.pass-through-wrappers": 6,
-          "defensive.empty-catch": 3,
-          "defensive.error-swallowing": 1,
-          "defensive.promise-default-fallbacks": 1
-        }
-      },
-      "latest": {
-        "schemaVersion": 1,
-        "benchmarkSetId": "known-ai-vs-solid-oss",
-        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
         "recordedAt": "2026-06-15T14:04:43.057Z",
         "periodStart": "2026-06-15",
         "repoId": "umami",
@@ -4999,6 +5092,49 @@
         },
         "blended": {
           "vsCurrentCohort": 0.6779969648161157,
+          "vsPinnedBaseline": 0.84509440652348
+        },
+        "ruleCounts": {
+          "defensive.error-obscuring": 9,
+          "structure.pass-through-wrappers": 6,
+          "defensive.empty-catch": 3,
+          "defensive.error-swallowing": 1,
+          "defensive.promise-default-fallbacks": 1
+        }
+      },
+      "latest": {
+        "schemaVersion": 1,
+        "benchmarkSetId": "known-ai-vs-solid-oss",
+        "benchmarkSetName": "Known AI repos vs older solid OSS repos",
+        "recordedAt": "2026-06-22T13:51:21.418Z",
+        "periodStart": "2026-06-22",
+        "repoId": "umami",
+        "repo": "umami-software/umami",
+        "cohort": "mature-oss",
+        "scanMode": "default-branch-as-of-recorded-at",
+        "defaultBranch": "master",
+        "ref": "c0ea3aefbee7a3429ee2f824b06dc4a9dbe0b7e1",
+        "analyzerVersion": "0.4.0",
+        "analyzerCommit": "60b6a36e9e9ca7cebb5951802eeb3845e078fca9",
+        "summary": {
+          "fileCount": 838,
+          "directoryCount": 195,
+          "findingCount": 20,
+          "repoScore": 57.20000000000001,
+          "physicalLineCount": 51522,
+          "logicalLineCount": 33319,
+          "functionCount": 1577,
+          "normalized": {
+            "scorePerFile": 0.06825775656324584,
+            "scorePerKloc": 1.716738197424893,
+            "scorePerFunction": 0.03627140139505391,
+            "findingsPerFile": 0.02386634844868735,
+            "findingsPerKloc": 0.6002581109877246,
+            "findingsPerFunction": 0.012682308180088777
+          }
+        },
+        "blended": {
+          "vsCurrentCohort": 0.6814714369380873,
           "vsPinnedBaseline": 0.84509440652348
         },
         "ruleCounts": {
@@ -5120,10 +5256,18 @@
           "blendedVsPinnedBaseline": 0.84509440652348,
           "repoScore": 57.20000000000001,
           "findingCount": 20
+        },
+        {
+          "periodStart": "2026-06-22",
+          "recordedAt": "2026-06-22T13:51:21.418Z",
+          "blendedVsCurrentCohort": 0.6814714369380873,
+          "blendedVsPinnedBaseline": 0.84509440652348,
+          "repoScore": 57.20000000000001,
+          "findingCount": 20
         }
       ],
       "deltaFromFirst": {
-        "blendedVsCurrentCohort": -0.3220030351838843,
+        "blendedVsCurrentCohort": -0.3185285630619127,
         "blendedVsPinnedBaseline": -0.1990789574213867,
         "repoScore": -94.66856060606062,
         "findingCount": -39,
@@ -5138,7 +5282,7 @@
         "findingsPerFunction": -0.025235429609114308
       },
       "deltaFromPrevious": {
-        "blendedVsCurrentCohort": -0.002840438914305965,
+        "blendedVsCurrentCohort": 0.0034744721219716057,
         "blendedVsPinnedBaseline": 0,
         "repoScore": 0,
         "findingCount": 0,
