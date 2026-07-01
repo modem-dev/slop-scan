@@ -158,6 +158,50 @@ describe("heuristic rule pack", () => {
     expect(ioFinding?.locations).toHaveLength(1);
   });
 
+  test("downweights browser API rescue blocks more aggressively", async () => {
+    const rootDir = await createTempRepo({
+      "src/content-script.ts": [
+        "export function readStoredTheme() {",
+        "  try {",
+        '    return window.localStorage.getItem("theme");',
+        "  } catch {",
+        "    return null;",
+        "  }",
+        "}",
+        "",
+      ].join("\n"),
+      "src/core.ts": [
+        "function transform(input: string) {",
+        "  return input.trim();",
+        "}",
+        "",
+        "export function safeTransform(input: string) {",
+        "  try {",
+        "    return transform(input);",
+        "  } catch {",
+        "    return null;",
+        "  }",
+        "}",
+        "",
+      ].join("\n"),
+    });
+
+    const result = await analyzeRepository(rootDir, DEFAULT_CONFIG, createDefaultRegistry());
+    const browserFinding = result.findings.find(
+      (finding) =>
+        finding.path === "src/content-script.ts" && finding.ruleId === "defensive.error-obscuring",
+    );
+    const coreFinding = result.findings.find(
+      (finding) => finding.path === "src/core.ts" && finding.ruleId === "defensive.error-obscuring",
+    );
+
+    expect(browserFinding).toBeDefined();
+    expect(coreFinding).toBeDefined();
+    expect(browserFinding?.score).toBe(0.75);
+    expect(browserFinding?.score ?? 0).toBeLessThan(coreFinding?.score ?? 0);
+    expect(browserFinding?.evidence.some((entry) => entry.includes("boundary=browser"))).toBe(true);
+  });
+
   test("does not flag filesystem existence probe wrappers", async () => {
     const rootDir = await createTempRepo({
       "src/fs-check.ts": [
