@@ -46,9 +46,9 @@ export function scoreTryCatch(summary: TryCatchSummary): number {
   if (summary.boundaryCategories.length > 0) {
     // Boundary code often logs/translates errors for operational reasons, so we
     // downweight instead of fully exempting it.
-    score *= 0.4;
+    score *= summary.boundaryCategories.includes("browser") ? 0.25 : 0.4;
     if (summary.catchIsEmpty) {
-      score += 0.5;
+      score += summary.boundaryCategories.includes("browser") ? 0.25 : 0.5;
     }
   }
 
