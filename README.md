@@ -89,10 +89,10 @@ slop-scan scan . --json
 Example CI check:
 
 ```bash
-slop-scan scan . --json | jq -e '.summary.findingCount == 0'
+slop-scan scan . --lint --fail-on-findings
 ```
 
-The CLI currently exits non-zero for CLI/runtime errors, not for findings.
+By default, the CLI exits non-zero for CLI/runtime errors, not for findings.
 
 ## Delta comparisons
 

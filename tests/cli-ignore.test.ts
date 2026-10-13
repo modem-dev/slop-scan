@@ -21,10 +21,11 @@ describe("parseCliArgs --ignore", () => {
   });
 
   test("preserves other flags", () => {
-    const args = parseCliArgs(["scan", ".", "--json", "--ignore", "dist/**"]);
+    const args = parseCliArgs(["scan", ".", "--json", "--fail-on-findings", "--ignore", "dist/**"]);
     expect(args.ignore).toEqual(["dist/**"]);
     expect(args.json).toBe(true);
     expect(args.lint).toBe(false);
+    expect(args.failOnFindings).toBe(true);
   });
 
   test("defaults to empty ignores when none provided", () => {

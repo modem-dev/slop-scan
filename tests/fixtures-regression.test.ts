@@ -90,6 +90,32 @@ describe("fixture regression suite", () => {
     expect(output.stdout).not.toContain("slop-scan report");
   });
 
+  test("CLI can fail when a scan reports findings", () => {
+    const output = spawnSync(
+      "bun",
+      ["run", "src/cli.ts", "scan", fixturePath("slop-heavy"), "--lint", "--fail-on-findings"],
+      {
+        encoding: "utf8",
+      },
+    );
+
+    expect(output.status).toBe(1);
+    expect(output.stdout).toContain("2 findings");
+  });
+
+  test("CLI succeeds with --fail-on-findings when a scan is clean", () => {
+    const output = spawnSync(
+      "bun",
+      ["run", "src/cli.ts", "scan", fixturePath("clean"), "--lint", "--fail-on-findings"],
+      {
+        encoding: "utf8",
+      },
+    );
+
+    expect(output.status).toBe(0);
+    expect(output.stdout).toContain("0 findings");
+  });
+
   test("CLI rejects --json and --lint together", () => {
     const output = spawnSync(
       "bun",

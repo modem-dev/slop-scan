@@ -27,6 +27,7 @@ export function formatHelp(): string {
     "",
     "Scan options:",
     "  --lint                  Output scan results in lint format",
+    "  --fail-on-findings      Exit non-zero when scan findings are reported",
     "",
     "Delta options:",
     "  --base <path>           Base repo/worktree to compare",
@@ -38,6 +39,7 @@ export function formatHelp(): string {
     "Examples:",
     "  slop-scan scan .",
     "  slop-scan scan ./my-project --lint",
+    "  slop-scan scan ./my-project --lint --fail-on-findings",
     '  slop-scan scan ./my-project --ignore "tests/**" --ignore "*.generated.*"',
     "  slop-scan delta ../main .",
     "  slop-scan delta --base-report base.json --head-report head.json --json",
@@ -49,6 +51,7 @@ export interface CliArgs {
   help: boolean;
   json: boolean;
   lint: boolean;
+  failOnFindings: boolean;
   ignore: string[];
   command: string | undefined;
   target: string;
@@ -136,6 +139,7 @@ export function parseCliArgs(argv: string[]): CliArgs {
       help: { type: "boolean", short: "h", default: false },
       json: { type: "boolean", default: false },
       lint: { type: "boolean", default: false },
+      "fail-on-findings": { type: "boolean", default: false },
       ignore: { type: "string", multiple: true, default: [] },
       base: { type: "string" },
       head: { type: "string" },
@@ -178,6 +182,7 @@ export function parseCliArgs(argv: string[]): CliArgs {
     help: values.help,
     json: values.json,
     lint: values.lint,
+    failOnFindings: values["fail-on-findings"],
     ignore: values.ignore,
     command,
     target: command === "scan" ? (firstPositional ?? ".") : ".",
@@ -220,12 +225,17 @@ export async function run(argv: string[]): Promise<number> {
     if (output.length > 0) {
       console.log(output);
     }
-    return 0;
+    return args.failOnFindings && result.summary.findingCount > 0 ? 1 : 0;
   }
 
   if (args.command === "delta") {
     if (args.lint) {
       console.error("--lint is only supported by the scan command.");
+      return 1;
+    }
+
+    if (args.failOnFindings) {
+      console.error("--fail-on-findings is only supported by the scan command.");
       return 1;
     }
 
