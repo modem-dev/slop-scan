@@ -44,6 +44,11 @@ describe("delta CLI", () => {
     expect(exitCode).toBe(1);
   });
 
+  test("delta command rejects --fail-on-findings", async () => {
+    const exitCode = await run(["delta", CLEAN_FIXTURE, SLOP_FIXTURE, "--fail-on-findings"]);
+    expect(exitCode).toBe(1);
+  });
+
   test("delta command reads JSON reports", async () => {
     const tempDir = await mkdtemp(path.join(tmpdir(), "slop-scan-delta-"));
 
